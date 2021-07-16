@@ -1,0 +1,321 @@
+.Payement {
+  width: 100%;
+  margin-right: 8%;
+  margin-left: 8%;
+  display: flex;
+  margin-bottom: 10%;
+  padding-top: 5%;
+  height: auto;
+  .Left {
+    margin-top: 5%;
+    .title {
+      font-size: 16px;
+      font-weight: bold;
+      color: $title-color;
+    }
+
+    .pricings {
+      margin-top: 50px !important;
+      .card-type {
+        margin-top: 5%;
+        width: 420px;
+        height: 117px;
+        border: 1px solid $title-color;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        text-align: start;
+        img {
+          background: $light;
+          border-radius: 50%;
+          border: 1px solid $title-color;
+          padding: 10px;
+        }
+        & .anticon {
+          font-size: 25px;
+          color: $primary-color;
+          border: 1px solid #7c7c7c;
+          padding: 10px;
+          border-radius: 50%;
+          background-color: $light;
+          font-weight: 600;
+        }
+        .price {
+          font-size: 18px;
+          font-weight: bold;
+        }
+        &:hover {
+          background-color: $primary-color;
+          cursor: pointer;
+          span {
+            color: white;
+          }
+          & .anticon-check {
+            color: $primary-color !important;
+          }
+        }
+      }
+      .checked {
+        background-color: $primary-color;
+        span {
+          color: white;
+        }
+      }
+    }
+  }
+  .Right {
+    margin-top: 10%;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: auto;
+    .title {
+      font-size: 16px;
+      font-weight: bold;
+      color: $title-color;
+    }
+    .under-title {
+      font-size: 14px;
+      color: $second-title-color;
+      margin-top: 5%;
+    }
+    .payement-logo {
+      height: 47.15px;
+      width: 471.5px;
+      background-color: $grey;
+      border-radius: 20px;
+      margin-top: 20%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: 81.22px;
+        height: 20.76px;
+      }
+    }
+    .payement-information {
+      margin-top: 20%;
+      .up {
+        display: flex;
+        width: 471.5px;
+        height: 100%;
+        .Date {
+          width: 50% !important;
+          height: 100px;
+          .title {
+            font-size: 14px;
+            font-weight: bold;
+            color: $title-color;
+          }
+          .SetDate {
+            padding: 15px 10px;
+            border: 1px solid $title-color;
+            border-radius: 8px;
+            position: relative;
+            top: 8px;
+
+            .ant-btn {
+              border: none;
+
+              width: 100px !important;
+              span {
+                color: $title-color;
+              }
+            }
+          }
+        }
+        .Card-number {
+          width: 50%;
+          span {
+            font-size: 14px;
+            font-weight: bold;
+            color: $title-color;
+          }
+          input {
+            height: 47.15px;
+            text-align: center;
+            border-radius: 8px;
+            border: 1px solid $title-color;
+            width: 100%;
+          }
+        }
+      }
+      .down {
+        display: flex;
+        width: 471.5px;
+        height: 100%;
+
+        .cvc {
+          width: 15%;
+          margin-left: 5%;
+          span {
+            font-size: 14px;
+            font-weight: bold;
+            color: $title-color;
+          }
+          input {
+            height: 47.15px;
+            text-align: center;
+            border-radius: 8px;
+            border: 1px solid $title-color;
+            width: 100%;
+          }
+        }
+        .Name-card {
+          width: 65%;
+          span {
+            font-size: 14px;
+            font-weight: bold;
+            color: $title-color;
+          }
+          input {
+            height: 47.15px;
+            text-align: center;
+            border-radius: 8px;
+            border: 1px solid $title-color;
+            width: 100%;
+          }
+        }
+      }
+    }
+    .pay {
+      width: 100%;
+      height: 47.15px;
+      background-color: #252525;
+      border: 1px #252525 solid;
+      color: $light;
+      border-radius: 8px;
+      margin-top: 10%;
+    }
+  }
+}
+@media screen and (max-width: 766px) {
+  .Payement {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10%;
+    padding-top: 5%;
+    height: auto;
+    margin: 0 !important;
+    align-items: center;
+    .Left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 !important;
+      .title {
+        font-size: 16px;
+        font-weight: bold;
+        color: $title-color;
+      }
+  
+      .pricings {
+        margin-top: 50px !important;
+        .card-type {
+          margin-top: 5%;
+          width: 100%;
+          height: 80px;
+          border: 1px solid $title-color;
+          border-radius: 5px;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          text-align: start;
+          img {
+            background: $light;
+            border-radius: 50%;
+            border: 1px solid $title-color;
+            padding: 10px;
+          }
+          & .anticon {
+            font-size: 25px;
+            color: $primary-color;
+            border: 1px solid #7c7c7c;
+            padding: 10px;
+            border-radius: 50%;
+            background-color: $light;
+            font-weight: 600;
+          }
+          .price {
+            font-size: 18px;
+            font-weight: bold;
+          }
+          &:hover {
+            background-color: $primary-color;
+            cursor: pointer;
+            span {
+              color: white;
+            }
+            & .anticon-check {
+              color: $primary-color !important;
+            }
+          }
+        }
+        .checked {
+          background-color: $primary-color;
+          span {
+            color: white;
+          }
+        }
+      }
+    }
+    .Right {
+      margin-top: 10%;
+      display: flex;
+      flex-flow: column;
+      
+      .title {
+        font-size: 16px;
+        font-weight: bold;
+        color: $title-color;
+        text-align: center;
+      }
+      .under-title {
+        font-size: 14px;
+        color: $second-title-color;
+        margin-top: 5%;
+      }
+      .payement-logo {
+        height: 47.15px;
+        width: 471.5px;
+        background-color: $grey;
+        border-radius: 20px;
+        margin-top: 20%;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        img {
+          width: 81.22px;
+          height: 20.76px;
+        }
+      }
+      .pay {
+        width: 250px;
+        height: 47.15px;
+        background-color: #252525;
+        border: 1px #252525 solid;
+        color: $light;
+        border-radius: 8px;
+        margin-top: 10%;
+      }
+    }
+  }
+}
+@media (min-width: 768px) and (max-width: 950px) {
+  .Payement {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10%;
+    padding-top: 5%;
+    height: auto;
+    margin: 0 !important;
+    align-items: center;
+    .pricings {
+      margin-bottom: 5%;
+    }
+  }
+}

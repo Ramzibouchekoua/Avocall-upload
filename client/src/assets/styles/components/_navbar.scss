@@ -1,0 +1,246 @@
+.header {
+  line-height: 62px;
+  background-color: $light;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 24px 0;
+  padding: 0;
+  width: 100%;
+  .logo {
+    background: url("../../icons/logo.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: auto;
+    min-height: 50px;
+    width: 150px;
+  }
+
+  .ant-menu {
+    background-color: $light;
+    border: none;
+    .ant-menu-item a {
+      font-size: 16px;
+      color: $text-color;
+      font-weight: 600;
+
+      &:hover {
+        font-size: 16px;
+        color: $primary-color;
+      }
+    }
+    .ant-menu-item-selected {
+      border-bottom: 2ps solid $primary-color !important;
+      a {
+        font-size: 16px;
+        color: $primary-color;
+      }
+    }
+  }
+  .action {
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+    .ant-btn {
+      width: 115px;
+      height: 50px;
+      border: 1px solid $primary-color;
+      border-radius: 4px;
+      margin: 0px 10px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .signup {
+      span {
+        color: $primary-color;
+      }
+    }
+    .signin {
+      background-color: $primary-color;
+      span {
+        color: $light;
+      }
+    }
+    .lang {
+      display: none;
+      background-color: $primary-color;
+      color: $light;
+      width: 50px;
+      position: relative;
+      span {
+        color: $light;
+      }
+      .anticon {
+        position: absolute;
+        right: -7px;
+        top: 40%;
+        background-color: $primary-color;
+        color: $light;
+        border: 1px solid $light;
+        border-radius: 50%;
+        width: 15px;
+        height: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+  .logout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $primary-color;
+    border-radius: 4px;
+    border: 1px solid $light;
+    flex-direction: row-reverse;
+    padding: 0px 10px;
+    .anticon-login {
+      font-size: 20px;
+      font-weight: 600;
+      color: $primary-color;
+      margin-right: 5px;
+      border: 1px solid $primary-color;
+      border-radius: 50%;
+      padding: 5px;
+      background-color: $light;
+      text-align: center;
+    }
+    .Name {
+      font-size: 16px;
+
+      color: #ffffff;
+      margin: 0;
+      &:hover {
+        font-weight: 600;
+      }
+    }
+    .profile {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      p,
+      p > span {
+        font-size: 14px;
+        color: $primary-color;
+        margin: 0;
+      }
+    }
+  }
+  .wallet {
+    color: $success-color;
+    margin-right: 10px;
+    border: 1px solid $success-color;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 15px 10px;
+    background-color: $light;
+
+    .anticon-file-done {
+      color: $success-color;
+      font-size: 20px;
+      font-weight: 600;
+    }
+  }
+  .successWallet{
+    color: $success-color;
+    border: 1px solid $success-color;
+    .anticon-file-done {
+      color: $success-color;
+    }
+  }
+  .failWallet{
+    color: $danger-color;
+    border: 1px solid $danger-color;
+    .anticon-file-done {
+      color: $danger-color;
+    }
+  }
+  .ant-dropdown-trigger {
+    color: $primary-color;
+  }
+  
+}
+@media (max-width: 566px) {
+  .header {
+    line-height: 62px;
+    background-color: $light;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 24px 0;
+    padding: 0;
+    width: 100%;
+    .header .action .ant-btn {
+      width: 60px;
+      height: 50px;
+      border: 1px solid #202f84;
+      border-radius: 4px;
+      margin: 0px 10px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .header .logo {
+      background: url(/static/media/logo.8cefd846.png);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      height: auto;
+      width: 60px;
+    }
+    .ant-menu-horizontal {
+      line-height: 46px;
+      white-space: none !important ;
+      border: 0;
+      border-bottom: 1px solid #f0f0f0;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+  }
+  .ant-dropdown-menu{
+    text-align:right;
+  }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .header {
+    line-height: 62px;
+    background-color: $light;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 24px 0;
+    padding: 0;
+    width: 100%;
+    .header .action .ant-btn {
+      width: 60px;
+      height: 50px;
+      border: 1px solid #202f84;
+      border-radius: 4px;
+      margin: 0px 10px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .header .logo {
+      background: url(/static/media/logo.8cefd846.png);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      height: auto;
+      width: 60px;
+    }
+    .ant-menu-horizontal {
+      line-height: 46px;
+      white-space: none !important ;
+      border: 0;
+      border-bottom: 1px solid #f0f0f0;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+  }
+  .ant-dropdown-menu{
+    text-align:right;
+  }
+}

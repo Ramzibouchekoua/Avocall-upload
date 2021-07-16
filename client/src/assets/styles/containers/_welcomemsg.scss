@@ -1,0 +1,19 @@
+
+
+    .welcome-msg {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+        margin-bottom: 10%;
+        margin-top: 5%;
+        .anticon-smile svg {
+            color: $primary-color;
+        }
+       span {
+        font-size: 36px;
+        color: $primary-color;
+        font-weight: 700; 
+       }
+    }
+ 

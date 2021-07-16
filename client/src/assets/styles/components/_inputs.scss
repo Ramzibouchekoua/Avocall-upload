@@ -1,0 +1,208 @@
+.ant-form-item {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  list-style: none;
+  -webkit-font-feature-settings: "tnum";
+  font-feature-settings: "tnum", "tnum";
+  margin-bottom: 24px;
+  vertical-align: top;
+  position: relative;
+}
+
+.ant-form-item-label {
+  position: absolute;
+  top: -15px;
+  right: 15px;
+  z-index: 999;
+  background-color: $light;
+  padding: 0 5px;
+  label {
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 20px;
+    color: $primary-color;
+    font-size: 12px;
+    &::before {
+      color: $primary-color !important;
+      font-size: 10px;
+    }
+    &::after {
+      content: "";
+    }
+  }
+}
+.ant-input{
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-variant: tabular-nums;
+  list-style: none;
+  -webkit-font-feature-settings: "tnum";
+  font-feature-settings: "tnum", "tnum";
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  min-width: 0;
+  height: 42px;
+  padding: 4px 11px;
+  color: #858585;
+  font-size: 14px;
+  line-height: 1.5715;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid $primary-color;
+  border-radius: 5px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  &:hover {
+    border: 1px solid $primary-color;
+  }
+  &:focus {
+    border: 1px solid $primary-color;
+    box-shadow: 0 0 0 1px rgba(32, 47, 132, 0.2);
+  }
+}
+.ant-input-affix-wrapper > input.ant-input{
+  padding: 4px 11px;
+}
+.ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-variant: tabular-nums;
+  list-style: none;
+  -webkit-font-feature-settings: "tnum";
+  font-feature-settings: "tnum", "tnum";
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  min-width: 0;
+  height: 42px;
+  padding: 4px 11px;
+  color: #858585;
+  font-size: 14px;
+  line-height: 1.5715;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid $primary-color;
+  border-radius: 5px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  &:hover {
+    border: 1px solid $primary-color;
+  }
+  &:focus {
+    border: 1px solid $primary-color;
+    box-shadow: 0 0 0 1px rgba(32, 47, 132, 0.2);
+  }
+}
+.ant-input-affix-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  min-width: 0;
+  padding:0;
+  color: #858585;
+  font-size: 14px;
+  line-height: 1.5715;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid $primary-color;
+  border-radius: 4px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  &:hover {
+    border: 1px solid $primary-color;
+  }
+  &:focus {
+    border: 1px solid $primary-color;
+    box-shadow: 0 0 0 1px rgba(32, 47, 132, 0.2);
+  }
+}
+
+.ant-input-suffix {
+  margin-left: 0;
+  background-color: $primary-color;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  span{
+    color: white;
+    &:hover{
+      color: white;
+
+    }
+
+  }
+}
+
+
+// DATEPICKER
+.ant-picker{
+  padding:0;
+  height: 50px;
+}
+.ant-picker-input{
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  margin-bottom: 15px;
+  font-variant: tabular-nums;
+  list-style: none;
+  -webkit-font-feature-settings: "tnum";
+  font-feature-settings: "tnum", "tnum";
+  position: relative;
+  width: 300px;
+  min-width: 0;
+  display:flex;
+  height: 50px;
+  padding: 0 11px;
+  color: #858585;
+  font-size: 14px;
+  line-height: 1.5715;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid $primary-color;
+  border-radius: 5px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  input{
+    border:none;
+  }
+  // input::placeholder{
+  //   color:$primary-color;
+
+  // }
+  // input:placeholder-shown{
+  //   position: absolute;
+  //   top: -15px;
+  //   right: 15px;
+  //   z-index: 999;
+  //   background-color: $light;
+  //   padding: 0 5px;
+  //   font-size:12px;
+  //   height: 20px;
+  //   width:25%;
+  // }
+  &:hover {
+    border: 1px solid $primary-color;
+  }
+  &:focus {
+    border: 1px solid $primary-color;
+    box-shadow: 0 0 0 1px rgba(32, 47, 132, 0.2);
+  }
+}

@@ -1,0 +1,42 @@
+/*=============================================
+=            GLOBAL            =
+=============================================*/
+
+@import "./var.scss";
+@import "./init";
+
+/*=============================================
+=            LAYOUT           =
+=============================================*/
+@import "./components/footer";
+@import "./components/navbar";
+
+
+
+/*=============================================
+=            PAGES            =
+=============================================*/
+@import "./containers/signin";
+@import "./containers/signup";
+@import "./containers/home-page";
+@import "./containers/dashboard";
+@import "./containers/video-chat";
+@import "./containers/VideoNotReady";
+@import "./containers/written-advice";
+@import "./containers/textchat";
+@import "./containers/payement";
+@import "./containers/phoneexpired";
+@import "./containers/PayementError";
+
+
+/*=============================================
+=            COMPONENTS           =
+=============================================*/
+@import "./components/inputs";
+@import "./components/error-notice";
+@import "./components/error-result";
+@import "./components/report-modal";
+@import "./components/chat-box";
+
+
+

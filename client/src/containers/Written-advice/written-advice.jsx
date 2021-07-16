@@ -1,0 +1,152 @@
+import React, { useState, useEffect } from 'react';
+import { Form, message, Button, Upload, DatePicker } from 'antd';
+import { List, Text, TextArea } from '../../components/Inputs';
+import { PaperClipOutlined, VideoCameraOutlined, FormOutlined } from '@ant-design/icons';
+import { useHistory } from 'react-router-dom';
+import { InlineWidget } from 'react-calendly';
+import axios from 'axios';
+import moment from 'moment';
+import _ from 'lodash';
+const WrittenAdvice = () => {
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [fileIds, setFileIds] = useState([]);
+  const [isChecked, setIsChecked] = useState('');
+  const [dateString, setDateString] = useState('');
+  const history = useHistory();
+
+  const onFileChange = (event) => {
+    setSelectedFile(event.target.files);
+  };
+
+  // console.log(history.go("https://call-object-react.netlify.app/?roomUrl=https%3A%2F%2Fdailyphil.daily.co%2FGMGj6dPwbXaycZhblXjb"))
+
+  const submitRequest = async (values) => {
+    const formData = new FormData();
+    selectedFile && Object.values(selectedFile).map((e) => formData.append('file', e, e.name));
+    try {
+      let token = localStorage.getItem('auth-token');
+      if (token === null) {
+        localStorage.setItem('auth-token', '');
+        token = '';
+      }
+      if (!isChecked) {
+        message.warning('نوع الإستشارة إجباري');
+        return;
+      }
+      if (!_.isEmpty(selectedFile)) {
+        const upFile = await axios.post('http://localhost:5000/api/file/upload', formData, {
+          headers: { 'x-auth-token': token },
+        });
+        try {
+          setFileIds(fileIds.concat(upFile.data.data._id));
+          message.success('uploaded');
+        } catch (err) {
+          message.warning('error');
+        }
+      }
+      setFileIds((state) => {
+        console.log(state);
+        return state;
+      });
+      const newCons = await axios.post(
+        'http://localhost:5000/api/user/newConsultation',
+        { ...values, files:values.files? values.files.concat(fileIds):[], type: isChecked, date: dateString },
+        {
+          headers: { 'x-auth-token': token },
+        }
+      );
+      console.log('consultation', newCons);
+      const consultationId = newCons.data.consultation._id;
+      isChecked === 'video' ? history.push(`/vid-page/${consultationId}`) : history.push(`/text-chat/${consultationId}`);
+    } catch (err) {
+      message.warning('ليس لديك إستشارات');
+      console.log("err:",err)
+      history.push('/checkout');
+    }
+  };
+
+  const Book = () => (
+    <InlineWidget
+      url={`https://calendly.com/istichara/istichara-video`}
+      pageSettings={{
+        backgroundColor: 'ffffff',
+        hideEventTypeDetails: false,
+        hideLandingPageDetails: false,
+        primaryColor: '202F84',
+        textColor: '2F281E',
+      }}
+      styles={{
+        height: '1000px',
+      }}
+      utm={{
+        utmCampaign: 'Spring Sale 2019',
+        utmContent: 'Shoe and Shirts',
+        utmMedium: 'Ad',
+        utmSource: 'Facebook',
+        utmTerm: 'Spring',
+      }}
+    />
+  );
+  const DescForm = () => (
+    <Form name="nest-messages" className="body" onFinish={submitRequest}>
+      <div className="form">
+        <div className="section-right">
+          <Text label="موضوع الاستشارة" name="title" rule={true} />
+          <List label="تصنيف الاستشارة" name="field" list={[' إستخلاص دين','قانون جزائي','قانون البنكي','قانون التأمين','قانون الشركات التجارية','قانون عقّاري','قانون الجبائي','قانون الشغل','نزاعات الجوار ','قانون الأُسرة', 'قانون الأكرية','حادث']} />
+
+          {/* <Upload {...props}> */}
+          <input type="file" name="file" onChange={onFileChange} multiple />
+          <Button icon={<PaperClipOutlined />}>رفع ملف مرفق</Button>
+          {/* </Upload> */}
+        </div>
+        <div className="section-left">
+          <Form.Item label="تاريخ الاستشارة*" rules={[{ required: true }]}>
+            <DatePicker
+              showTime
+              onChange={(v, d) => setDateString(d)}
+              bordered={false}
+              disabledDate={(current) => current && current < moment().endOf('day')}
+              placeholder=""
+            />
+          </Form.Item>
+          <TextArea label="تفاصيل الاستشارة" name="description" />
+        </div>
+      </div>
+
+      <Form.Item>
+        <Button htmlType="submit" className="submit-button">
+          ارسل طلب الاستشارة
+        </Button>
+      </Form.Item>
+    </Form>
+  );
+  return (
+    <div className="written-advice">
+      <div className="head">
+        <div className="title"> استشارة جديدة</div>
+        <div className="pricing">
+          <div className={isChecked === 'text' ? 'card-type checked' : 'card-type'} onClick={(e) => setIsChecked('text')}>
+            <FormOutlined />
+            <span>إستشارة كتابيّة</span>
+          </div>
+          <div className={isChecked === 'video' ? 'card-type checked' : 'card-type'} onClick={(e) => setIsChecked('video')}>
+            <VideoCameraOutlined />
+            <span>إستشارة بالفيديو</span>
+          </div>
+
+          {/* <input
+            type="button"
+            value="call"
+            name="call"
+            onClick={(e) => setIsChecked(e.target.name)}
+            className={isChecked === 'call' ? 'card-type checked' : 'card-type'}
+          /> */}
+        </div>
+        {DescForm()}
+        {/* {Book()} */}
+      </div>
+    </div>
+  );
+};
+
+export default WrittenAdvice;

@@ -1,0 +1,15 @@
+.ant-modal-footer {
+  .ant-btn {
+    border-color: $primary-color;
+    span {
+      color: $primary-color;
+    }
+  }
+  .ant-btn-primary {
+    background: $primary-color;
+    border-color: $primary-color;
+    span {
+      color: $light;
+    }
+  }
+}
