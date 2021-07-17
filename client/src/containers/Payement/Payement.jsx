@@ -6,7 +6,6 @@ import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { isEmpty } from 'lodash';
 import axios from 'axios';
-import _ from 'lodash'
 
 const Mounth = (
   <Menu>
@@ -70,46 +69,46 @@ const Payement = () => {
     selectedFile && Object.values(selectedFile).map(e => formData.append('file', e, e.name));
     let filename = '';
 
-    try {
-      let token = localStorage.getItem('auth-token');
-      if (token === null) {
-        localStorage.setItem('auth-token', '');
-        token = '';
-      }
+    if (isEmpty(isChecked)) {
+      message.warning('اختر الباقة المناسبة');
+    }
+    if (isEmpty(selectedFile)) {
+      message.warning('الرجاء تحميل صورة');
+    }
+    if (!isEmpty(isChecked) && !isEmpty(selectedFile)) {
+      try {
+        let token = localStorage.getItem('auth-token');
+        if (token === null) {
+          localStorage.setItem('auth-token', '');
+          token = '';
+        }
 
-      if (!_.isEmpty(selectedFile)) {
         const upFile = await axios.post('http://localhost:5000/api/file/upload', formData, {
           headers: { 'x-auth-token': token }
         });
-        try {
-          filename = upFile.data.data.fileName;
-          message.success('uploaded');
-        } catch (err) {
-          message.warning('error');
-        }
-      }
 
-      const newConsultation = await axios.post(
-        'http://localhost:5000/api/user/buyPack',
-        {
-          consultationNumber: isChecked.nbr,
-          filename
-        },
-        {
-          headers: { 'x-auth-token': token }
-        }
-      );
-      // message.success("باقتك اضيفت الى الرصيد بنجاح")
-      history.push('/OrderConfirmation');
-    } catch (err) {
-      if (isEmpty(isChecked)) {
-        message.warning('اختر الباقة المناسبة');
-        return;
+        filename = upFile.data.data.fileName;
+        message.success('uploaded');
+
+        const newConsultation = await axios.post(
+          'http://localhost:5000/api/user/buyPack',
+          {
+            consultationNumber: isChecked.nbr,
+            filename
+          },
+          {
+            headers: { 'x-auth-token': token }
+          }
+        );
+        // message.success("باقتك اضيفت الى الرصيد بنجاح")
+        history.push('/OrderConfirmation');
+      } catch (err) {
+        console.log('error in buypack', err);
+        history.push('/PayementError');
       }
-      console.log('error in buypack', err);
-      history.push('/PayementError');
     }
   };
+
   return (
     <div className="Payement">
       <div className="Left">
