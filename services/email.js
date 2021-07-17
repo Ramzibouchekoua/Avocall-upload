@@ -4,6 +4,8 @@ import verifEmailTemplate from '../helpers/email/verifEmailTemplate';
 import VerifAvocatMail from '../helpers/email/sendVerifAvocatMail';
 import newConsultation from '../helpers/email/newConsultation';
 import confirmAccMail from '../helpers/email/confirmAccMail';
+import buyPackEmailTemplate from '../helpers/email/buyPackEmail';
+
 const path = require('path');
 
 // const transport = nodemailer.createTransport(config.email.smtp);
@@ -26,38 +28,21 @@ const sendEmail = async (to, subject, text, html) => {
  * Send an email with image attached
  */
 const sendEmailWithImageAttached = async (to, subject, text, html, imageFileName) => {
-  let msg;
-  if (html !== '') {
-    msg = {
-      from: config.email.from,
-      to,
-      subject,
-      text,
-      html,
-      attachments: [
-        {
-          filename: imageFileName,
-          contentType: 'image/jpeg' || 'image/png',
-          path: path.join(process.cwd(), 'uploads', imageFileName)
-        }
-      ]
-    };
-  }
-  if (html == '') {
-    msg = {
-      from: config.email.from,
-      to,
-      subject,
-      text,
-      attachments: [
-        {
-          filename: imageFileName,
-          contentType: 'image/jpeg' || 'image/png',
-          path: path.join(process.cwd(), 'uploads', imageFileName)
-        }
-      ]
-    };
-  }
+  const msg = {
+    from: config.email.from,
+    to,
+    subject,
+    text,
+    html,
+    attachments: [
+      {
+        filename: imageFileName,
+        contentType: 'image/jpeg' || 'image/png',
+        path: path.join(process.cwd(), 'uploads', imageFileName)
+      }
+    ]
+  };
+
   await transport.sendMail(msg);
 };
 
@@ -76,16 +61,17 @@ const sendVerifAvocatMail = async (user, token) => {
 const newConsultationEmail = async (consultation, avocats, imageFileName) => {
   const subject = 'Valid Consultation';
   const html = newConsultation(consultation, avocats);
-  if ((imageFileName == '')) {
+  if (imageFileName == '') {
     await sendEmail(config.email.smtp.auth.user, subject, '', html);
   } else {
     await sendEmailWithImageAttached(config.email.smtp.auth.user, subject, '', html, imageFileName);
   }
 };
 
-const buyPackEmail = async imageFileName => {
+const buyPackEmail = async (user, imageFileName) => {
   const subject = 'Payment';
-  await sendEmailWithImageAttached(config.email.smtp.auth.user, subject, '', '', imageFileName);
+  const html = buyPackEmailTemplate(user);
+  await sendEmailWithImageAttached(config.email.smtp.auth.user, subject, '', html, imageFileName);
 };
 
 const confirmAccEmail = async (to, name, token) => {

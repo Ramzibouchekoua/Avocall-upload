@@ -155,6 +155,6 @@ export const buyPack = asyncHandler(async (req, res) => {
   user.wallet = Number(user.wallet) + Number(req.body.consultationNumber);
   await user.save();
   user.password = undefined;
-  await emailService.buyPackEmail(req.body.filename);
+  await emailService.buyPackEmail(user,req.body.filename);
   res.json({ user });
 });
