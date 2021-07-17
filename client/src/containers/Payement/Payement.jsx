@@ -39,6 +39,7 @@ const Year = (
     <Menu.Item key="10">2030</Menu.Item>
   </Menu>
 );
+
 const packs = [
   {
     id: 1,
@@ -53,6 +54,7 @@ const packs = [
     nbr:3
   }
 ];
+
 const Payement = () => {
   const [isChecked, setIsChecked] = useState({});
   const history = useHistory();
