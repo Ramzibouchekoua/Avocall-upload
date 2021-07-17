@@ -23,23 +23,41 @@ const sendEmail = async (to, subject, text, html) => {
 };
 
 /**
- * Send an email with image attachemet
+ * Send an email with image attached
  */
-const sendEmailWithImageAttachements = async (to, subject, text, html, imageFileName) => {
-  const msg = {
-    from: config.email.from,
-    to,
-    subject,
-    text,
-    html,
-    attachments: [
-      {
-        filename: imageFileName,
-        contentType: 'image/jpeg' || 'image/png',
-        path: path.join(process.cwd(), 'uploads', imageFileName)
-      }
-    ]
-  };
+const sendEmailWithImageAttached = async (to, subject, text, html, imageFileName) => {
+  let msg;
+  if (html !== '') {
+    msg = {
+      from: config.email.from,
+      to,
+      subject,
+      text,
+      html,
+      attachments: [
+        {
+          filename: imageFileName,
+          contentType: 'image/jpeg' || 'image/png',
+          path: path.join(process.cwd(), 'uploads', imageFileName)
+        }
+      ]
+    };
+  }
+  if (html == '') {
+    msg = {
+      from: config.email.from,
+      to,
+      subject,
+      text,
+      attachments: [
+        {
+          filename: imageFileName,
+          contentType: 'image/jpeg' || 'image/png',
+          path: path.join(process.cwd(), 'uploads', imageFileName)
+        }
+      ]
+    };
+  }
   await transport.sendMail(msg);
 };
 
@@ -58,7 +76,16 @@ const sendVerifAvocatMail = async (user, token) => {
 const newConsultationEmail = async (consultation, avocats, imageFileName) => {
   const subject = 'Valid Consultation';
   const html = newConsultation(consultation, avocats);
-  await sendEmailWithImageAttachements(config.email.smtp.auth.user, subject, '', html, imageFileName);
+  if ((imageFileName == '')) {
+    await sendEmail(config.email.smtp.auth.user, subject, '', html);
+  } else {
+    await sendEmailWithImageAttached(config.email.smtp.auth.user, subject, '', html, imageFileName);
+  }
+};
+
+const buyPackEmail = async imageFileName => {
+  const subject = 'Payment';
+  await sendEmailWithImageAttached(config.email.smtp.auth.user, subject, '', '', imageFileName);
 };
 
 const confirmAccEmail = async (to, name, token) => {
@@ -73,5 +100,6 @@ export default {
   sendVerifMail,
   sendVerifAvocatMail,
   newConsultationEmail,
-  confirmAccEmail
+  confirmAccEmail,
+  buyPackEmail
 };

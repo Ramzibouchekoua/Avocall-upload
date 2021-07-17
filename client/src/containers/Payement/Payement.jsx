@@ -1,11 +1,12 @@
 import React from 'react';
 import Paypal from '../../assets/images/paypal.png';
-import { Menu, Dropdown, Button,message } from 'antd';
-import { DownOutlined, CheckOutlined , PaperClipOutlined} from '@ant-design/icons';
+import { Menu, Dropdown, Button, message } from 'antd';
+import { DownOutlined, CheckOutlined, PaperClipOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
-import {isEmpty} from "lodash"
+import { isEmpty } from 'lodash';
 import axios from 'axios';
+import _ from 'lodash'
 
 const Mounth = (
   <Menu>
@@ -45,52 +46,69 @@ const packs = [
     id: 1,
     title: 'إستشارة',
     price: '29TND',
-    nbr:1
+    nbr: 1
   },
   {
     id: 2,
     title: 'عرض : 3 إستشارات',
     price: '69TND',
-    nbr:3
+    nbr: 3
   }
 ];
 
 const Payement = () => {
   const [isChecked, setIsChecked] = useState({});
+  const [selectedFile, setSelectedFile] = useState(null);
   const history = useHistory();
+
+  const onFileChange = event => {
+    setSelectedFile(event.target.files);
+  };
+
   const onClick = async () => {
-  
-    try{
+    const formData = new FormData();
+    selectedFile && Object.values(selectedFile).map(e => formData.append('file', e, e.name));
+    let filename = '';
+
+    try {
       let token = localStorage.getItem('auth-token');
       if (token === null) {
         localStorage.setItem('auth-token', '');
         token = '';
       }
-     
+
+      if (!_.isEmpty(selectedFile)) {
+        const upFile = await axios.post('http://localhost:5000/api/file/upload', formData, {
+          headers: { 'x-auth-token': token }
+        });
+        try {
+          filename = upFile.data.data.fileName;
+          message.success('uploaded');
+        } catch (err) {
+          message.warning('error');
+        }
+      }
+
       const newConsultation = await axios.post(
         'http://localhost:5000/api/user/buyPack',
         {
-          consultationNumber:isChecked.nbr,
+          consultationNumber: isChecked.nbr,
+          filename
         },
         {
-          headers: { 'x-auth-token': token },
+          headers: { 'x-auth-token': token }
         }
       );
       // message.success("باقتك اضيفت الى الرصيد بنجاح")
       history.push('/OrderConfirmation');
-
-    }
-      catch(err){
-        if(isEmpty(isChecked)){
-          message.warning("اختر الباقة المناسبة")
-          return
-        }
-          console.log("error in buypack",err)
-          history.push('/PayementError');
-        
-    
+    } catch (err) {
+      if (isEmpty(isChecked)) {
+        message.warning('اختر الباقة المناسبة');
+        return;
       }
-  
+      console.log('error in buypack', err);
+      history.push('/PayementError');
+    }
   };
   return (
     <div className="Payement">
@@ -98,7 +116,7 @@ const Payement = () => {
         <span className="title"> اختر خطة الاشتراك المناسبة لك</span>
 
         <div className="pricings">
-          {packs.map((e) => (
+          {packs.map(e => (
             <div
               onClick={() => setIsChecked(e)}
               className={isChecked.id === e.id ? 'card-type checked' : 'card-type'}
@@ -115,8 +133,8 @@ const Payement = () => {
       <div className="Right">
         <span className="title">اختر طريقة الدفع المناسبة لك</span>
         <span className="under-title">يمكنك الدفع عبر باي بال او عبر استعمال بطاقتك البنكية</span>
-        <input type="file" name="file"  />
-          <Button icon={<PaperClipOutlined />}>رفع ملف مرفق</Button>
+        <input type="file" name="file" onChange={onFileChange} multiple />
+        <Button icon={<PaperClipOutlined />}>رفع ملف مرفق</Button>
         <div className="payement-logo">
           <img src={Paypal} alt="Paypal" />
         </div>
