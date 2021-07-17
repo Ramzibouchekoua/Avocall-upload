@@ -1,11 +1,12 @@
 import React from 'react';
 import Paypal from '../../assets/images/paypal.png';
 import { Menu, Dropdown, Button,message } from 'antd';
-import { DownOutlined, CheckOutlined } from '@ant-design/icons';
+import { DownOutlined, CheckOutlined , PaperClipOutlined} from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import {isEmpty} from "lodash"
 import axios from 'axios';
+
 const Mounth = (
   <Menu>
     <Menu.Item key="1">جانفي</Menu.Item>
@@ -112,6 +113,8 @@ const Payement = () => {
       <div className="Right">
         <span className="title">اختر طريقة الدفع المناسبة لك</span>
         <span className="under-title">يمكنك الدفع عبر باي بال او عبر استعمال بطاقتك البنكية</span>
+        <input type="file" name="file"  />
+          <Button icon={<PaperClipOutlined />}>رفع ملف مرفق</Button>
         <div className="payement-logo">
           <img src={Paypal} alt="Paypal" />
         </div>
