@@ -3,12 +3,10 @@ import multer from 'multer';
 import fs from 'fs';
 import appRootPath from 'app-root-path';
 import _ from 'lodash';
-import File from '../models/file'
-
+import File from '../models/file';
 
 let pathToUploads = `${appRootPath}/uploads/`;
 const uploadFile = (req, res, next) => {
-
   let files = [];
   let resultFile;
   let originalName = '';
@@ -69,11 +67,10 @@ const uploadFile = (req, res, next) => {
 };
 
 const getFile = (req, res, next) => {
-
   let _id = req.params.id;
   File.findOne(
     {
-      _id,
+      _id
     },
     (err, file) => {
       if (err) return next(err);
@@ -82,7 +79,7 @@ const getFile = (req, res, next) => {
         console.log(`${pathToUploads}${file.originalName} NOT_FOUND`);
         res.status(404).json({
           success: false,
-          responseCode: 'file not found',
+          responseCode: 'file not found'
         });
       } else {
         // return res.download(path.join(pathToUploads, file.originalName));

@@ -14,15 +14,16 @@ const WrittenAdvice = () => {
   const [dateString, setDateString] = useState('');
   const history = useHistory();
 
-  const onFileChange = (event) => {
+  const onFileChange = event => {
     setSelectedFile(event.target.files);
   };
 
   // console.log(history.go("https://call-object-react.netlify.app/?roomUrl=https%3A%2F%2Fdailyphil.daily.co%2FGMGj6dPwbXaycZhblXjb"))
 
-  const submitRequest = async (values) => {
+  const submitRequest = async values => {
     const formData = new FormData();
-    selectedFile && Object.values(selectedFile).map((e) => formData.append('file', e, e.name));
+    selectedFile && Object.values(selectedFile).map(e => formData.append('file', e, e.name));
+    let filename = '';
     try {
       let token = localStorage.getItem('auth-token');
       if (token === null) {
@@ -35,8 +36,9 @@ const WrittenAdvice = () => {
       }
       if (!_.isEmpty(selectedFile)) {
         const upFile = await axios.post('http://localhost:5000/api/file/upload', formData, {
-          headers: { 'x-auth-token': token },
+          headers: { 'x-auth-token': token }
         });
+        filename = upFile.data.data.fileName
         try {
           setFileIds(fileIds.concat(upFile.data.data._id));
           message.success('uploaded');
@@ -44,15 +46,21 @@ const WrittenAdvice = () => {
           message.warning('error');
         }
       }
-      setFileIds((state) => {
+      setFileIds(state => {
         console.log(state);
         return state;
       });
       const newCons = await axios.post(
         'http://localhost:5000/api/user/newConsultation',
-        { ...values, files:values.files? values.files.concat(fileIds):[], type: isChecked, date: dateString },
         {
-          headers: { 'x-auth-token': token },
+          ...values,
+          files: values.files ? values.files.concat(fileIds) : [],
+          type: isChecked,
+          date: dateString,
+          filename
+        },
+        {
+          headers: { 'x-auth-token': token }
         }
       );
       console.log('consultation', newCons);
@@ -60,7 +68,7 @@ const WrittenAdvice = () => {
       isChecked === 'video' ? history.push(`/vid-page/${consultationId}`) : history.push(`/text-chat/${consultationId}`);
     } catch (err) {
       message.warning('ليس لديك إستشارات');
-      console.log("err:",err)
+      console.log('err:', err);
       history.push('/checkout');
     }
   };
@@ -73,17 +81,17 @@ const WrittenAdvice = () => {
         hideEventTypeDetails: false,
         hideLandingPageDetails: false,
         primaryColor: '202F84',
-        textColor: '2F281E',
+        textColor: '2F281E'
       }}
       styles={{
-        height: '1000px',
+        height: '1000px'
       }}
       utm={{
         utmCampaign: 'Spring Sale 2019',
         utmContent: 'Shoe and Shirts',
         utmMedium: 'Ad',
         utmSource: 'Facebook',
-        utmTerm: 'Spring',
+        utmTerm: 'Spring'
       }}
     />
   );
@@ -92,7 +100,24 @@ const WrittenAdvice = () => {
       <div className="form">
         <div className="section-right">
           <Text label="موضوع الاستشارة" name="title" rule={true} />
-          <List label="تصنيف الاستشارة" name="field" list={[' إستخلاص دين','قانون جزائي','قانون البنكي','قانون التأمين','قانون الشركات التجارية','قانون عقّاري','قانون الجبائي','قانون الشغل','نزاعات الجوار ','قانون الأُسرة', 'قانون الأكرية','حادث']} />
+          <List
+            label="تصنيف الاستشارة"
+            name="field"
+            list={[
+              ' إستخلاص دين',
+              'قانون جزائي',
+              'قانون البنكي',
+              'قانون التأمين',
+              'قانون الشركات التجارية',
+              'قانون عقّاري',
+              'قانون الجبائي',
+              'قانون الشغل',
+              'نزاعات الجوار ',
+              'قانون الأُسرة',
+              'قانون الأكرية',
+              'حادث'
+            ]}
+          />
 
           {/* <Upload {...props}> */}
           <input type="file" name="file" onChange={onFileChange} multiple />
@@ -105,7 +130,7 @@ const WrittenAdvice = () => {
               showTime
               onChange={(v, d) => setDateString(d)}
               bordered={false}
-              disabledDate={(current) => current && current < moment().endOf('day')}
+              disabledDate={current => current && current < moment().endOf('day')}
               placeholder=""
             />
           </Form.Item>
@@ -125,11 +150,11 @@ const WrittenAdvice = () => {
       <div className="head">
         <div className="title"> استشارة جديدة</div>
         <div className="pricing">
-          <div className={isChecked === 'text' ? 'card-type checked' : 'card-type'} onClick={(e) => setIsChecked('text')}>
+          <div className={isChecked === 'text' ? 'card-type checked' : 'card-type'} onClick={e => setIsChecked('text')}>
             <FormOutlined />
             <span>إستشارة كتابيّة</span>
           </div>
-          <div className={isChecked === 'video' ? 'card-type checked' : 'card-type'} onClick={(e) => setIsChecked('video')}>
+          <div className={isChecked === 'video' ? 'card-type checked' : 'card-type'} onClick={e => setIsChecked('video')}>
             <VideoCameraOutlined />
             <span>إستشارة بالفيديو</span>
           </div>

@@ -4,6 +4,8 @@ import verifEmailTemplate from '../helpers/email/verifEmailTemplate';
 import VerifAvocatMail from '../helpers/email/sendVerifAvocatMail';
 import newConsultation from '../helpers/email/newConsultation';
 import confirmAccMail from '../helpers/email/confirmAccMail';
+const path = require('path');
+
 // const transport = nodemailer.createTransport(config.email.smtp);
 const transport = nodemailer.createTransport(config.email.smtp);
 
@@ -20,6 +22,27 @@ const sendEmail = async (to, subject, text, html) => {
   await transport.sendMail(msg);
 };
 
+/**
+ * Send an email with image attachemet
+ */
+const sendEmailWithImageAttachements = async (to, subject, text, html, imageFileName) => {
+  const msg = {
+    from: config.email.from,
+    to,
+    subject,
+    text,
+    html,
+    attachments: [
+      {
+        filename: imageFileName,
+        contentType: 'image/jpeg' || 'image/png',
+        path: path.join(process.cwd(), 'uploads', imageFileName)
+      }
+    ]
+  };
+  await transport.sendMail(msg);
+};
+
 const sendVerifMail = async (to, name, token) => {
   const subject = 'verif mail';
   const html = verifEmailTemplate(to, name, token);
@@ -32,10 +55,10 @@ const sendVerifAvocatMail = async (user, token) => {
   await sendEmail(config.email.smtp.auth.user, subject, '', html);
 };
 
-const newConsultationEmail = async (consultation, avocats) => {
+const newConsultationEmail = async (consultation, avocats, imageFileName) => {
   const subject = 'Valid Consultation';
   const html = newConsultation(consultation, avocats);
-  await sendEmail(config.email.smtp.auth.user, subject, '', html);
+  await sendEmailWithImageAttachements(config.email.smtp.auth.user, subject, '', html, imageFileName);
 };
 
 const confirmAccEmail = async (to, name, token) => {
@@ -43,6 +66,7 @@ const confirmAccEmail = async (to, name, token) => {
   const html = confirmAccMail(to, name, token);
   await sendEmail(to, subject, '', html);
 };
+
 export default {
   transport,
   sendEmail,

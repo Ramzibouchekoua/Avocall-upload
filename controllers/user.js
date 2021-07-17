@@ -11,7 +11,7 @@ import { date } from 'joi';
 //@route POST /api/user/register
 //@access public
 export const register = asyncHandler(async (req, res) => {
-  const { email, password, phone, name, address,birthDate } = req.body;
+  const { email, password, phone, name, address, birthDate } = req.body;
   //validation
   if (!email || !password || !name || !birthDate) return res.status(400).json({ msg: 'خانات إلزامية.' });
   if (password.length < 5) return res.status(400).json({ msg: 'يجب أن تتكون كلمة المرور من 5 أحرف على الأقل.' });
@@ -51,7 +51,7 @@ export const update = asyncHandler(async (req, res) => {
   user.birthDate = req.body.birthDate || user.birthDate;
   const updateduser = await user.save();
   res.json({
-    newUser: updateduser,
+    newUser: updateduser
   });
 });
 
@@ -63,8 +63,8 @@ export const verifMail = asyncHandler(async (req, res) => {
   const user = await User.findById(id);
   user.status.isVerified = true;
   await user.save();
-  if(user.role==="PRO"){
-    emailService.confirmAccEmail(user.email, user.name, generateToken(user._id, config.email.secret))
+  if (user.role === 'PRO') {
+    emailService.confirmAccEmail(user.email, user.name, generateToken(user._id, config.email.secret));
   }
   // res.json('لقد تم تفعيل حسابكم' );
   res.redirect('http://localhost:3000/sign-in');
@@ -112,7 +112,7 @@ export const newConsultation = asyncHandler(async (req, res) => {
   user.wallet = user.wallet - 1;
   user.userId = req.user;
   await user.save();
-  await emailService.newConsultationEmail(consultation, avocats);
+  await emailService.newConsultationEmail(consultation, avocats,req.body.filename);
   res.json({ consultation });
 });
 
@@ -143,7 +143,7 @@ export const updateConsultation = asyncHandler(async (req, res) => {
   consultation.date = req.body.date || consultation.date;
   const updatedconsultation = await consultation.save();
   res.json({
-    newConsultation: updatedconsultation,
+    newConsultation: updatedconsultation
   });
 });
 
