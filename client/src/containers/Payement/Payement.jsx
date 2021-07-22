@@ -1,5 +1,5 @@
 import React from 'react';
-import Paypal from '../../assets/images/paypal.png';
+import Paypal from '../../assets/images/ClicToPay_logo.png';
 import { Menu, Dropdown, Button, message } from 'antd';
 import { DownOutlined, CheckOutlined, PaperClipOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
@@ -45,13 +45,13 @@ const packs = [
     id: 1,
     title: 'إستشارة',
     price: '29TND',
-    nbr: 1
+    nbr: 0
   },
   {
     id: 2,
     title: 'عرض : 3 إستشارات',
     price: '69TND',
-    nbr: 3
+    nbr: 0
   }
 ];
 
@@ -131,11 +131,11 @@ const Payement = () => {
 
       <div className="Right">
         <span className="title">اختر طريقة الدفع المناسبة لك</span>
-        <span className="under-title">يمكنك الدفع عبر باي بال او عبر استعمال بطاقتك البنكية</span>
+        <span className="under-title">يمكنك الدفع عبر حوالة مصرفية او عبر استعمال بطاقتك البنكية</span>
         <input type="file" name="file" onChange={onFileChange} multiple />
-        <Button icon={<PaperClipOutlined />}>رفع ملف مرفق</Button>
         <div className="payement-logo">
-          <img src={Paypal} alt="Paypal" />
+          <img src={Paypal} alt="" />
+          <span>قريبا!!</span>
         </div>
         <button className="pay" onClick={onClick}>
           Finaliser

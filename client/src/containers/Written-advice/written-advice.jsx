@@ -120,9 +120,7 @@ const WrittenAdvice = () => {
           />
 
           {/* <Upload {...props}> */}
-          <input type="file" name="file" onChange={onFileChange} multiple />
-          <Button icon={<PaperClipOutlined />}>رفع ملف مرفق</Button>
-          {/* </Upload> */}
+          <input type="file" name="file" onChange={onFileChange} multiple />          {/* </Upload> */}
         </div>
         <div className="section-left">
           <Form.Item label="تاريخ الاستشارة*" rules={[{ required: true }]}>

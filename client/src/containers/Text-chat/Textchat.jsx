@@ -141,16 +141,6 @@ const Textchat = ({ socket }) => {
             </tr>
           </tbody> */}
         </table>
-        <button className="button-blue" onClick={viewPic}>
-          Photo
-        </button>
-        <Image
-          width={200}
-          src="C:\\Users\\Acer\\Desktop\\pers_sha\\istichara\\uploads\\660130860801_115050273777003_9031875740337729047_n.jpg"
-          preview={{
-            src: 'C:\\Users\\Acer\\Desktop\\pers_sha\\istichara\\uploads\\660130860801_115050273777003_9031875740337729047_n.jpg',
-          }}
-        />
         <Link to="/dashboard">
           <button className="button-blue">أغلق الاستشارة</button>
         </Link>

@@ -27,8 +27,7 @@ import PayementFailed from './containers/PayementError';
 import Verification from './containers/AccountVerification';
 import Confirmation from './containers/OrderConfirmation';
 import Book from './containers/Book';
-import Blog from './containers/Blog';
-import Article from './containers/Article';
+import Wallet from './containers/Wallet';
 import Welcomemsg from './containers/Welcome';
 import VidPage from './videoChat/components/App/App';
 //ERROR PAGES
@@ -130,8 +129,7 @@ export default function App() {
                 <PrivateAuth exact path="/sign-up" component={Signup} />
                 <PrivateAuth exact path="/sign-up-pro" component={SignupPro} />
                 <PrivateAuth exact path="/sign-in" component={Signin} />
-                <Route exact path="/Blog" component={Blog} />
-                <Route exact path="/قانون الأُسرة" component={Article} />
+                <Route exact path="/Wallet" component={Wallet} />
                 <Route exact path="/vid-page/:id" component={VidPage} />
                 <Route exact path="/text-chat/:id" render={() => <Textchat socket={socket} />} />
 

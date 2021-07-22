@@ -6,24 +6,7 @@ import UserContext from "../../context/userContext";
 
 const Update = ({ user = {} }) => {
   const [form] = Form.useForm();
-  const formItemLayout = {
-    labelCol: {
-      xs: {
-        span: 24,
-      },
-      sm: {
-        span: 8,
-      },
-    },
-    wrapperCol: {
-      xs: {
-        span: 24,
-      },
-      sm: {
-        span: 16,
-      },
-    },
-  };
+ 
   const { setUserData } = useContext(UserContext);
   
   const onFinish = async (values) => {
@@ -46,11 +29,10 @@ const Update = ({ user = {} }) => {
   };
 
   return (
-    <div className="registration">
+    <div className="update-profile">
       <h1>تعديل الحساب</h1>
       <Form
         className="Container"
-        {...formItemLayout}
         form={form}
         name="register"
         onFinish={onFinish}
@@ -62,17 +44,17 @@ const Update = ({ user = {} }) => {
           address: user.address,
         }}
       >
-        <div className="Right-Signup">
+        <div className="right-Signup">
           <Email label="البريد الالكتروني" value={user.email} name="email" />
           <Number label="رقم الهاتف " value={user.phone} name="phone" />
-          <Form.Item>
-            <Button htmlType="submit">احفظ</Button>
-          </Form.Item>
         </div>
         <div className="Left-Signup">
           <Text label="الاسم الكامل" value={user.name} name="name" />
           <Text label="مقر السكنى" value={user.address} name="address" />
         </div>
+        <Form.Item>
+            <Button htmlType="submit">احفظ</Button>
+          </Form.Item>
       </Form>
     </div>
   );

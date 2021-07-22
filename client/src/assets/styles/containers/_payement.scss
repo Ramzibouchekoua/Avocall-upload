@@ -81,103 +81,28 @@
       color: $second-title-color;
       margin-top: 5%;
     }
+    input {
+     margin-top: 10px;
+    }
+  
     .payement-logo {
-      height: 47.15px;
-      width: 471.5px;
-      background-color: $grey;
-      border-radius: 20px;
-      margin-top: 20%;
+      margin-top: 10px;
       display: flex;
+      
       justify-content: center;
       align-items: center;
-      img {
-        width: 81.22px;
-        height: 20.76px;
-      }
-    }
-    .payement-information {
-      margin-top: 20%;
-      .up {
-        display: flex;
-        width: 471.5px;
-        height: 100%;
-        .Date {
-          width: 50% !important;
-          height: 100px;
-          .title {
-            font-size: 14px;
-            font-weight: bold;
-            color: $title-color;
-          }
-          .SetDate {
-            padding: 15px 10px;
-            border: 1px solid $title-color;
-            border-radius: 8px;
-            position: relative;
-            top: 8px;
-
-            .ant-btn {
-              border: none;
-
-              width: 100px !important;
-              span {
-                color: $title-color;
-              }
-            }
-          }
-        }
-        .Card-number {
-          width: 50%;
-          span {
-            font-size: 14px;
-            font-weight: bold;
-            color: $title-color;
-          }
-          input {
-            height: 47.15px;
-            text-align: center;
-            border-radius: 8px;
-            border: 1px solid $title-color;
-            width: 100%;
-          }
-        }
-      }
-      .down {
-        display: flex;
-        width: 471.5px;
-        height: 100%;
-
-        .cvc {
-          width: 15%;
-          margin-left: 5%;
-          span {
-            font-size: 14px;
-            font-weight: bold;
-            color: $title-color;
-          }
-          input {
-            height: 47.15px;
-            text-align: center;
-            border-radius: 8px;
-            border: 1px solid $title-color;
-            width: 100%;
-          }
-        }
-        .Name-card {
-          width: 65%;
-          span {
-            font-size: 14px;
-            font-weight: bold;
-            color: $title-color;
-          }
-          input {
-            height: 47.15px;
-            text-align: center;
-            border-radius: 8px;
-            border: 1px solid $title-color;
-            width: 100%;
-          }
-        }
+    
+  img {
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
+    width: 80px;
+  }
+ 
+      span {
+       font-size: 22px;
+       font-weight: 700;
+       color: $primary-color;
+       text-align: center;
       }
     }
     .pay {
