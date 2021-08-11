@@ -84,6 +84,31 @@
     input {
      margin-top: 10px;
     }
+    .Bank-detail {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+      .under-title {
+        font-size: 16px;
+        color: $second-title-color;
+        margin-top: 5%;
+      }
+      .name {
+        font-size: 16px;
+        color: $primary-color;
+        margin-top: 20px;
+font-weight: 700;
+text-align: center;
+      }
+      .rib {
+        font-size: 16px;
+        color: $primary-color;
+        margin-top: 20px;
+font-weight: 700;
+text-align: center;
+direction: ltr;
+      }
+    }
   
     .payement-logo {
       margin-top: 10px;
@@ -106,7 +131,7 @@
       }
     }
     .pay {
-      width: 100%;
+      width: 200px;
       height: 47.15px;
       background-color: #252525;
       border: 1px #252525 solid;

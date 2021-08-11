@@ -8,11 +8,11 @@ const Footer = () => {
       <img alt="brand" src={Logo} />
       <div className="addresse">
         <span className="title"> العنوان:</span>
-        <span className="subtitle">45 شارع الحبيب بورقيبة ، الكولوسيوم ، المدرج. أ ، الطابق الثالث ، تونس العاصمة.</span>
+        <span className="subtitle">  <b> اقامة الكوليزي مدرج ا الطابق الثالث 45</b> شارع الحبيب بورقيبة تونس</span>
       </div>
       <div className="addresse">
         <span className="title"> الهاتف:</span>
-        <span className="subtitle">+216 22 250 738</span>
+        <span className="phone-number">+216 22 250 738</span>
       </div>
       <div className="Brand">
         <span className="copyright"> كل الحقوق محفوظة©</span>

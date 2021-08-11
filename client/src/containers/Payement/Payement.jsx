@@ -132,6 +132,16 @@ const Payement = () => {
       <div className="Right">
         <span className="title">اختر طريقة الدفع المناسبة لك</span>
         <span className="under-title">يمكنك الدفع عبر حوالة مصرفية او عبر استعمال بطاقتك البنكية</span>
+        <div className="Bank-detail">
+          <span className="under-title">للدفع عبر الحوالة البنكية الرجاء ارسال حوالة للحسابات التالية :</span>
+          <span className="under-title">  <b>الرجاء ذكر اسم المستخدم في ملاحظة الحوالة البنكية و التاكد من اسم المستفيد </b></span>          <span className="name">Ghedira Avocats et conseils Avocall</span>
+          <span className="under-title">من تونس :</span>
+          <span className="rib">08 004 0001710003480</span>
+          <span className="under-title">من خارج تونس :</span>
+          <span className="rib">TN59 0800 4000 1710 0034 8023</span>
+          <span className="under-title">الرجاء تحميل إثبات الدفع من هنا</span>
+
+        </div>
         <input type="file" name="file" onChange={onFileChange} multiple />
         <div className="payement-logo">
           <img src={Paypal} alt="" />
