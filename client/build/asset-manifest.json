@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.f5e33ab8.chunk.css",
+    "main.css": "/static/css/main.ae0024c9.chunk.css",
     "main.js": "/static/js/main.d5327918.chunk.js",
     "main.js.map": "/static/js/main.d5327918.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.5a8b4898.js",
@@ -9,10 +9,10 @@
     "static/js/2.f01cba5c.chunk.js": "/static/js/2.f01cba5c.chunk.js",
     "static/js/2.f01cba5c.chunk.js.map": "/static/js/2.f01cba5c.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.216b3f17adb9952b4c4cdc906d844144.js": "/precache-manifest.216b3f17adb9952b4c4cdc906d844144.js",
+    "precache-manifest.8ce93c1ee517c0bf6d9d143c3ab00f92.js": "/precache-manifest.8ce93c1ee517c0bf6d9d143c3ab00f92.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.adc0bda4.chunk.css.map": "/static/css/2.adc0bda4.chunk.css.map",
-    "static/css/main.f5e33ab8.chunk.css.map": "/static/css/main.f5e33ab8.chunk.css.map",
+    "static/css/main.ae0024c9.chunk.css.map": "/static/css/main.ae0024c9.chunk.css.map",
     "static/js/2.f01cba5c.chunk.js.LICENSE.txt": "/static/js/2.f01cba5c.chunk.js.LICENSE.txt",
     "static/media/index.scss": "/static/media/Bg-sec2.f24eb165.png",
     "static/media/ClicToPay_logo.png": "/static/media/ClicToPay_logo.b111688e.png",
@@ -31,7 +31,7 @@
     "static/js/runtime-main.5a8b4898.js",
     "static/css/2.adc0bda4.chunk.css",
     "static/js/2.f01cba5c.chunk.js",
-    "static/css/main.f5e33ab8.chunk.css",
+    "static/css/main.ae0024c9.chunk.css",
     "static/js/main.d5327918.chunk.js"
   ]
 }
