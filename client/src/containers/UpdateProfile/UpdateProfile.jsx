@@ -17,7 +17,7 @@ const Update = ({ user = {} }) => {
         token = '';
       }
       const newUser = await axios.put(
-        'http://localhost:5000/api/user/update',
+        process.env.REACT_APP_API_URL + '/api/user/update',
         { ...values},
         {
           headers: { 'x-auth-token': token },

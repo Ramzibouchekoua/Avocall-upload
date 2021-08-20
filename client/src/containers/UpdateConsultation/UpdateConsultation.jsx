@@ -25,7 +25,7 @@ const WrittenAdvice = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await axios.get(`/api/user/consultation/${consultationId}`, {
+        const res = await axios.get(process.env.REACT_APP_API_URL + `/api/user/consultation/${consultationId}`, {
           headers: {
             'x-auth-token': localStorage.getItem('auth-token'),
           },
@@ -54,7 +54,7 @@ const WrittenAdvice = () => {
         token = '';
       }
       if (!_.isEmpty(selectedFile)) {
-        const upFile = await axios.post('http://localhost:5000/api/file/upload', formData, {
+        const upFile = await axios.post(process.env.REACT_APP_API_URL + '/api/file/upload', formData, {
           headers: { 'x-auth-token': token },
         });
         try {
@@ -64,7 +64,7 @@ const WrittenAdvice = () => {
         }
       }
       const newCons = await axios.put(
-        `/api/user/updateConsultation/${consultationId}`,
+        process.env.REACT_APP_API_URL + `/api/user/updateConsultation/${consultationId}`,
         { ...values, type: isChecked, date: dateString },
         {
           headers: { 'x-auth-token': token },

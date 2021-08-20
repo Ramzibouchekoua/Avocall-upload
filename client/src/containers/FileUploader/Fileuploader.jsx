@@ -17,7 +17,7 @@ const Fileuploader =  () => {
               for (let i = 0; i < files.length; i++) {
                      data.append("file", files[i]);
               }
-              axios.post("//localhost:8000/uploadfile", data)
+              axios.post(process.env.REACT_APP_API_URL + "/uploadfile", data)
                      .then((response) => {
                             toast.success("Share Success");
                             onSuccess(response.data)

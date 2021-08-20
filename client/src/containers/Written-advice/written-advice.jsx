@@ -35,7 +35,7 @@ const WrittenAdvice = () => {
         return;
       }
       if (!_.isEmpty(selectedFile)) {
-        const upFile = await axios.post('http://localhost:5000/api/file/upload', formData, {
+        const upFile = await axios.post(process.env.REACT_APP_API_URL + '/api/file/upload', formData, {
           headers: { 'x-auth-token': token }
         });
         filename = upFile.data.data.fileName
@@ -51,7 +51,7 @@ const WrittenAdvice = () => {
         return state;
       });
       const newCons = await axios.post(
-        'http://localhost:5000/api/user/newConsultation',
+        process.env.REACT_APP_API_URL + '/api/user/newConsultation',
         {
           ...values,
           files: values.files ? values.files.concat(fileIds) : [],

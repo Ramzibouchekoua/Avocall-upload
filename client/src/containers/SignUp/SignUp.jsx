@@ -41,7 +41,7 @@ const Signup = () => {
     const token = res?.tokenId;
     try {
       setError(undefined)
-      const loginRes = await axios.post("/api/auth/googleLogin", {
+      const loginRes = await axios.post(process.env.REACT_APP_API_URL + "/api/auth/googleLogin", {
         ...result,
       });
       setUserData({
@@ -71,7 +71,7 @@ const Signup = () => {
         address: values.address,
         birthDate: values.birthDate,
       };
-      await axios.post("/api/user/register", newUser);
+      await axios.post(process.env.REACT_APP_API_URL + "/api/user/register", newUser);
       history.push("/AccountVerification");
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);

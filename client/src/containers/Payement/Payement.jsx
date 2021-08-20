@@ -83,7 +83,7 @@ const Payement = () => {
           token = '';
         }
 
-        const upFile = await axios.post('http://localhost:5000/api/file/upload', formData, {
+        const upFile = await axios.post(process.env.REACT_APP_API_URL + '/api/file/upload', formData, {
           headers: { 'x-auth-token': token }
         });
 
@@ -91,7 +91,7 @@ const Payement = () => {
         message.success('uploaded');
 
         const newConsultation = await axios.post(
-          'http://localhost:5000/api/user/buyPack',
+          process.env.REACT_APP_API_URL + '/api/user/buyPack',
           {
             consultationNumber: isChecked.nbr,
             filename

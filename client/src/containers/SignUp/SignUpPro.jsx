@@ -59,7 +59,7 @@ const SignupPro = () => {
         bankId: values.bankId,
         classing: values.classing,
       };
-      await axios.post("/api/userpro/register", newUser);
+      await axios.post(process.env.REACT_APP_API_URL + "/api/userpro/register", newUser);
       history.push("/Welcomemsg");
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);

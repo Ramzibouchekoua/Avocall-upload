@@ -21,7 +21,7 @@ const SignIn = () => {
   const onFinish = async (values) => {
     try {
       setError(undefined)
-      const loginRes = await axios.post("/api/auth/login", {
+      const loginRes = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, {
         email: values.email,
         password: values.password,
       });
@@ -44,7 +44,7 @@ const SignIn = () => {
     const token = res?.tokenId;
     try {
       setError(undefined)
-      const loginRes = await axios.post("/api/auth/googleLogin", {
+      const loginRes = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/googleLogin`, {
         ...result,
       });
       setUserData({

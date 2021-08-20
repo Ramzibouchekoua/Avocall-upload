@@ -84,12 +84,12 @@ export default function App() {
       localStorage.setItem('auth-token', '');
       token = '';
     } else {
-      const tokenRes = await axios.get('/api/user/tokenIsValid', {
+      const tokenRes = await axios.get(`${process.env.REACT_APP_API_URL}/api/user/tokenIsValid`, {
         headers: { 'x-auth-token': token },
       });
       try {
         if (tokenRes.data) {
-          const userRes = await axios.get('/api/user/', {
+          const userRes = await axios.get(process.env.REACT_APP_API_URL + '/api/user/', {
             headers: { 'x-auth-token': token },
           });
           setUserData({

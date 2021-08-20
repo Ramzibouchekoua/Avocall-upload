@@ -78,7 +78,7 @@ const Textchat = ({ socket }) => {
     //eslint-disable-next-line
   }, []);
   const viewPic = async () => {
-    const file = await axios.get('/api/file/download/60da61e47585d73764d32133', {
+    const file = await axios.get(process.env.REACT_APP_API_URL + '/api/file/download/60da61e47585d73764d32133', {
       headers: { 'x-auth-token': localStorage.getItem('auth-token') },
     });
     try {
