@@ -71,7 +71,7 @@ export const verifMail = asyncHandler(async (req, res) => {
     emailService.confirmAccEmail(user.email, user.name, generateToken(user._id, config.email.secret));
   }
   // res.json('لقد تم تفعيل حسابكم' );
-  res.redirect('http://localhost:3000/sign-in');
+  res.redirect('http://51.38.225.27/sign-in');
 });
 
 //@des get user details
