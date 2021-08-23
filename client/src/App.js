@@ -52,7 +52,7 @@ export default function App() {
   const setupSocket = () => {
     const token = localStorage.getItem('auth-token');
     if (token && !socket) {
-      const newSocket = io('http://127.0.0.1:5000', {
+      const newSocket = io('http://51.38.225.27:5000', {
         query: {
           token: localStorage.getItem('auth-token'),
         },
