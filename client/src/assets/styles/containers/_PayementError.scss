@@ -93,8 +93,9 @@ div {
       display: flex;
       align-items: center;
       width: 100%;
+      flex-direction: column;
       .ant-btn {
-          width: 30%;
+          width: 200px;
           border: 1px solid #202f84;
           border-radius: 4px;
           height: 46px;
