@@ -21,7 +21,7 @@ const { value: envVars, error } = envVarsSchema.prefs({ errors: { label: 'key' }
 if (error) {
   throw new Error(`Config validation error: ${error.message}`);
 }
-
+console.log('envVars.SMTP_PASSWORD::', envVars.SMTP_PASSWORD);
 export default {
   env: envVars.NODE_ENV,
   port: envVars.PORT,

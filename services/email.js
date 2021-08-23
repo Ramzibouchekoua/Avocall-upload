@@ -47,9 +47,13 @@ const sendEmailWithImageAttached = async (to, subject, text, html, imageFileName
 };
 
 const sendVerifMail = async (to, name, token) => {
-  const subject = 'verif mail';
-  const html = verifEmailTemplate(to, name, token);
-  await sendEmail(to, subject, '', html);
+  try {
+    const subject = 'verif mail';
+    const html = verifEmailTemplate(to, name, token);
+    await sendEmail(to, subject, '', html);
+  } catch (error) {
+    console.log('sendVerifMail::', {error});
+  }
 };
 
 const sendVerifAvocatMail = async (user, token) => {

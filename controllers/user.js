@@ -28,7 +28,11 @@ export const register = asyncHandler(async (req, res) => {
   });
   const savedUser = await newUser.save();
   savedUser.password = undefined;
-  emailService.sendVerifMail(email, name, generateToken(savedUser._id, config.email.secret));
+  try {
+    emailService.sendVerifMail(email, name, generateToken(savedUser._id, config.email.secret));
+  } catch (error) {
+    console.log({error});
+  }
   res.json(savedUser);
 });
 

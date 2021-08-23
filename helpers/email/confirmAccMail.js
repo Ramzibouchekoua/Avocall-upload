@@ -4,7 +4,7 @@ const confirmAccMail = (to, name, token) =>
   <h2> <span style=" text-transform: capitalize;"> ${name}</span> مرحبا بك</h2>
  <h3> لقد تم تفعيل حسابك بنجاح </h3>
  <h3> للتأكّد من إتمام إثبات ملكية حسابك، يُرجى الضغط على الزر ادناه</h3>
-  <a href="http://localhost:5000/api/user/verifMail/${token}" style='text-decoration:none; '>
+  <a href="http://51.38.225.27/:5000/api/user/verifMail/${token}" style='text-decoration:none; '>
   <button style='background-color:#202F84; color:white;font-weight:900;font-size:20px;padding:5px 30px;margin-top:20px;'> التاكيد الان </button>
   </a>
 </div>
