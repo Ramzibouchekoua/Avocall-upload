@@ -63,7 +63,7 @@ const PORT = config.port || 5000;
 
 const io = require('socket.io')(server, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: 'http://51.38.225.27/',
     methods: ['GET', 'POST']
   }
 });
