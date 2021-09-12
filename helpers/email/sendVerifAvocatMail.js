@@ -6,7 +6,7 @@ const verifEmailTemplate = (user, token) => `
   <h3><span style=" text-transform: capitalize;"> ${user.phone}</span></h3>
   <h3><span style=" text-transform: capitalize;"> ${user.address}</span></h3>
   <h3><span style=" text-transform: capitalize;"> ${user.type}</span></h3>
-  <a href="http://51.38.225.27:5000/api/user/verifMail/${token}" >
+  <a href="https://api.avocall.com/api/user/verifMail/${token}" >
   <button>Valid Account</button>
   
   </a>

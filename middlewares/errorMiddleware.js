@@ -1,8 +1,9 @@
 import config from "../config";
 const notFound = (req, res, next) => {
-  const error = new Error(`Not Found - ${req.originalUrl}`);
-  res.status(404);
-  next(error);
+  // const error = new Error(`Not Found - ${req.originalUrl}`);
+  // res.status(404);
+  // next(error);
+  next();
 };
 
 const errorHandler = (err, req, res, next) => {
