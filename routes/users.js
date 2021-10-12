@@ -15,6 +15,8 @@ router.post('/newConsultation', auth, UserController.newConsultation);
 router.get('/allConsultation', auth, UserController.getConsultations);
 router.get('/consultation/:id', auth, UserController.getConsultation);
 router.put('/updateConsultation/:id', auth, UserController.updateConsultation);
-router.post('/buyPack', auth, UserController.buyPack);
+router.post('/buyPack', auth,UserController.buyPack);
+router.get('/getUserPayments/:id', auth, UserController.getUserPayments);
+//router.get('/getSinglePayment/:payment_id', auth, UserController.getSinglePayment);
 
 export default router;

@@ -1,9 +1,11 @@
 import asyncHandler from 'express-async-handler';
 import User from '../models/user';
+import File from '../models/file';
 import Consultation from '../models/consultation';
 import generateToken from '../helpers/generateToken';
 import config from '../config';
 import emailService from '../services/email';
+import uploadFileService from '../services/uploadFile';
 import email from '../services/email';
 import { date } from 'joi';
 
@@ -31,7 +33,7 @@ export const register = asyncHandler(async (req, res) => {
   try {
     emailService.sendVerifMail(email, name, generateToken(savedUser._id, config.email.secret));
   } catch (error) {
-    console.log({error});
+    console.log({ error });
   }
   res.json(savedUser);
 });
@@ -108,15 +110,15 @@ export const newConsultation = asyncHandler(async (req, res) => {
   if (!user.wallet || user.wallet < 1) return res.status(400).json({ msg: 'Empty wallet' });
   const newConsultation = {
     ...req.body,
-    userId: req.user,
+    userId: req.user
   };
-  console.log("newConsultation",newConsultation)
+  console.log('newConsultation', newConsultation);
   const consultation = await Consultation.create(newConsultation);
   const avocats = await User.find({ role: 'PRO' });
   user.wallet = user.wallet - 1;
   user.userId = req.user;
   await user.save();
-  await emailService.newConsultationEmail(consultation, avocats,req.body.filename);
+  await emailService.newConsultationEmail(consultation, avocats, req.body.filename);
   res.json({ consultation });
 });
 
@@ -155,10 +157,23 @@ export const updateConsultation = asyncHandler(async (req, res) => {
 //@route POST /api/user/buyPack
 //@access private
 export const buyPack = asyncHandler(async (req, res) => {
+  await uploadFileService.registerPayment(req, res);
+  const fileName = req.body.filename;
+  const payment = await File.findOne({ fileName });
   const user = await User.findById(req.user);
   user.wallet = Number(user.wallet) + Number(req.body.consultationNumber);
+  user.files.push(payment);
   await user.save();
   user.password = undefined;
-  await emailService.buyPackEmail(user,req.body.filename);
+  //await emailService.buyPackEmail(user, req.body.filename);
+  res.json({ user });
+});
+
+//@des getUserPayments
+//@route POST /api/user/getUserPayments/id
+//@access private
+export const getUserPayments = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user);
+  console.log(user);
   res.json({ user });
 });
