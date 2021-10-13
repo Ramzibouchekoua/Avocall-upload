@@ -21,7 +21,8 @@ export const register = asyncHandler(async (req, res) => {
   });
   const savedUser = await newUser.save();
   savedUser.password = undefined;
-  await emailService.sendVerifAvocatMail(savedUser, generateToken(savedUser._id, config.email.secret));
+  const token = await generateToken(savedUser._id, config.email.secret)
+  await emailService.sendVerifAvocatMail(savedUser, token);
   res.json({ msg: 'email sent to an admin', savedUser });
 });
 

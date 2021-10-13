@@ -5,7 +5,6 @@ import Consultation from '../models/consultation';
 import generateToken from '../helpers/generateToken';
 import config from '../config';
 import emailService from '../services/email';
-import uploadFileService from '../services/uploadFile';
 import email from '../services/email';
 import { date } from 'joi';
 
@@ -31,7 +30,36 @@ export const register = asyncHandler(async (req, res) => {
   const savedUser = await newUser.save();
   savedUser.password = undefined;
   try {
-    emailService.sendVerifMail(email, name, generateToken(savedUser._id, config.email.secret));
+    emailService.sendVerifMail(email, name, savedUser._id, config.email.secret);
+  } catch (error) {
+    console.log({ error });
+  }
+  res.json(savedUser);
+});
+
+//@des register new admin
+//@route POST /api/user/registerAdmin
+//@access public
+export const registerAdmin = asyncHandler(async (req, res) => {
+  const { email, password, phone, name, address, birthDate } = req.body;
+  //validation
+  if (!email || !password || !name || !birthDate) return res.status(400).json({ msg: 'خانات إلزامية.' });
+  if (password.length < 5) return res.status(400).json({ msg: 'يجب أن تتكون كلمة المرور من 5 أحرف على الأقل.' });
+  const existingUser = await User.findOne({ email: email });
+  if (existingUser) return res.status(400).json({ msg: 'الحساب مع هذا البريد الإلكتروني موجود بالفعل.' });
+  const newUser = new User({
+    email,
+    password,
+    phone,
+    name,
+    role: 'ADMIN',
+    address,
+    birthDate
+  });
+  const savedUser = await newUser.save();
+  savedUser.password = undefined;
+  try {
+    emailService.sendVerifMail(email, name, await generateToken(savedUser._id, config.email.secret));
   } catch (error) {
     console.log({ error });
   }
@@ -66,11 +94,13 @@ export const update = asyncHandler(async (req, res) => {
 //@access public
 export const verifMail = asyncHandler(async (req, res) => {
   const id = req.user;
+  console.log(id);
   const user = await User.findById(id);
   user.status.isVerified = true;
+  console.log(user);
   await user.save();
   if (user.role === 'PRO') {
-    emailService.confirmAccEmail(user.email, user.name, generateToken(user._id, config.email.secret));
+    emailService.confirmAccEmail(user.email, user.name, await generateToken(user._id, config.email.secret));
   }
   // res.json('لقد تم تفعيل حسابكم' );
   res.redirect(`${process.env.REACT_APP_CLIENT_URL}/sign-in`);
@@ -157,23 +187,14 @@ export const updateConsultation = asyncHandler(async (req, res) => {
 //@route POST /api/user/buyPack
 //@access private
 export const buyPack = asyncHandler(async (req, res) => {
-  await uploadFileService.registerPayment(req, res);
   const fileName = req.body.filename;
+  const consultationNumber = req.body.consultationNumber;
   const payment = await File.findOne({ fileName });
   const user = await User.findById(req.user);
-  user.wallet = Number(user.wallet) + Number(req.body.consultationNumber);
+  user.wallet = Number(user.wallet) + Number(consultationNumber);
   user.files.push(payment);
   await user.save();
   user.password = undefined;
-  //await emailService.buyPackEmail(user, req.body.filename);
-  res.json({ user });
-});
-
-//@des getUserPayments
-//@route POST /api/user/getUserPayments/id
-//@access private
-export const getUserPayments = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user);
-  console.log(user);
+  await emailService.buyPackEmail(user, fileName);
   res.json({ user });
 });

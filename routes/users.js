@@ -5,6 +5,7 @@ import * as UserController from '../controllers/user';
 const router = express.Router();
 
 router.post('/register', UserController.register);
+router.post('/registerAdmin', UserController.registerAdmin);
 router.get('/verifMail/:token', verifTokenEmail, UserController.verifMail);
 router.get('/tokenIsValid', auth, UserController.tokenIsValid);
 router.put('/update', auth, UserController.update);
@@ -15,8 +16,6 @@ router.post('/newConsultation', auth, UserController.newConsultation);
 router.get('/allConsultation', auth, UserController.getConsultations);
 router.get('/consultation/:id', auth, UserController.getConsultation);
 router.put('/updateConsultation/:id', auth, UserController.updateConsultation);
-router.post('/buyPack', auth,UserController.buyPack);
-router.get('/getUserPayments/:id', auth, UserController.getUserPayments);
-//router.get('/getSinglePayment/:payment_id', auth, UserController.getSinglePayment);
+router.post('/buyPack', auth, UserController.buyPack);
 
 export default router;
