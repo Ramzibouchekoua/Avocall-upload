@@ -198,3 +198,11 @@ export const buyPack = asyncHandler(async (req, res) => {
   await emailService.buyPackEmail(user, fileName);
   res.json({ user });
 });
+
+//@des createOrderNumber
+//@route GET /api/user/createOrderNumber
+//@access private
+export const createOrderNumber = asyncHandler(async (req, res) => {
+  const orderNumber = Date.now();
+  res.json({ orderNumber });
+});

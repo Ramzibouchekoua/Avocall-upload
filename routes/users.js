@@ -17,5 +17,6 @@ router.get('/allConsultation', auth, UserController.getConsultations);
 router.get('/consultation/:id', auth, UserController.getConsultation);
 router.put('/updateConsultation/:id', auth, UserController.updateConsultation);
 router.post('/buyPack', auth, UserController.buyPack);
+router.get('/createOrderNumber', auth, UserController.createOrderNumber);
 
 export default router;
