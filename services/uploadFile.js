@@ -1,6 +1,6 @@
 import path from 'path';
 import multer from 'multer';
-import fs from 'fs';
+import fs, { accessSync } from 'fs';
 import appRootPath from 'app-root-path';
 import _ from 'lodash';
 import File from '../models/file';
@@ -27,7 +27,7 @@ const uploadFile = (req, res, next) => {
         originalName,
         fileExtension: extension,
         fileSize: size,
-        user: req.user,
+        user: req.user
       });
 
       uploadedFile.save((err, file) => {
@@ -37,15 +37,15 @@ const uploadFile = (req, res, next) => {
         resultFile = file;
       });
     }, //,
-    fileSize: 5000000,
+    fileSize: 5000000
   });
 
   let upload = multer({ storage }).array('file', 10);
-  upload(req, res, (err) => {
+  upload(req, res, err => {
     if (err instanceof multer.MulterError) {
       return res.json({
         success: false,
-        error: err,
+        error: err
       });
     } else if (err) {
       console.log(err);
@@ -55,13 +55,13 @@ const uploadFile = (req, res, next) => {
     if (!resultFile)
       return res.status(400).json({
         success: false,
-        responseCode: 'file is required',
+        responseCode: 'file is required'
       });
 
     return res.status(200).json({
       success: true,
       responseCode: 'upload success',
-      data: resultFile,
+      data: resultFile
     });
   });
 };
@@ -89,4 +89,59 @@ const getFile = (req, res, next) => {
   );
 };
 
-export default { uploadFile, getFile };
+const registerPayment = async (req, res, next) => {
+  let files = [];
+  let resultFile;
+  let originalName = '';
+  let extension = '';
+  let size = 0;
+  let uploadedFile;
+  let returnData;
+  let storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, pathToUploads);
+    },
+    filename: (req, file, cb) => {
+      originalName = file.originalname;
+      extension = path.extname(file.originalname);
+      size = file.size || 1;
+
+      uploadedFile = new File({
+        fileName: originalName,
+        originalName,
+        fileExtension: extension,
+        fileSize: size,
+        user: req.user
+      });
+
+      uploadedFile.save((err, file) => {
+        if (err) return next(err);
+        files.push(file.id);
+        cb(err, originalName);
+        resultFile = file;
+      });
+    }, //,
+    fileSize: 5000000
+  });
+
+  let upload = multer({ storage }).array('file', 10);
+  upload(req, res, err => {
+    if (err instanceof multer.MulterError) {
+      return {
+        success: false,
+        error: err
+      };
+    } else if (err) {
+      console.log(err);
+      return next(err);
+    }
+    if (!resultFile) {
+      return {
+        success: false,
+        responseCode: 'file is required'
+      };
+    }
+  });
+};
+
+export default { uploadFile, getFile, registerPayment };

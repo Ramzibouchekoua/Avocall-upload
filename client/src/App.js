@@ -39,13 +39,14 @@ import PrivateUser from './privateRoutes/PrivateUser';
 import PrivateUserPro from './privateRoutes/PrivateUserPro';
 import PrivateAuth from './privateRoutes/PrivateAuth';
 
+
 export default function App() {
   const [socket, setSocket] = useState(null);
   const [isPro] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [userData, setUserData] = useState({
     token: undefined,
-    user: undefined,
+    user: undefined
   });
   // const location = useLocation()
   //SOCKET Begin
@@ -54,8 +55,8 @@ export default function App() {
     if (token && !socket) {
       const newSocket = io('https://api.avocall.com', {
         query: {
-          token: localStorage.getItem('auth-token'),
-        },
+          token: localStorage.getItem('auth-token')
+        }
       });
 
       newSocket.on('disconnect', () => {
@@ -85,23 +86,23 @@ export default function App() {
       token = '';
     } else {
       const tokenRes = await axios.get(`${process.env.REACT_APP_API_URL}/api/user/tokenIsValid`, {
-        headers: { 'x-auth-token': token },
+        headers: { 'x-auth-token': token }
       });
       try {
         if (tokenRes.data) {
           const userRes = await axios.get(process.env.REACT_APP_API_URL + '/api/user/', {
-            headers: { 'x-auth-token': token },
+            headers: { 'x-auth-token': token }
           });
           setUserData({
             token,
-            user: userRes.data,
+            user: userRes.data
           });
         }
       } catch (err) {
         console.log('tokenRes.data err', err);
         setUserData({
           token: undefined,
-          user: undefined,
+          user: undefined
         });
       }
     }
@@ -147,7 +148,10 @@ export default function App() {
                 <PrivateUser exact path="/update-consultation/:id" component={updateConsultation} />
                 <PrivateUser exact path="/PayementError" component={PayementFailed} />
                 <PrivateUser exact path="/AccountVerification" component={Verification} />
-                <PrivateUser exact path="/OrderConfirmation" component={Confirmation} />
+                <Route exact path="/OrderConfirmation">
+                  <Confirmation />
+                </Route>
+                {/*<PrivateUser exact path="/OrderConfirmation" component={Confirmation} />*/}
                 <PrivateUser exact path="/book" component={Book} />
                 <PrivateUser exact path="/checkout" component={Payement} />
                 <PrivateUser exact path="/video-chat" component={Videochat} />

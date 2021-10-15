@@ -18,7 +18,7 @@ export const login = asyncHandler(async (req, res) => {
     });
     const savedUser = await newUser.save();
     res.json({
-      token: generateToken(savedUser.googleId),
+      token: await generateToken(savedUser.googleId),
       user: savedUser,
     });
 
@@ -27,7 +27,7 @@ export const login = asyncHandler(async (req, res) => {
   if (user.deletedAt) return res.status(400).json({ msg: 'تم حذف هذا الحساب الرجاء التواصل مع ادارة الموقع ' });
   if (user.role === 'USER') {
     res.json({
-      token: generateToken(user._id),
+      token: await generateToken(user._id),
       user: {
         status: { isVerified: user.status.isVerified },
         id: user._id,
@@ -42,7 +42,7 @@ export const login = asyncHandler(async (req, res) => {
     });
   } else {
     res.json({
-      token: generateToken(user._id),
+      token:await  generateToken(user._id),
       user: {
         id: user._id,
         email: user.email,
