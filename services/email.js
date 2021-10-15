@@ -52,7 +52,7 @@ const sendVerifMail = async (to, name, token) => {
     const html = verifEmailTemplate(to, name, token);
     await sendEmail(to, subject, '', html);
   } catch (error) {
-    console.log('sendVerifMail::', {error});
+    console.log('sendVerifMail::', { error });
   }
 };
 
@@ -75,7 +75,11 @@ const newConsultationEmail = async (consultation, avocats, imageFileName) => {
 const buyPackEmail = async (user, imageFileName) => {
   const subject = 'Payment';
   const html = buyPackEmailTemplate(user);
-  await sendEmailWithImageAttached(config.email.smtp.auth.user, subject, '', html, imageFileName);
+  if (imageFileName === 'online-payment') {
+    await sendEmail(config.email.smtp.auth.user, subject, '', html);
+  } else {
+    await sendEmailWithImageAttached(config.email.smtp.auth.user, subject, '', html, imageFileName);
+  }
 };
 
 const confirmAccEmail = async (to, name, token) => {

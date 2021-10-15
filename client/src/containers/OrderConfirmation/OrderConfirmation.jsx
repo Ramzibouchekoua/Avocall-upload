@@ -14,7 +14,6 @@ const OrderConfirmation = () => {
   const [language] = useState('en');
   const [password] = useState(process.env.REACT_APP_CLICK_TO_PAY_PASSWORD);
   const [userName] = useState(process.env.REACT_APP_CLICK_TO_PAY_USERNAME);
-  const [formUrl, setFormUrl] = useState('');
   const history = useHistory();
   let query = useQuery();
 
@@ -39,10 +38,12 @@ const OrderConfirmation = () => {
 
   const sendPayment = async () => {
     try {
-      const res = await axios.post(
+      const {
+        data: { orderId, formUrl }
+      } = await axios.post(
         process.env.REACT_APP_CLICK_TO_PAY_API_URL +
           '?amount=' +
-          query.get('amount') +
+          parseFloat(query.get('amount')) +
           '&currency=' +
           currency +
           '&language=' +
@@ -54,16 +55,15 @@ const OrderConfirmation = () => {
           '&returnUrl=' +
           returnUrl +
           '&userName=' +
-          userName
+          userName +
+          `&returnUrl=http://localhost:3000/PayementSuccess&failUrl=http://localhost:3000/PayementError`
       );
-      console.log(res.data);
-      setFormUrl(res.data.formUrl);
-      //window.location.href = formUrl;
+      //console.log(formUrl);
+      history.push(`/payment-gateway?link=${formUrl}`);
     } catch (err) {
       console.log('error in createOrderNumber', err);
     }
   };
-  console.log(orderNumber);
   return (
     <div className="PayementError">
       <span>

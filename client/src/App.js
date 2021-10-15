@@ -24,6 +24,8 @@ import UpdateProfilePro from './containers/UpdateProfile/UpdateProfilePro';
 import PhoneCall from './containers/PhoneCall';
 import PhoneExpired from './containers/Phoneexpired';
 import PayementFailed from './containers/PayementError';
+import PayementSuccess from './containers/PayementSuccess';
+import PayementGateway from './containers/PayementGateway';
 import Verification from './containers/AccountVerification';
 import Confirmation from './containers/OrderConfirmation';
 import Book from './containers/Book';
@@ -38,7 +40,6 @@ import NotFound from './containers/ErrorResult/notFound';
 import PrivateUser from './privateRoutes/PrivateUser';
 import PrivateUserPro from './privateRoutes/PrivateUserPro';
 import PrivateAuth from './privateRoutes/PrivateAuth';
-
 
 export default function App() {
   const [socket, setSocket] = useState(null);
@@ -127,6 +128,9 @@ export default function App() {
                 <Route exact path="/">
                   <HomePage isPro={isPro} />
                 </Route>
+                <Route path="/payment-gateway">
+                  <PayementGateway />
+                </Route>
                 <PrivateAuth exact path="/sign-up" component={Signup} />
                 <PrivateAuth exact path="/sign-up-pro" component={SignupPro} />
                 <PrivateAuth exact path="/sign-in" component={Signin} />
@@ -146,10 +150,17 @@ export default function App() {
                 <PrivateUser exact path="/profile" component={UpdateProfile} />
                 <PrivateUser exact path="/written-advice" component={WrittenAdvice} />
                 <PrivateUser exact path="/update-consultation/:id" component={updateConsultation} />
-                <PrivateUser exact path="/PayementError" component={PayementFailed} />
+                {/*<PrivateUser exact path="/PayementError" component={PayementFailed} />
+                <PrivateUser exact path="/PayementSuccess" component={PayementSuccess} />*/}
                 <PrivateUser exact path="/AccountVerification" component={Verification} />
                 <Route exact path="/OrderConfirmation">
                   <Confirmation />
+                </Route>
+                <Route exact path="/PayementError">
+                  <PayementFailed />
+                </Route>
+                <Route exact path="/PayementSuccess">
+                  <PayementSuccess />
                 </Route>
                 {/*<PrivateUser exact path="/OrderConfirmation" component={Confirmation} />*/}
                 <PrivateUser exact path="/book" component={Book} />

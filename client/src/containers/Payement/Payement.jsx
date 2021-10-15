@@ -47,14 +47,14 @@ const packs = [
     title: 'إستشارة',
     price: '29TND',
     nbr: 0,
-    amount:100
+    amount: 29000
   },
   {
     id: 2,
     title: 'عرض : 3 إستشارات',
     price: '69TND',
     nbr: 0,
-    amount:100
+    amount: 69000
   }
 ];
 
@@ -153,9 +153,12 @@ const Payement = () => {
           <img src={Paypal} alt="" />
           <span>قريبا!!</span>
         </div>
-        <Link to={`/OrderConfirmation?amount=${isChecked.amount}`}>
-          <button className="ant-btn">Test Order Confirmation</button>
-        </Link>
+        {isChecked.amount && (
+          <Link to={`/OrderConfirmation?amount=${isChecked.amount}`}>
+            <button className="ant-btn">Test Order Confirmation</button>
+          </Link>
+        )}
+
         <button className="pay" onClick={onClick}>
           Finaliser
         </button>
