@@ -122,79 +122,77 @@ export default function App() {
           {isLoading ? (
             <Spin tip="جاري..." spinning={isLoading} />
           ) : (
-            <Layout>
+            <>
               <Switch>
-                {/* COMMON PAGES */}
-                <Route exact path="/">
-                  <HomePage isPro={isPro} />
-                </Route>
-                <Route path="/payment-gateway">
-                  <PayementGateway />
-                </Route>
-                <PrivateAuth exact path="/sign-up" component={Signup} />
-                <PrivateAuth exact path="/sign-up-pro" component={SignupPro} />
-                <PrivateAuth exact path="/sign-in" component={Signin} />
-                <Route exact path="/Wallet" component={Wallet} />
-                <Route exact path="/vid-page/:id" component={VidPage} />
-                <Route exact path="/text-chat/:id" render={() => <Textchat socket={socket} />} />
+                <Route exact path="/payment-error" component={PayementFailed} />
+                <Route exact path="/payment-success" component={PayementSuccess} />
+              </Switch>
+              <Layout>
+                  <Switch>
+                    {/* COMMON PAGES */}
+                    <Route exact path="/">
+                      <HomePage isPro={isPro} />
+                    </Route>
+                    <PrivateAuth exact path="/sign-up" component={Signup} />
+                    <PrivateAuth exact path="/sign-up-pro" component={SignupPro} />
+                    <PrivateAuth exact path="/sign-in" component={Signin} />
+                    <Route exact path="/Wallet" component={Wallet} />
+                    <Route exact path="/vid-page/:id" component={VidPage} />
+                    <Route exact path="/text-chat/:id" render={() => <Textchat socket={socket} />} />
 
-                {/* PRO PAGES */}
-                <PrivateUserPro exact path="/dashboardPro" component={DashboardPro} />
-                <Route exact path="/profilePro">
-                  <UpdateProfilePro isPro={isPro} />
-                </Route>
+                    {/* PRO PAGES */}
+                    <PrivateUserPro exact path="/dashboardPro" component={DashboardPro} />
+                    <Route exact path="/profilePro">
+                      <UpdateProfilePro isPro={isPro} />
+                    </Route>
 
-                {/* USER PAGES */}
-                <PrivateUser exact path="/dashboard" component={Dashboard} />
-                <PrivateUser exact path="/Welcomemsg" component={Welcomemsg} />
-                <PrivateUser exact path="/profile" component={UpdateProfile} />
-                <PrivateUser exact path="/written-advice" component={WrittenAdvice} />
-                <PrivateUser exact path="/update-consultation/:id" component={updateConsultation} />
-                {/*<PrivateUser exact path="/PayementError" component={PayementFailed} />
+                    {/* USER PAGES */}
+                    <PrivateUser exact path="/dashboard" component={Dashboard} />
+                    <PrivateUser exact path="/Welcomemsg" component={Welcomemsg} />
+                    <PrivateUser exact path="/profile" component={UpdateProfile} />
+                    <PrivateUser exact path="/written-advice" component={WrittenAdvice} />
+                    <PrivateUser exact path="/update-consultation/:id" component={updateConsultation} />
+                    {/*<PrivateUser exact path="/PayementError" component={PayementFailed} />
                 <PrivateUser exact path="/PayementSuccess" component={PayementSuccess} />*/}
-                <PrivateUser exact path="/AccountVerification" component={Verification} />
-                <Route exact path="/OrderConfirmation">
-                  <Confirmation />
-                </Route>
-                <Route exact path="/PayementError">
-                  <PayementFailed />
-                </Route>
-                <Route exact path="/PayementSuccess">
-                  <PayementSuccess />
-                </Route>
-                {/*<PrivateUser exact path="/OrderConfirmation" component={Confirmation} />*/}
-                <PrivateUser exact path="/book" component={Book} />
-                <PrivateUser exact path="/checkout" component={Payement} />
-                <PrivateUser exact path="/video-chat" component={Videochat} />
-                <PrivateUser exact path="/video-not-ready" component={Videonotready} />
-                <PrivateUser exact path="/phoneexpired" component={PhoneExpired} />
-                <PrivateUser exact path="/phone-not-ready" component={Phonenotready} />
-                <PrivateUser exact path="/phone-call" component={PhoneCall} />
-                {/* <Route exact path="/Welcomemsg">
+                    <PrivateUser exact path="/AccountVerification" component={Verification} />
+                    <Route exact path="/OrderConfirmation">
+                      <Confirmation />
+                    </Route>
+                    {/*<PrivateUser exact path="/OrderConfirmation" component={Confirmation} />*/}
+                    <PrivateUser exact path="/book" component={Book} />
+                    <PrivateUser exact path="/checkout" component={Payement} />
+                    <PrivateUser exact path="/video-chat" component={Videochat} />
+                    <PrivateUser exact path="/video-not-ready" component={Videonotready} />
+                    <PrivateUser exact path="/phoneexpired" component={PhoneExpired} />
+                    <PrivateUser exact path="/phone-not-ready" component={Phonenotready} />
+                    <PrivateUser exact path="/phone-call" component={PhoneCall} />
+                    {/* <Route exact path="/Welcomemsg">
                   <Welcomemsg isPro={isPro} />
                 </Route> */}
-                {/* <Route exact path="/profile">
+                    {/* <Route exact path="/profile">
                   <UpdateProfile isPro={isPro} />
                 </Route> */}
-                {/* <Route exact path="/written-advice" component={WrittenAdvice}/> */}
-                {/* <Route exact path="/update-consultation/:id" component={updateConsultation}/> */}
-                {/* <Route exact path="/PayementError" component={PayementFailed} /> */}
-                {/* <Route exact path="/AccountVerification" component={Verification} /> */}
-                {/* <Route exact path="/OrderConfirmation" component={Confirmation} /> */}
-                {/* <Route exact path="/book" component={Book} /> */}
-                {/* <Route exact path="/checkout" component={Payement} /> */}
-                {/* <Route exact path="/video-chat" component={Videochat} /> */}
-                {/* <Route exact path="/video-not-ready" component={Videonotready} /> */}
-                {/* <Route exact path="/phoneexpired" component={PhoneExpired} /> */}
-                {/* <Route exact path="/phone-not-ready" component={Phonenotready} /> */}
-                {/* <Route exact path="/phone-call" component={PhoneCall} /> */}
+                    {/* <Route exact path="/written-advice" component={WrittenAdvice}/> */}
+                    {/* <Route exact path="/update-consultation/:id" component={updateConsultation}/> */}
+                    {/* <Route exact path="/PayementError" component={PayementFailed} /> */}
+                    {/* <Route exact path="/AccountVerification" component={Verification} /> */}
+                    {/* <Route exact path="/OrderConfirmation" component={Confirmation} /> */}
+                    {/* <Route exact path="/book" component={Book} /> */}
+                    {/* <Route exact path="/checkout" component={Payement} /> */}
+                    {/* <Route exact path="/video-chat" component={Videochat} /> */}
+                    {/* <Route exact path="/video-not-ready" component={Videonotready} /> */}
+                    {/* <Route exact path="/phoneexpired" component={PhoneExpired} /> */}
+                    {/* <Route exact path="/phone-not-ready" component={Phonenotready} /> */}
+                    {/* <Route exact path="/phone-call" component={PhoneCall} /> */}
 
-                {/* REDIRECTION PAGES */}
-                <Route exact path="/unauthorized" component={UnAuthorized} />
-                <Route exact path="/server-error" component={ServerError} />
-                <Route component={NotFound} />
-              </Switch>
-            </Layout>
+                    {/* REDIRECTION PAGES */}
+                    <Route exact path="/unauthorized" component={UnAuthorized} />
+                    <Route exact path="/server-error" component={ServerError} />
+                    <Route exact path="/payment-gateway" component={PayementGateway} />
+                    <Route exact strict component={NotFound} />
+                  </Switch>
+                </Layout>
+            </>
           )}
         </UserContext.Provider>
       </BrowserRouter>

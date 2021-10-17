@@ -189,22 +189,16 @@ export const updateConsultation = asyncHandler(async (req, res) => {
 export const buyPack = asyncHandler(async (req, res) => {
   const fileName = req.body.filename;
   const consultationNumber = req.body.consultationNumber;
-  if (fileName === 'online-payment') {
-    user.wallet = Number(user.wallet) + Number(consultationNumber);
-    await user.save();
-    user.password = undefined;
-    await emailService.buyPackEmail(user, fileName);
-    res.json({ user });
-  } else {
+  const user = await User.findById(req.user);
+  if (fileName !== 'online-payment') {
     const payment = await File.findOne({ fileName });
-    const user = await User.findById(req.user);
-    user.wallet = Number(user.wallet) + Number(consultationNumber);
     user.files.push(payment);
-    await user.save();
-    user.password = undefined;
-    await emailService.buyPackEmail(user, fileName);
-    res.json({ user });
   }
+  user.wallet = Number(user.wallet) + Number(consultationNumber);
+  await user.save();
+  user.password = undefined;
+  await emailService.buyPackEmail(user, fileName);
+  res.json({ user });
 });
 
 //@des createOrderNumber

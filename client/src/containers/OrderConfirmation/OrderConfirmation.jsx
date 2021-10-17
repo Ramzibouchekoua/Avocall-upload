@@ -9,7 +9,6 @@ function useQuery() {
 
 const OrderConfirmation = () => {
   const [orderNumber, setOrderNumber] = useState();
-  const [returnUrl] = useState('finish.html');
   const [currency] = useState(788);
   const [language] = useState('en');
   const [password] = useState(process.env.REACT_APP_CLICK_TO_PAY_PASSWORD);
@@ -52,14 +51,14 @@ const OrderConfirmation = () => {
           orderNumber +
           '&password=' +
           password +
-          '&returnUrl=' +
-          returnUrl +
           '&userName=' +
           userName +
-          `&returnUrl=http://localhost:3000/PayementSuccess&failUrl=http://localhost:3000/PayementError`
+          `&returnUrl=http://localhost:3000/payment-success?amount=${query.get(
+            'amount'
+          )}&failUrl=http://localhost:3000/payment-error?amount=${query.get('amount')}`
       );
       //console.log(formUrl);
-      history.push(`/payment-gateway?link=${formUrl}`);
+      history.push(`/payment-gateway?orderId=${orderId}&amount=${query.get('amount')}`);
     } catch (err) {
       console.log('error in createOrderNumber', err);
     }
