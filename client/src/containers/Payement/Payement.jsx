@@ -46,15 +46,15 @@ const packs = [
     id: 1,
     title: 'إستشارة',
     price: '29TND',
-    nbr: 0,
-    amount:100
+    nbr: 1,
+    amount: 29000
   },
   {
     id: 2,
     title: 'عرض : 3 إستشارات',
     price: '69TND',
-    nbr: 0,
-    amount:100
+    nbr: 3,
+    amount: 69000
   }
 ];
 
@@ -86,7 +86,7 @@ const Payement = () => {
           token = '';
         }
 
-        const upFile = await axios.post(process.env.REACT_APP_API_URL + '/api/file/upload', formData, {
+        const upFile = await axios.post('http://localhost:5000/api/file/upload', formData, {
           headers: { 'x-auth-token': token }
         });
 
@@ -94,7 +94,7 @@ const Payement = () => {
         message.success('uploaded');
 
         const newConsultation = await axios.post(
-          process.env.REACT_APP_CLICK_TO_PAY_API_URL + '/api/user/buyPack',
+          'http://localhost:5000/api/user/buyPack',
           {
             consultationNumber: isChecked.nbr,
             filename
@@ -103,8 +103,8 @@ const Payement = () => {
             headers: { 'x-auth-token': token }
           }
         );
-        // message.success("باقتك اضيفت الى الرصيد بنجاح")
-        history.push('/OrderConfirmation');
+        message.success('باقتك اضيفت الى الرصيد بنجاح');
+        //history.push('/OrderConfirmation');
       } catch (err) {
         console.log('error in buypack', err);
         history.push('/PayementError');
@@ -153,9 +153,12 @@ const Payement = () => {
           <img src={Paypal} alt="" />
           <span>قريبا!!</span>
         </div>
-        <Link to={`/OrderConfirmation?amount=${isChecked.amount}`}>
-          <button className="ant-btn">Test Order Confirmation</button>
-        </Link>
+        {isChecked.amount && (
+          <Link to={`/OrderConfirmation?amount=${isChecked.amount}`}>
+            <button className="ant-btn">Test Order Confirmation</button>
+          </Link>
+        )}
+
         <button className="pay" onClick={onClick}>
           Finaliser
         </button>

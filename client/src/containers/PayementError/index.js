@@ -1,7 +1,8 @@
-import React from "react";
+import React from 'react';
 import PayementError from "./PayementError";
-const PayementFailed = (props) => {
-  return < PayementFailed {...props} />;
+
+const PayementFailed = props => {
+  return <PayementError {...props} />;
 };
 
-export default PayementError ;
+export default PayementFailed;
