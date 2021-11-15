@@ -17,7 +17,7 @@ const Textchat = ({ socket }) => {
   const [userId, setUserId] = useState('');
   useEffect(() => {
     axios
-      .get(`/api/user/consultation/${chatroomId}`, {
+      .get(`https://api.avocall.com/api/user/consultation/${chatroomId}`, {
         headers: {
           'x-auth-token': localStorage.getItem('auth-token'),
         },
@@ -36,7 +36,7 @@ const Textchat = ({ socket }) => {
   };
   useEffect(() => {
     axios
-      .get(`/api/message/${chatroomId}`, {
+      .get(`https://api.avocall.com/api/message/${chatroomId}`, {
         headers: {
           'x-auth-token': localStorage.getItem('auth-token'),
         },

@@ -33,7 +33,7 @@ export default function App() {
   // console.log('now', moment('2010-10-20').isBefore(moment().today));
   useEffect(() => {
     axios
-      .get(`/api/user/consultation/${chatroomId}`, {
+      .get(`https://api.avocall.com/api/user/consultation/${chatroomId}`, {
         headers: {
           'x-auth-token': localStorage.getItem('auth-token'),
         },
