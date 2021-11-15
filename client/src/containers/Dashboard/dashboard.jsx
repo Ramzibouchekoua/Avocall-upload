@@ -9,7 +9,7 @@ const Dashboard = () => {
   const [list, setList] = useState([]);
   useEffect(() => {
     axios
-      .get(`/api/user/allConsultation`, {
+      .get(`https://api.avocall.com/api/user/allConsultation`, {
         headers: {
           'x-auth-token': localStorage.getItem('auth-token'),
         },

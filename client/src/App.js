@@ -123,10 +123,7 @@ export default function App() {
             <Spin tip="جاري..." spinning={isLoading} />
           ) : (
             <>
-              <Switch>
-                <Route exact path="/payment-error" component={PayementFailed} />
-                <Route exact path="/payment-success" component={PayementSuccess} />
-              </Switch>
+        
               <Layout>
                   <Switch>
                     {/* COMMON PAGES */}
@@ -189,6 +186,8 @@ export default function App() {
                     <Route exact path="/unauthorized" component={UnAuthorized} />
                     <Route exact path="/server-error" component={ServerError} />
                     <Route exact path="/payment-gateway" component={PayementGateway} />
+                    <Route exact path="/payment-error" component={PayementFailed} />
+                    <Route exact path="/payment-success" component={PayementSuccess} />
                     <Route exact strict component={NotFound} />
                   </Switch>
                 </Layout>

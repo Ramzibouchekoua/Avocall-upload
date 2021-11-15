@@ -13,6 +13,7 @@ import { date } from 'joi';
 //@access private
 export const getUserPayments = asyncHandler(async (req, res) => {
   const email = req.body.userEmail;
+ 
   const { files } = await User.findOne({ email }).populate('files');
   res.json({ files });
 });

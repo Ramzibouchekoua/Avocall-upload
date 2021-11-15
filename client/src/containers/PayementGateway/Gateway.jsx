@@ -9,14 +9,11 @@ const Gateway = () => {
   let query = useQuery();
   return (
     <div className="container">
-      <iframe
-        name="iframe_name"
-        id="iframe_id"
-        src={`https://test.clictopay.com/payment/merchants/CLICTOPAY/payment_en.html?mdOrder=${query.get('orderId')}`}
-        style={{ width: '100%', height: '700px', border: '0 none' }}
-        scrolling="no"
-        frameBorder="0"
-      ></iframe>
+      <a
+        
+        href={`https://test.clictopay.com/payment/merchants/CLICTOPAY/payment_en.html?mdOrder=${query.get('orderId')}`}
+     
+      >click me</a>
     </div>
   );
 };
