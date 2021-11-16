@@ -59,11 +59,11 @@ app.use(errorHandler);
 // app.get('/', function (req, res, next) {
 //   res.send('testing');
 // });
-const PORT = config.port || 5000;
+
 
 const io = require('socket.io')(server, {
   cors: {
-    origin: 'https://avocall.com',
+    origin: 'https://api.avocall.com/api',
     methods: ['GET', 'POST']
   }
 });
