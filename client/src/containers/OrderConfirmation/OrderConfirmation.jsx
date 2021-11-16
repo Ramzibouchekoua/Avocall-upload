@@ -53,9 +53,9 @@ const OrderConfirmation = () => {
           password +
           '&userName=' +
           userName +
-          `&returnUrl=http://localhost:3000/payment-success?amount=${query.get(
+          `&returnUrl=https://avocall.com//payment-success?amount=${query.get(
             'amount'
-          )}&failUrl=http://localhost:3000/payment-error?amount=${query.get('amount')}`
+          )}&failUrl=https://avocall.com//payment-error?amount=${query.get('amount')}`
       );
       //console.log(formUrl);
       history.push(`/payment-gateway?orderId=${orderId}&amount=${query.get('amount')}`);
