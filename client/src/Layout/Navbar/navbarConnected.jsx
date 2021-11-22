@@ -28,7 +28,7 @@ const Navbar = ({ logout, userName }) => {
           <Link to="/dashboard">الرئيسية</Link>
         </Menu.Item>
         <Menu.Item key="2">
-         <a href="http://blog.avocall.com/" >المكتبة القانونية</a>
+         <a href="https://avocall.tn/bibliotheque-juridique/" >المكتبة القانونية</a>
         </Menu.Item>
       </Menu>
 

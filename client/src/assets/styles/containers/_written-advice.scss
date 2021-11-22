@@ -148,6 +148,9 @@
         .card-type {
           width: 300px;
           height: 60px;
+          .consultationtype {
+            font-size: 16px ;
+           }
         }
       }
     }
@@ -174,6 +177,8 @@
       }
       & .section-right {
         margin-bottom: 37px;
+        margin-right: 0px !important;
+        margin-left: 0px !important;
       }
     }
     .ant-upload {
@@ -228,6 +233,13 @@
   .ant-picker-now-btn {
     display: none;
   }
+  .ant-picker-date-panel {
+    width:300px
+  }
+  .ant-picker-datetime-panel {
+    flex-direction: column;
+  }
+ 
 }
 
 @media (min-width: 768px) and (max-width: 950px) {
@@ -258,6 +270,7 @@
         .card-type {
           width: 300px;
           height: 100px;
+     
         }
       }
     }

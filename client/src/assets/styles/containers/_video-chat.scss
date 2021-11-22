@@ -189,13 +189,16 @@
 }
 @media (max-width: 767px) {
   .video-chat {
-    width: 80% !important;
+    width: 100% !important;
     display: flex;
     flex-direction: column-reverse;
 height: auto;
 padding-bottom: 2%;
+margin: 0px !important;
+align-items: center;
+justify-content: center;
     .Table {
-      width: 100% !important;
+      width: 80% !important;
       // margin-top: 3%;
       .button-blue {
         margin-bottom: 20px;
@@ -284,12 +287,17 @@ padding-bottom: 2%;
       display: flex;
       flex-direction: column;
       margin-bottom: 5%;
+      width: 80%;
       .Link {
         display: flex;
         flex-direction: column;
-        width: 80%;
+        width: 100%;
         span {
           text-align: center;
+        }
+        button {
+          width: 200px;
+          font-size: 14px;
         }
       }
     }

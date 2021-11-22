@@ -99,12 +99,12 @@
 }
 @media (max-width: 767px) {
   .Text-chat {
-    width: 80% !important;
+    width: 100% !important;
     display: flex;
     flex-direction: column-reverse !important;
 
     .Table {
-      width: 100% !important;
+      width: 80% !important;
       // margin-top: 3%;
       .button-blue {
         margin-bottom: 20px;
@@ -193,6 +193,21 @@
       width: 100%;
       margin-top: 2%;
       position: relative;
+
+      .chatroom-actions {
+        max-width: 100%;
+.action-btn {
+  .join {
+    padding: 10px;
+    border-radius: 4px;
+  
+    display: block;
+    width: 40px;
+    height: 59px;
+    font-size: 16px;
+}
+}
+      }
     }
   }
 }

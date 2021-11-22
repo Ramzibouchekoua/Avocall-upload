@@ -41,7 +41,7 @@ const Navbar = () => {
           <Link to="/">الرئيسية</Link>
         </Menu.Item>
         <Menu.Item key="2">
-         <a href="http://blog.avocall.com/" >المكتبة القانونية</a>
+         <a href="https://avocall.tn/bibliotheque-juridique/" >المكتبة القانونية</a>
         </Menu.Item>
         <Menu.Item key="3">
           <Link to="/sign-up-pro">أنا محامي</Link>

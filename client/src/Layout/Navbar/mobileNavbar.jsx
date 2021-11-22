@@ -29,7 +29,7 @@ const MobileNavbar = ({ user = {}, logout }) => {
             <Link to="/dashboard">الرئيسية</Link>
           </Menu.Item>
           <Menu.Item key="2">
-           <a href="http://blog.avocall.com/" >المكتبة القانونية</a>
+           <a href="https://avocall.tn/bibliotheque-juridique/" >المكتبة القانونية</a>
           </Menu.Item>
 
           <Menu.Item key="3" className="signin" onClick={logout}>
@@ -46,7 +46,7 @@ const MobileNavbar = ({ user = {}, logout }) => {
             <a href="https://calendly.com/app/scheduled_events/user/me" target="_blank" rel="noopener noreferrer">توقيت العمل</a>
           </Menu.Item>
           <Menu.Item key="3">
-           <a href="http://blog.avocall.com/" >المكتبة القانونية</a>
+           <a href="https://avocall.tn/bibliotheque-juridique/" >المكتبة القانونية</a>
           </Menu.Item>
 
           <Menu.Item key="4" className="signin" onClick={logout}>
@@ -59,7 +59,7 @@ const MobileNavbar = ({ user = {}, logout }) => {
           <Link to="/">الرئيسية</Link>
         </Menu.Item>
         <Menu.Item key="2">
-         <a href="http://blog.avocall.com/" >المكتبة القانونية</a>
+         <a href="https://avocall.tn/bibliotheque-juridique/" >المكتبة القانونية</a>
         </Menu.Item>
         <Menu.Item key="3">
           <Link to="/sign-up-pro">أنا محامي</Link>

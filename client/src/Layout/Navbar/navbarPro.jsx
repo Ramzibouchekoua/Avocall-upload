@@ -30,7 +30,7 @@ const Navbar = ({ logout,userName }) => {
         <a href="https://calendly.com/app/scheduled_events/user/me" target="_blank" rel="noopener noreferrer">توقيت العمل</a>
         </Menu.Item>
         <Menu.Item key="3">
-         <a href="http://blog.avocall.com/" >المكتبة القانونية</a>
+         <a href="https://avocall.tn/bibliotheque-juridique/" >المكتبة القانونية</a>
         </Menu.Item>
       </Menu>
       <div className="logout">
