@@ -88,7 +88,7 @@ const section_four = () => {
       <div className="desc">
         <Row>
           {fields.map((e) => (
-            <Col xs={8} md={8} lg={6} key={e.index}>
+            <Col xs={24} md={8} lg={6} key={e.index}>
               <div className="desc_icon">
                 <img src={require(`../../../assets/icons/${e.icon}`)} alt="" />
               </div>

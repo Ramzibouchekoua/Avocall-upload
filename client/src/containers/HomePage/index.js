@@ -6,6 +6,7 @@ import SectionFour from "./Sections/section_four";
 import SectionFive from "./Sections/section_five";
 import SectionSix from "./Sections/section_six";
 import SectionSeven from "./Sections/section_seven";
+import SectionEight from "./Sections/section_eight";
 const HomePage = () => (
   <div>
     <SectionOne />
@@ -15,6 +16,7 @@ const HomePage = () => (
     <SectionFive />
     <SectionSix />
     <SectionSeven/>
+    <SectionEight/>
   </div>
 );
 export default HomePage;

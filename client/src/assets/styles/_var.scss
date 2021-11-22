@@ -11,4 +11,10 @@ $light:#FFFFFF;
 $grey:#F6F6F6;
 
 // FONTS
-$font-style:Almarai;
+
+@font-face {
+    font-family: 'Beauty';
+    src: url(./Almarai/Almarai-Regular.ttf) format("truetype");
+ }
+ $font-style: 'Beauty', sans-serif;
+
