@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "090da063de63ec3ad66842f2b3d3672a",
+    "revision": "9bfc5cc336e53e4cd12efa5387b52074",
     "url": "./index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/css/2.adc0bda4.chunk.css"
   },
   {
-    "revision": "1834f02d1b622f8e8810",
-    "url": "./static/css/main.7510ce29.chunk.css"
+    "revision": "535aca618dc2c2aefcdc",
+    "url": "./static/css/main.709fc12e.chunk.css"
   },
   {
     "revision": "425b4eb94350b8c21029",
@@ -20,12 +20,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/js/2.dd733b04.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "1834f02d1b622f8e8810",
-    "url": "./static/js/main.c2ff8630.chunk.js"
+    "revision": "535aca618dc2c2aefcdc",
+    "url": "./static/js/main.e8405be9.chunk.js"
   },
   {
     "revision": "de3685cff278b3b929cc",
     "url": "./static/js/runtime-main.ac764ad0.js"
+  },
+  {
+    "revision": "a19edc26bbe86c6fd4921f2b4cc3477e",
+    "url": "./static/media/Almarai-Regular.a19edc26.ttf"
   },
   {
     "revision": "078565b55dd4f80f9e28a2635c3edabd",
