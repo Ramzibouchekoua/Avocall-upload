@@ -1,44 +1,48 @@
 import React from 'react';
-import Logo from '../../assets/images/logo@2x.png';
+import Map from '../../assets/icons/4831018_direction_location_map_maps_pin_icon.svg';
+import Hours from '../../assets/icons/6457560_24 hours_24_7_customer_delivery_service_icon.svg';
+import Phone from '../../assets/icons/4014702_call_phone_service_support_icon (1).svg';
+
+
 // import {Link} from "react-router-dom"
 
 const Footer = () => {
   return (
     <div className="footer">
-      <img alt="brand" src={Logo} />
-      <div className="addresse">
-        <span className="title"> العنوان:</span>
-        <span className="subtitle">  <b> اقامة الكوليزي مدرج ا الطابق الثالث 45</b> شارع الحبيب بورقيبة تونس</span>
-      </div>
-      <div className="addresse">
-        <span className="title"> الهاتف:</span>
-        <span className="phone-number">+216 22 250 738</span>
-      </div>
-      <div className="Brand">
-        <span className="copyright"> كل الحقوق محفوظة©</span>
-      </div>
+     <div className="information">
 
-      {/* <div className="Consulting">
-          <span className="Categorie-title">استشارة</span>
-          <Link to="/" className="Categorie">الرئيسية</Link>
-          <Link to="/sign-up-pro" className="Categorie">انا محامي</Link>
-          <span className="Categorie">استشارة كتابية</span>
-          <span className="Categorie">استشارة سمعية بصرية</span>
-        </div>
-    
-        <div className="Law">
-          <span className="Categorie-title"> قانوني</span>
-          <span className="Categorie">سياسة الخصوصية</span>
-          <span className="Categorie">أسعارنا</span>
-          <span className="Categorie">من نحن</span>
-          <span className="Categorie">اتصل بنا</span>
-        </div>
-    
-        <div className="Newsletter">
-          <span>سجل في النشرة البريدية الخاصة</span>
-          <input type="text" name="name" placeholder="عنوان البريد الإلكتروني" />
-          <button type="submit">التسجيل</button>
-        </div> */}
+       <div>
+           <img src={Map} alt="العنوان" />
+           <a href="https://www.google.com/maps/place/Avocall/@36.8001901,10.1815148,15z/data=!4m2!3m1!1s0x0:0x4fc6a111ac1f09c2?sa=X&ved=2ahUKEwj-1s-Uuq70AhXJ-aQKHUhYALcQ_BJ6BAg9EAU">
+         <span className="bold">العنوان</span>
+         <span className="description">اقامة الكوليزي مدرج ا الطابق الثالث 45 شارع الحبيب بورقيبة تونس</span>
+         </a>
+       </div>
+      
+
+       <div>
+       <img src={Hours} alt="توقيت العمل" />
+       <a href="">
+       <span className="bold">توقيت العمل</span>
+         <span className="description">نحن متواجدون 24/7</span>
+       </a>
+       </div>
+
+       
+       <div>
+       <img src={Phone} alt="رقم الهاتف" />
+       <a href="tel:+2162225738" >
+       <span className="bold"> رقم الهاتف </span>
+         <span className="description " dir="ltr">+216 22 250 738</span>
+         </a>
+       </div>
+
+
+     </div>
+     <div className="powred ">
+<span>Copyright © 2021 Avocall</span>
+<span>Powered by FabLab</span>
+      </div>
     </div>
   );
 };
