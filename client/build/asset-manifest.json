@@ -1,19 +1,22 @@
 {
   "files": {
-    "main.css": "./static/css/main.b7577206.chunk.css",
-    "main.js": "./static/js/main.f2e891bb.chunk.js",
-    "main.js.map": "./static/js/main.f2e891bb.chunk.js.map",
+    "main.css": "./static/css/main.5e8c7a1d.chunk.css",
+    "main.js": "./static/js/main.60bad20d.chunk.js",
+    "main.js.map": "./static/js/main.60bad20d.chunk.js.map",
     "runtime-main.js": "./static/js/runtime-main.ac764ad0.js",
     "runtime-main.js.map": "./static/js/runtime-main.ac764ad0.js.map",
     "static/css/2.adc0bda4.chunk.css": "./static/css/2.adc0bda4.chunk.css",
-    "static/js/2.dd733b04.chunk.js": "./static/js/2.dd733b04.chunk.js",
-    "static/js/2.dd733b04.chunk.js.map": "./static/js/2.dd733b04.chunk.js.map",
+    "static/js/2.7f07ab80.chunk.js": "./static/js/2.7f07ab80.chunk.js",
+    "static/js/2.7f07ab80.chunk.js.map": "./static/js/2.7f07ab80.chunk.js.map",
     "index.html": "./index.html",
-    "precache-manifest.34d044c13ac13ad66b230334de9d0040.js": "./precache-manifest.34d044c13ac13ad66b230334de9d0040.js",
+    "precache-manifest.14e5364e5f32fb00dcbccdd31ea72044.js": "./precache-manifest.14e5364e5f32fb00dcbccdd31ea72044.js",
     "service-worker.js": "./service-worker.js",
     "static/css/2.adc0bda4.chunk.css.map": "./static/css/2.adc0bda4.chunk.css.map",
-    "static/css/main.b7577206.chunk.css.map": "./static/css/main.b7577206.chunk.css.map",
-    "static/js/2.dd733b04.chunk.js.LICENSE.txt": "./static/js/2.dd733b04.chunk.js.LICENSE.txt",
+    "static/css/main.5e8c7a1d.chunk.css.map": "./static/css/main.5e8c7a1d.chunk.css.map",
+    "static/js/2.7f07ab80.chunk.js.LICENSE.txt": "./static/js/2.7f07ab80.chunk.js.LICENSE.txt",
+    "static/media/4014702_call_phone_service_support_icon (1).svg": "./static/media/4014702_call_phone_service_support_icon (1).2a48cd1c.svg",
+    "static/media/4831018_direction_location_map_maps_pin_icon.svg": "./static/media/4831018_direction_location_map_maps_pin_icon.8d063ffd.svg",
+    "static/media/6457560_24 hours_24_7_customer_delivery_service_icon.svg": "./static/media/6457560_24 hours_24_7_customer_delivery_service_icon.61cf0cd4.svg",
     "static/media/index.scss": "./static/media/Bg-sec2.f24eb165.png",
     "static/media/ClicToPay_logo.png": "./static/media/ClicToPay_logo.b111688e.png",
     "static/media/Videochat.PNG": "./static/media/Videochat.b4548ee1.PNG",
@@ -31,8 +34,8 @@
   "entrypoints": [
     "static/js/runtime-main.ac764ad0.js",
     "static/css/2.adc0bda4.chunk.css",
-    "static/js/2.dd733b04.chunk.js",
-    "static/css/main.b7577206.chunk.css",
-    "static/js/main.f2e891bb.chunk.js"
+    "static/js/2.7f07ab80.chunk.js",
+    "static/css/main.5e8c7a1d.chunk.css",
+    "static/js/main.60bad20d.chunk.js"
   ]
 }

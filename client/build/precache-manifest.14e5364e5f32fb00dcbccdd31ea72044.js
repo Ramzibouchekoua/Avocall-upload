@@ -1,31 +1,43 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0fc57e5884adc086068a2255b5f0b5e1",
+    "revision": "65dc1f1a458dcc75538870816c3ae3d6",
     "url": "./index.html"
   },
   {
-    "revision": "425b4eb94350b8c21029",
+    "revision": "e4dd5a7ae2a9366e2b34",
     "url": "./static/css/2.adc0bda4.chunk.css"
   },
   {
-    "revision": "1262c29737d077fd6580",
-    "url": "./static/css/main.b7577206.chunk.css"
+    "revision": "67c9468b5690298ef977",
+    "url": "./static/css/main.5e8c7a1d.chunk.css"
   },
   {
-    "revision": "425b4eb94350b8c21029",
-    "url": "./static/js/2.dd733b04.chunk.js"
+    "revision": "e4dd5a7ae2a9366e2b34",
+    "url": "./static/js/2.7f07ab80.chunk.js"
   },
   {
     "revision": "4c43173cb3b425ee99755e38eb96dc9d",
-    "url": "./static/js/2.dd733b04.chunk.js.LICENSE.txt"
+    "url": "./static/js/2.7f07ab80.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "1262c29737d077fd6580",
-    "url": "./static/js/main.f2e891bb.chunk.js"
+    "revision": "67c9468b5690298ef977",
+    "url": "./static/js/main.60bad20d.chunk.js"
   },
   {
     "revision": "de3685cff278b3b929cc",
     "url": "./static/js/runtime-main.ac764ad0.js"
+  },
+  {
+    "revision": "2a48cd1ccd3df979defaa982c1cf2a05",
+    "url": "./static/media/4014702_call_phone_service_support_icon (1).2a48cd1c.svg"
+  },
+  {
+    "revision": "8d063ffdd6da627dd2c780a354202b97",
+    "url": "./static/media/4831018_direction_location_map_maps_pin_icon.8d063ffd.svg"
+  },
+  {
+    "revision": "61cf0cd49f96030e8f1245b1d71cb7f3",
+    "url": "./static/media/6457560_24 hours_24_7_customer_delivery_service_icon.61cf0cd4.svg"
   },
   {
     "revision": "a19edc26bbe86c6fd4921f2b4cc3477e",
