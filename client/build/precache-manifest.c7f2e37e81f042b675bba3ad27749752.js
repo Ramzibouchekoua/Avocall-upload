@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "65dc1f1a458dcc75538870816c3ae3d6",
+    "revision": "a60113a720e5ed5235879b2499e8032a",
     "url": "./index.html"
   },
   {
-    "revision": "e4dd5a7ae2a9366e2b34",
+    "revision": "3f84710e0001c20635ab",
     "url": "./static/css/2.adc0bda4.chunk.css"
   },
   {
-    "revision": "67c9468b5690298ef977",
-    "url": "./static/css/main.5e8c7a1d.chunk.css"
+    "revision": "0693c3bf769a3d8a6e25",
+    "url": "./static/css/main.1891d1e1.chunk.css"
   },
   {
-    "revision": "e4dd5a7ae2a9366e2b34",
-    "url": "./static/js/2.7f07ab80.chunk.js"
+    "revision": "3f84710e0001c20635ab",
+    "url": "./static/js/2.1fb5bec7.chunk.js"
   },
   {
     "revision": "4c43173cb3b425ee99755e38eb96dc9d",
-    "url": "./static/js/2.7f07ab80.chunk.js.LICENSE.txt"
+    "url": "./static/js/2.1fb5bec7.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "67c9468b5690298ef977",
-    "url": "./static/js/main.60bad20d.chunk.js"
+    "revision": "0693c3bf769a3d8a6e25",
+    "url": "./static/js/main.79809865.chunk.js"
   },
   {
     "revision": "de3685cff278b3b929cc",
@@ -52,8 +52,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "./static/media/Bg-sec2.f24eb165.png"
   },
   {
-    "revision": "b111688e55d799fa6380c8da1fe83fef",
-    "url": "./static/media/ClicToPay_logo.b111688e.png"
+    "revision": "48e6aeb52d04ec65b41a3f6c47270b89",
+    "url": "./static/media/ClicToPay_logo.48e6aeb5.png"
   },
   {
     "revision": "b4548ee16ee1a078f7cfd82521325af0",

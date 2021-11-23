@@ -146,7 +146,7 @@
         flex-direction: column;
         align-items: center;
         .card-type {
-          width: 300px;
+          width: 280px;
           height: 60px;
           .consultationtype {
             font-size: 16px ;
@@ -165,13 +165,14 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      max-width: 280px;
       input,
       .ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
-        width: 300px;
+        width: 280px;
         height: 50px;
       }
       textarea {
-        width: 300px;
+        width: 280px;
         height: 200px;
         border: 1px solid #202f84;
       }
@@ -183,7 +184,7 @@
     }
     .ant-upload {
       button {
-        width: 300px;
+        width: 280px;
         height: 50px;
         background-color: transparent;
         border: 1px solid $primary-color;
@@ -197,16 +198,16 @@
       }
     }
     .ant-upload-text-icon {
-      padding-right: 10px;
+      padding-right: 0px;
     }
     .ant-upload-list-item-name-icon-count-1 {
-      padding-right: 30px;
+      padding-right: 0px;
     }
     .ant-upload-list-item-list-type-text:hover .ant-upload-list-item-name-icon-count-1 {
-      padding-right: 30px;
+      padding-right: 0px;
     }
     .submit-button {
-      width: 300px;
+      width: 280px;
       height: 46px;
       background-color: $primary-color;
       border: 1px solid $primary-color;
@@ -238,6 +239,9 @@
   }
   .ant-picker-datetime-panel {
     flex-direction: column;
+  }
+  .ant-picker-input {
+    max-width: 280px;
   }
  
 }

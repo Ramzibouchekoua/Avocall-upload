@@ -135,6 +135,14 @@ const Payement = () => {
       <div className="Right">
         <span className="title">اختر طريقة الدفع المناسبة لك</span>
         <span className="under-title">يمكنك الدفع عبر حوالة مصرفية او عبر استعمال بطاقتك البنكية</span>
+        <div className="credit-card">
+          <span>للدفع عبر البطاقة المصرفية اختر العرض المرغوب فيه</span>
+        {isChecked.amount && (
+          <Link to={`/OrderConfirmation?amount=${isChecked.amount}`}>
+            <button className="ant-btn">البطاقة المصرفية</button>
+          </Link>
+        )}
+        </div>
         <div className="Bank-detail">
           <span className="under-title">للدفع عبر الحوالة البنكية الرجاء ارسال حوالة للحسابات التالية :</span>
           <span className="under-title">
@@ -149,15 +157,8 @@ const Payement = () => {
           <span className="under-title">الرجاء تحميل إثبات الدفع من هنا</span>
         </div>
         <input type="file" name="file" onChange={onFileChange} multiple />
-        <div className="payement-logo">
-          <img src={Paypal} alt="" />
-          <span>قريبا!!</span>
-        </div>
-        {isChecked.amount && (
-          <Link to={`/OrderConfirmation?amount=${isChecked.amount}`}>
-            <button className="ant-btn">Test Order Confirmation</button>
-          </Link>
-        )}
+       
+     
 
         <button className="pay" onClick={onClick}>
           Finaliser
