@@ -24,7 +24,7 @@ const OrderConfirmation = () => {
           localStorage.setItem('auth-token', '');
           token = '';
         }
-        const response = await axios.get('http://localhost:5000/api/user/createOrderNumber', {
+        const response = await axios.get('https://api.avocall.com/api/user/createOrderNumber', {
           headers: { 'x-auth-token': token }
         });
         setOrderNumber(response.data.orderNumber);

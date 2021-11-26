@@ -86,7 +86,7 @@ const Payement = () => {
           token = '';
         }
 
-        const upFile = await axios.post('http://localhost:5000/api/file/upload', formData, {
+        const upFile = await axios.post('https://api.avocall.com/api/file/upload', formData, {
           headers: { 'x-auth-token': token }
         });
 
@@ -94,7 +94,7 @@ const Payement = () => {
         message.success('uploaded');
 
         const newConsultation = await axios.post(
-          'http://localhost:5000/api/user/buyPack',
+          'https://api.avocall.com/api/user/buyPack',
           {
             consultationNumber: isChecked.nbr,
             filename
