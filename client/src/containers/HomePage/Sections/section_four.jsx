@@ -10,7 +10,7 @@ const fields = [
   },
   {
     index: 2,
-    subtext: "حـــــــــــــادث",
+    subtext: "حادث",
     text: "حادث مرور ، تسرّب مياه ، حريق ، حادث شغل…",
     icon: "alert-triangle.png",
   },
@@ -22,13 +22,13 @@ const fields = [
   },
   {
     index: 4,
-    subtext: "قــــانون جزائي",
+    subtext: "قانون جزائي",
     text: "تحيّل ، سرقة ، إعتداء جسدي ،  عنف ضد المرأة أو الطفل …",
     icon: "army-sword-fight.png",
   },
   {
     index: 5,
-    subtext: "قــــــــــانون الشغل",
+    subtext: "قانون الشغل",
     text: "إبرام عقد شغل  ، طرد ، إستقالة، حادث شغل ، ضمان إجتماعي…",
     icon: "office-desk.png",
   },
