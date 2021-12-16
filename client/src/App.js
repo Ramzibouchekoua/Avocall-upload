@@ -32,6 +32,7 @@ import Book from './containers/Book';
 import Wallet from './containers/Wallet';
 import Welcomemsg from './containers/Welcome';
 import VidPage from './videoChat/components/App/App';
+import DashboardAdmin from './containers/DashboardAdmin';
 //ERROR PAGES
 import UnAuthorized from './containers/ErrorResult/unAuthorized';
 import ServerError from './containers/ErrorResult/serverError';
@@ -134,6 +135,7 @@ export default function App() {
                     <PrivateAuth exact path="/sign-up-pro" component={SignupPro} />
                     <PrivateAuth exact path="/sign-in" component={Signin} />
                     <Route exact path="/Wallet" component={Wallet} />
+                    <Route exact path="/DashboardAdmin" component={DashboardAdmin} />
                     <Route exact path="/vid-page/:id" component={VidPage} />
                     <Route exact path="/text-chat/:id" render={() => <Textchat socket={socket} />} />
 
