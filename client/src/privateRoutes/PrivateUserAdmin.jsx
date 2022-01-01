@@ -7,11 +7,11 @@ const PrivateUser = ({ component: Component, role, ...rest }) => {
 
   return (
     <Route {...rest} render={(props) =>
-      !userData.token ?
-        <Component {...props} />
-        : userData.user.role === "USER" ?
-          <Redirect to="/dashboard" />
+      userData.token ?
+        userData.user.role === "ADMIN" ?
+          <Component {...props} />
           : <Redirect to="/DashboardAdmin" />
+        : <Redirect to="/sign-in" />
     }
     />
   );

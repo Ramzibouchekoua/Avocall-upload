@@ -5,7 +5,7 @@ import axios from "axios";
 import moment from "moment";
 import 'moment/locale/ar-tn';
 import { set } from "mongoose";
-import AllUser from "./AllUser";
+import Consultation from "./allConsultations";
 import UserSearch from "./UserSearch";
 
 
@@ -16,6 +16,7 @@ const DashboardAdmin = () => {
 <div className="admin-dashboard">
 
 <UserSearch />
+<Consultation />
 </div>
   )
 };
