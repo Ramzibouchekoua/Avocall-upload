@@ -73,14 +73,56 @@ color: $primary-color;
            padding: 5px;
            border-radius: 4px;
            width: 100%;
+           height: auto;
            align-items: center;
           
             .bold {
                 width: calc(100% /10);
-font-weight: 700;
-font-size: 14px;
+font-weight: 400;
+font-size: 12px;
+display: block;
+.anticon-check-circle {
+    svg {
+        fill: $success-color;
+        font-size: 20px;
+        font-weight: 700;
+    }
+}
+.CloseCircleOutlined{
+    svg {
+        fill: $danger-color;
+        font-size: 20px;
+        font-weight: 700;
+    }
+}
             }
+          
         }
+      }
+      form {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          align-items: center;
+          .ant-input-affix-wrapper{
+              background-color: $light;
+              margin-top: 10px;
+              width: 250px;
+          }
+          button {
+              margin-top: 20px;
+              background-color: $success-color;
+              border: 1px solid $success-color ;
+              border-radius: 4px;
+              width: 200px;
+              padding: 10px;
+              font-weight: 700;
+              cursor: pointer;
+              &:hover {
+                background-color: $light;
+                color: $success-color ;
+            }
+          }
       }
     }
 }

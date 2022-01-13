@@ -10,7 +10,7 @@ const PrivateUser = ({ component: Component, role, ...rest }) => {
       userData.token ?
         userData.user.role === "ADMIN" ?
           <Component {...props} />
-          : <Redirect to="/DashboardAdmin" />
+          : <Redirect to="/unauthorized" />
         : <Redirect to="/sign-in" />
     }
     />

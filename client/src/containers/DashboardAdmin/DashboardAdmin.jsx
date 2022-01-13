@@ -7,7 +7,7 @@ import 'moment/locale/ar-tn';
 import { set } from "mongoose";
 import Consultation from "./allConsultations";
 import UserSearch from "./UserSearch";
-
+import Wallet from "./updateConsultation";
 
 const DashboardAdmin = () => {
 
@@ -17,6 +17,7 @@ const DashboardAdmin = () => {
 
 <UserSearch />
 <Consultation />
+<Wallet />
 </div>
   )
 };

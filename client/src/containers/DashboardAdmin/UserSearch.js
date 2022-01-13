@@ -19,7 +19,7 @@ function UserSearch () {
     .then((res) => setData(res.consultations));
          
   },
-  [],console.log(data));
+  []);
   function search(item) {
       const colmuns = item[0] && Object.keys(item[0]);
       return data.filter((item)=> 
@@ -31,7 +31,7 @@ function UserSearch () {
   return (
  
  <div className='alluser'>
- <span className='title'>All Users</span>
+ <span className='title'>All Consultations</span>
 
   <Search placeholder="User search" type="text" value={q} onChange={(e) => setQ(e.target.value)}  enterButton />
  <div  className='table'>

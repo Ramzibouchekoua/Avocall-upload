@@ -15,13 +15,13 @@ const Consultation = () => {
   const [data, setData] = useState([]);
   const [q, setQ] = useState("");
   useEffect(() => {
-      fetch('http://localhost:5000/api/admin/getAllPayments?page=1&limit=10000', {
+      axios
+      .get('http://localhost:5000/api/admin/getAllPayments?page=1&limit=10000', {
         headers: {
           'x-auth-token': localStorage.getItem('auth-token'),
         },
       })
-      .then((response) => response.json())
-      .then((res) => setData(res.payments));
+      .then((res) => setData(res.data.payments));
       
     },
     []);
@@ -37,7 +37,7 @@ const Consultation = () => {
  
 return (  
   <div className='alluser'>
-  <span className='title'>Consultation</span>
+  <span className='title'>All payment</span>
  
   <Search placeholder="Search by date" type="text" value={q} onChange={(e) => setQ(e.target.value)}  enterButton />
   <div  className='table'>
