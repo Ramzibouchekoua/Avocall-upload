@@ -63,7 +63,7 @@ const PORT = config.port || 5000;
 
 const io = require('socket.io')(server, {
   cors: {
-    origin: 'https://avocall.com',
+    origin: 'http://localhost:3000',
     methods: ['GET', 'POST']
   }
 });

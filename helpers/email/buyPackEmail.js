@@ -5,6 +5,7 @@ const buyPackEmail = user => {
     <h3>التحقق من الدفع</h3>
     <h5>المستعمل: ${user.name}</h5>
     <h5>البريد الإلكتروني: ${user.email}</h5>
+    <h1>Wallet:${user.wallet}</h1>
   </div>
   </div>
   `;

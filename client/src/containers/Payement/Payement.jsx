@@ -46,14 +46,14 @@ const packs = [
     id: 1,
     title: 'إستشارة',
     price: '29TND',
-    nbr: 1,
+    nbr: 0,
     amount: 29000
   },
   {
     id: 2,
     title: 'عرض : 3 إستشارات',
     price: '69TND',
-    nbr: 3,
+    nbr: 0,
     amount: 69000
   }
 ];
@@ -86,7 +86,7 @@ const Payement = () => {
           token = '';
         }
 
-        const upFile = await axios.post('https://api.avocall.com/api/file/upload', formData, {
+        const upFile = await axios.post('http://localhost:5000/api/file/upload', formData, {
           headers: { 'x-auth-token': token }
         });
 
@@ -94,7 +94,7 @@ const Payement = () => {
         message.success('uploaded');
 
         const newConsultation = await axios.post(
-          'https://api.avocall.com/api/user/buyPack',
+          'http://localhost:5000/api/user/buyPack',
           {
             consultationNumber: isChecked.nbr,
             filename
@@ -103,11 +103,11 @@ const Payement = () => {
             headers: { 'x-auth-token': token }
           }
         );
-        message.success('باقتك اضيفت الى الرصيد بنجاح');
+        message.success('سيضاف لكم الرصيد في اجل اقصاه 48 ساعة شكرا');
         //history.push('/OrderConfirmation');
       } catch (err) {
         console.log('error in buypack', err);
-        history.push('/PayementError');
+        history.push('/dashboard');
       }
     }
   };
