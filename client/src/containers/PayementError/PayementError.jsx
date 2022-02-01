@@ -25,7 +25,7 @@ const PayementError = () => {
         const newConsultation = await axios.post(
           'https://api.avocall.com/api/user/buyPack',
           {
-            consultationNumber: Number(query.get('amount') === '29000' ? 1 : 3),
+            consultationNumber: Number(query.get('amount') === '29000' ? 0 : 0),
             filename: 'online-payment'
           },
           {

@@ -24,7 +24,7 @@ const OrderConfirmation = () => {
           localStorage.setItem('auth-token', '');
           token = '';
         }
-        const response = await axios.get('https://api.avocall.com/api/user/createOrderNumber', {
+        const response = await axios.get('http://localhost:5000/api/user/createOrderNumber', {
           headers: { 'x-auth-token': token }
         });
         setOrderNumber(response.data.orderNumber);
@@ -53,9 +53,9 @@ const OrderConfirmation = () => {
           password +
           '&userName=' +
           userName +
-          `&returnUrl=https://avocall.com//payment-success?amount=${query.get(
+          `&returnUrl=http://localhost:3000/payment-success?amount=${query.get(
             'amount'
-          )}&failUrl=https://avocall.com//payment-error?amount=${query.get('amount')}`
+          )}&failUrl=http://localhost:3000/payment-error?amount=${query.get('amount')}`
       );
       //console.log(formUrl);
       history.push(`/payment-gateway?orderId=${orderId}&amount=${query.get('amount')}`);
@@ -81,4 +81,4 @@ const OrderConfirmation = () => {
   );
 };
 
-export default OrderConfirmation;
+export default OrderConfirmation 

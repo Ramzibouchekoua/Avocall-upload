@@ -14,7 +14,7 @@ const Gateway = () => {
       <img src={Paypal} alt="Clicktopay" />
       <a
         
-        href={`https://test.clictopay.com/payment/merchants/CLICTOPAY/payment_en.html?mdOrder=${query.get('orderId')}`}
+        href={`https://ipay.clictopay.com/payment/merchants/CLICTOPAY/payment_en.html?mdOrder=${query.get('orderId')}`}
      
       >الدفع</a>
       <span>نظام الدفع آمن إذا تعرضت الى اي اشكال</span>

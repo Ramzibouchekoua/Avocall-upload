@@ -31,7 +31,7 @@ const Footer = () => {
        
        <div>
        <img src={Phone} alt="رقم الهاتف" />
-       <a href="tel:+2162225738" >
+       <a href="tel:+21622250738" >
        <span className="bold"> رقم الهاتف </span>
          <span className="description " dir="ltr">+216 22 250 738</span>
          </a>
