@@ -86,7 +86,7 @@ const SignupPro = () => {
           <Text label="الاسم الكامل" name="name"/>
           <Password label="كلمة السر" name="password" />
           <Number label="رقم الهاتف " name="phone" />
-          <List label="الاختصاص" name="specialization" list={["قانون الأكرية","قانون الشغل","قانون التأمين","قانون الأُسرة"]} />
+          <List label="الاختصاص" name="specialization" list={["قانون الأكرية","قانون الشغل","قانون التأمين","قانون الأسرة"]} />
           <Number label="الهوية البنكية" name="bankId" />
           <Form.Item
             name="agreement"
@@ -108,7 +108,7 @@ const SignupPro = () => {
         <div className="Left-Signup">
           <Email label="البريد الالكتروني" name="email" />
           <Text label="عنوان المكتب" name="address" />
-          <List label="صنف المحامي" name="classing" list={["قانون الأكرية","قانون الشغل","قانون التأمين","قانون الأُسرة"]}/>
+          <List label="صنف المحامي" name="classing" list={["قانون الأكرية","قانون الشغل","قانون التأمين","قانون الأسرة"]}/>
           <Upload {...props}>
             <Button icon={<PaperClipOutlined />}>شهادة ترسيم أو بطاقة مهنية</Button>
           </Upload>

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const fields = [
   {
     index: 1,
-    subtext: "قانون الأُسرة",
+    subtext: "قانون الأسرة",
     text: "زواج ، نفقة ، طلاق ، حضانة ، نسب ، ميراث ، وصيّة ، هبة ...",
     icon: "family-child.png",
   },

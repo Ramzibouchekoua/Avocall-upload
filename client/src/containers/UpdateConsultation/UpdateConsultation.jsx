@@ -116,7 +116,7 @@ const WrittenAdvice = () => {
         <div className="form">
           <div className="section-right">
             <Text label="موضوع الاستشارة" name="title" rule={true} />
-            <List label="تصنيف الاستشارة" name="field" list={['قانون الأُسرة', 'قانون الشغل']} />
+            <List label="تصنيف الاستشارة" name="field" list={['قانون الأسرة', 'قانون الشغل']} />
 
             {/* <Upload {...props}> */}
             <input type="file" name="file" onChange={onFileChange} multiple />
