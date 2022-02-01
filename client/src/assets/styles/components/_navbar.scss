@@ -22,19 +22,19 @@
     background-color: $light;
     border: none;
     .ant-menu-item a {
-      font-size: 16px;
+      font-size: 14px;
       color: $text-color;
       font-weight: 600;
 
       &:hover {
-        font-size: 16px;
+        font-size: 14px;
         color: $primary-color;
       }
     }
     .ant-menu-item-selected {
       border-bottom: 2ps solid $primary-color !important;
       a {
-        font-size: 16px;
+        font-size: 14px;
         color: $primary-color;
       }
     }
@@ -109,7 +109,7 @@
       text-align: center;
     }
     .Name {
-      font-size: 16px;
+      font-size: 12px;
       color: #ffffff;
       margin: 0;
       &:hover {
