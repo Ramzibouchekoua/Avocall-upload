@@ -31,7 +31,7 @@ import Confirmation from './containers/OrderConfirmation';
 import Book from './containers/Book';
 import Wallet from './containers/Wallet';
 import Welcomemsg from './containers/Welcome';
-import VidPage from './videoChat/components/App/App';
+// import VidPage from './videoChat/components/App/App';
 import DashboardAdmin from './containers/DashboardAdmin';
 //ERROR PAGES
 import UnAuthorized from './containers/ErrorResult/unAuthorized';
@@ -136,8 +136,11 @@ export default function App() {
                   <PrivateAuth exact path="/sign-in" component={Signin} />
                   <Route exact path="/Wallet" component={Wallet} />
                   
-                  <Route exact path="/vid-page/:id" component={VidPage} />
-                  <Route exact path="/text-chat/:id" render={() => <Textchat socket={socket} />} />
+                  {/* <Route exact path="/vid-page/:id" component={VidPage} /> */}
+                  {/* <Route exact path="/text-chat/:id" render={() => <Textchat socket={socket} />} /> */}
+                  <Route exact path="/text-chat/:id">
+                  <Textchat socket={socket} />
+                  </Route>
 
                   {/* ADMIN PAGES */}
 
