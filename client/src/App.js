@@ -56,7 +56,7 @@ export default function App() {
   const setupSocket = () => {
     const token = localStorage.getItem('auth-token');
     if (token && !socket) {
-      const newSocket = io('http://api.avocall.com', {
+      const newSocket = io('https://api.avocall.com', {
         query: {
           token: localStorage.getItem('auth-token'),
         },
