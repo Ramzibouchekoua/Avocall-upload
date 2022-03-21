@@ -20,7 +20,7 @@ const Consultation = () => {
     };
     axios
       .post(
-        'http://localhost:5000/api/admin/updateUserConsultationsTotal',
+        'https://api.avocall.com/api/admin/updateUserConsultationsTotal',
         { email: email, consultationNumber: consultation },
         config
       )

@@ -17,7 +17,7 @@ const Textchat = ({ socket }) => {
   const [userId, setUserId] = useState('');
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/user/consultation/${chatroomId}`, {
+      .get(`https://api.avocall.com/api/user/consultation/${chatroomId}`, {
         headers: {
           'x-auth-token': localStorage.getItem('auth-token'),
         },
@@ -36,7 +36,7 @@ const Textchat = ({ socket }) => {
   };
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/message/${chatroomId}`, {
+      .get(`https://api.avocall.com/api/message/${chatroomId}`, {
         headers: {
           'x-auth-token': localStorage.getItem('auth-token'),
         },
@@ -78,7 +78,7 @@ const Textchat = ({ socket }) => {
     //eslint-disable-next-line
   }, []);
   const viewPic = async () => {
-    const file = await axios.get( 'http://localhost:5000/api/file/download/60da61e47585d73764d32133', {
+    const file = await axios.get( 'https://api.avocall.com/api/file/download/60da61e47585d73764d32133', {
       headers: { 'x-auth-token': localStorage.getItem('auth-token') },
     });
     try {

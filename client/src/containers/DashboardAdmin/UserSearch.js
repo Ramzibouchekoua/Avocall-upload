@@ -10,7 +10,7 @@ function UserSearch () {
   const [data, setData] = useState([]);
   const [q, setQ] = useState("");
   useEffect(() => {
-    fetch('http://localhost:5000/api/admin/getAllConsultations?page=1&limit=10000', {
+    fetch('https://api.avocall.com/api/admin/getAllConsultations?page=1&limit=10000', {
       headers: {
         'x-auth-token': localStorage.getItem('auth-token'),
       },
