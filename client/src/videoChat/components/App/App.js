@@ -70,7 +70,7 @@ export default function App() {
     setRoomUrl(url);
     setCallObject(newCallObject);
     setAppState(STATE_JOINING);
-    newCallObject.join({ url: 'https://avocall.daily.co/msfnsEllMXJu9fLPXLks' });
+    newCallObject.join({ url: 'https://avocall.daily.co/prod' });
   }, []);
 
   /**
