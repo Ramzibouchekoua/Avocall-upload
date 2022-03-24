@@ -103,7 +103,7 @@ export const verifMail = asyncHandler(async (req, res) => {
     emailService.confirmAccEmail(user.email, user.name, await generateToken(user._id, config.email.secret));
   }
   // res.json('لقد تم تفعيل حسابكم' );
-  res.redirect(`${process.env.REACT_APP_CLIENT_URL}/sign-in`);
+  res.redirect(`https://avocall.com/sign-in`);
 });
 
 //@des get user details
