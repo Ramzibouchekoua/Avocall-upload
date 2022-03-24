@@ -51,7 +51,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "homepage": ".",
+  "homepage": "https://avocall.com",
   "secure": false,
   "eslintConfig": {
     "extends": "react-app"
@@ -71,6 +71,6 @@
   "description": "Istichara ",
   "main": "index.js",
   "devDependencies": {},
-  "author": "shahrazed",
+  "author": "Ramzi",
   "license": "ISC"
 }
