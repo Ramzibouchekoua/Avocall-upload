@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Result, Button } from 'antd';
+import { Result  } from 'antd';
 import { useLocation, useHistory } from 'react-router-dom';
 import axios from 'axios';
 

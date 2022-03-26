@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { List } from "antd";
-import { EditOutlined, CreditCardOutlined, SolutionOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
 import axios from "axios";
-
 import 'moment/locale/ar-tn';
 import Posts from "./Consultation";
 import { Input, Space } from 'antd';

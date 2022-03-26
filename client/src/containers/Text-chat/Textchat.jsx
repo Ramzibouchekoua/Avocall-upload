@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 import ReportModal from '../../components/ReportModal';
 import { PaperClipOutlined, SendOutlined } from '@ant-design/icons';
-import { Image } from 'antd';
 import moment from 'moment';
 import 'moment/locale/ar-tn';
 const Textchat = ({ socket }) => {

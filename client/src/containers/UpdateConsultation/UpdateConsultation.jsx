@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Form, message, Button, Upload, DatePicker, Spin } from 'antd';
+import { Form, message, Button, DatePicker, Spin } from 'antd';
 import { List, Text, TextArea } from '../../components/Inputs';
 import { PaperClipOutlined, VideoCameraOutlined, FormOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';

@@ -1,45 +1,15 @@
 import React from 'react';
-import Paypal from '../../assets/images/ClicToPay_logo.png';
-import { Menu, Dropdown, Button, message } from 'antd';
-import { DownOutlined, CheckOutlined, PaperClipOutlined } from '@ant-design/icons';
+import {  message } from 'antd';
+import {  CheckOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { isEmpty } from 'lodash';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const Mounth = (
-  <Menu>
-    <Menu.Item key="1">جانفي</Menu.Item>
-    <Menu.Item key="2">فيفري</Menu.Item>
-    <Menu.Item key="3">مارس</Menu.Item>
-    <Menu.Item key="4">أفريل</Menu.Item>
-    <Menu.Item key="5">ماي</Menu.Item>
-    <Menu.Item key="6">جوان</Menu.Item>
-    <Menu.Item key="7">جويلية</Menu.Item>
-    <Menu.Item key="8">أوت</Menu.Item>
-    <Menu.Item key="9">سبتمبر</Menu.Item>
-    <Menu.Item key="10">أكتوبر</Menu.Item>
-    <Menu.Item key="11">نوفمبر</Menu.Item>
-    <Menu.Item key="12">ديسمبر</Menu.Item>
-  </Menu>
-);
 
-const Year = (
-  <Menu>
-    <Menu.Item key="1">2020</Menu.Item>
-    <Menu.Item key="2">2021</Menu.Item>
-    <Menu.Item key="3">2022</Menu.Item>
-    <Menu.Item key="4">2023</Menu.Item>
-    <Menu.Item key="5">2024</Menu.Item>
-    <Menu.Item key="6">2025</Menu.Item>
-    <Menu.Item key="7">2026</Menu.Item>
-    <Menu.Item key="8">2027</Menu.Item>
-    <Menu.Item key="9">2028</Menu.Item>
-    <Menu.Item key="10">2029</Menu.Item>
-    <Menu.Item key="10">2030</Menu.Item>
-  </Menu>
-);
+
+
 
 const packs = [
   {

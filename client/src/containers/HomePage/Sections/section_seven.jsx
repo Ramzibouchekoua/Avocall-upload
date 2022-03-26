@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Form, Button,Input } from "antd";
+import { Form } from "antd";
 import { Email,Text, TextArea } from "../../../components/Inputs";
 const section_seven = () => {
   const [form] = Form.useForm();

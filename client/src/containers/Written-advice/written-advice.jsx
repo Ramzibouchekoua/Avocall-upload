@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Form, message, Button, Upload, DatePicker } from 'antd';
+import { Form, message, Button,  DatePicker } from 'antd';
 import { List, Text, TextArea } from '../../components/Inputs';
-import { PaperClipOutlined, VideoCameraOutlined, FormOutlined } from '@ant-design/icons';
+import {  VideoCameraOutlined, FormOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import { InlineWidget } from 'react-calendly';
 import axios from 'axios';
