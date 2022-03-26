@@ -5,7 +5,7 @@ let ObjectId = mongoose.Schema.Types.ObjectId;
 const userSchema = new mongoose.Schema(
   {
     status: {
-      isVerified: { type: Boolean, default: true } ,
+      isVerified: { type: Boolean, default: false } ,
     },
     email: {
       type: String,
