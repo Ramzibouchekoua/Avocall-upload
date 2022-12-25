@@ -15,6 +15,8 @@ import moment from 'moment';
 import 'moment/locale/ar-tn';
 import { Alert } from 'antd';
 
+import { useHistory } from 'react-router';
+
 const STATE_IDLE = 'STATE_IDLE';
 const STATE_CREATING = 'STATE_CREATING';
 const STATE_JOINING = 'STATE_JOINING';
@@ -31,6 +33,7 @@ export default function App() {
   const { id } = useParams();
   const chatroomId = id;
   // console.log('now', moment('2010-10-20').isBefore(moment().today));
+
   useEffect(() => {
     axios
       .get(`https://api.avocall.com/api/user/consultation/${chatroomId}`, {
@@ -222,6 +225,7 @@ export default function App() {
    * !!!
    */
   const enableStartButton = appState === STATE_IDLE;
+
   const callVideo = () =>
     showCall ? (
       // NOTE: for an app this size, it's not obvious that using a Context
@@ -229,10 +233,10 @@ export default function App() {
       // that want to access call object state and bind event listeners to the
       // call object, this can be a helpful pattern.
       <div className="call-box">
-      <CallObjectContext.Provider value={callObject}>
-        <Call roomUrl={roomUrl} />
-        <Tray disabled={!enableCallButtons} onClickLeaveCall={startLeavingCall} />
-      </CallObjectContext.Provider>
+        <CallObjectContext.Provider value={callObject}>
+          <Call roomUrl={roomUrl} />
+          <Tray disabled={!enableCallButtons} onClickLeaveCall={startLeavingCall} />
+        </CallObjectContext.Provider>
       </div>
     ) : (
       <StartButton
@@ -243,6 +247,9 @@ export default function App() {
         }}
       />
     );
+
+  const navigate = useHistory();
+
   return (
     <div className="video-chat">
       <div className="Table">
@@ -296,23 +303,55 @@ export default function App() {
             </tr>
           </tbody> */}
         </table>
-        <button className="button-blue">أغلق الاستشارة</button>
-        <button className="button-blue">تعديل الاستشارة</button>
-        <button className="Connexion ">مشكلة في الاستشارة ؟</button>
+
+        {callObject ? (
+          <button
+            className="button-blue"
+            style={{ cursor: 'pointer' }}
+            onClick={() => {
+              startLeavingCall();
+            }}
+          >
+            أغلق الاستشارة
+          </button>
+        ) : null}
+
+        {!callObject ? (
+          <button
+            className="button-blue"
+            style={{ cursor: 'pointer' }}
+            onClick={() => {
+              console.log(callObject);
+              navigate.push({
+                pathname: `/update-consultation/${theConsultation._id}`,
+                // state: {
+                //   id: theConsultation._id,
+                // },
+              });
+            }}
+          >
+            تعديل الاستشارة
+          </button>
+        ) : null}
+        {/* <button className="Connexion ">مشكلة في الاستشارة ؟</button> */}
       </div>
       <div className="redirection">
         <Alert
-      message={ <span className="title">
-      لقد تم حجز المكالمة الالكترونية بنجاح بتاريخ {moment(theConsultation.date).format('LLLL')}
-    </span>}
-      description={   <span className="text">
-      سيتصل بك مستشارنا القانوني الكترونيا للاجابة على استفساراتك القانونية. لذا نلتمس منكم مراعات الموعد الالكتروني و
-      الحرص على تواجدكم بالموقع بالوقت المحدد
-    </span>}
-      type={moment(theConsultation.date).isSame(moment().today)?"success":"error"}
-      // showIcon
-      className="alert"
-    />
+          message={
+            <span className="title">
+              لقد تم حجز المكالمة الالكترونية بنجاح بتاريخ {moment(theConsultation.date).format('LLLL')}
+            </span>
+          }
+          description={
+            <span className="text">
+              سيتصل بك مستشارنا القانوني الكترونيا للاجابة على استفساراتك القانونية. لذا نلتمس منكم مراعات الموعد الالكتروني
+              و الحرص على تواجدكم بالموقع بالوقت المحدد
+            </span>
+          }
+          type={moment(theConsultation.date).isSame(moment().today) ? 'success' : 'error'}
+          // showIcon
+          className="alert"
+        />
         {callVideo()}
       </div>
     </div>
