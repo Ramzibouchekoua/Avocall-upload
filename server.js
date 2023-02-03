@@ -12,15 +12,16 @@ import config from './config';
 import routes from './routes';
 import Message from './models/message';
 import User from './models/user';
-import emptyOutUploadDir from "./helpers/emptyOutUploadDir";
+import emptyOutUploadDir from './helpers/emptyOutUploadDir';
 
 const morgan = require('morgan');
 const app = express();
+
 const server = require('http').createServer(app);
 
 // db connexion
 connectDB();
-mongoose.connection.on('error', err => {
+mongoose.connection.on('error', (err) => {
   console.log('Mongoose Connection ERROR: ' + err.message);
 });
 
@@ -47,11 +48,14 @@ app.use(mongoSanitize());
 app.use(compression());
 
 // enable cors
-app.use(cors());
-app.options('*', cors());
-
+app.use('*', cors());
+app.all('/*', function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+  next();
+});
 // api routes
-app.use('/api', routes);
+app.use('*', routes);
 
 // handle error
 app.use(notFound);
@@ -64,8 +68,8 @@ const PORT = config.port || 5000;
 const io = require('socket.io')(server, {
   cors: {
     origin: '*',
-    methods: ['GET', 'POST']
-  }
+    methods: ['GET', 'POST'],
+  },
 });
 const jwt = require('jwt-then');
 
@@ -78,7 +82,7 @@ io.use(async (socket, next) => {
   } catch (err) {}
 });
 
-io.on('connection', socket => {
+io.on('connection', (socket) => {
   console.log('socket: ' + socket.userId);
   socket.on('joinRoom', ({ chatroomId }) => {
     socket.join(chatroomId);
@@ -97,12 +101,12 @@ io.on('connection', socket => {
         chatroom: chatroomId,
         user: socket.userId,
         name: user.name,
-        message
+        message,
       });
       io.to(chatroomId).emit('newMessage', {
         message,
         name: user.name,
-        user: socket.userId
+        user: socket.userId,
       });
       await newMessage.save();
     }
