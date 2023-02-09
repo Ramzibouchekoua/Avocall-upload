@@ -55,7 +55,20 @@ const Signup = () => {
 
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
-      console.log('Google Sign In was successful', err)
+      console.log('Google Sign In was not successful', err.response.status == 500)
+
+      if (err.response.status == 500) {
+        setError(undefined);
+        const loginRes = await axios.post(process.env.REACT_APP_API_URL + '/api/auth/googleLogin', {
+          ...result,
+        });
+        setUserData({
+          token: loginRes.data.token,
+          user: loginRes.data.user,
+        });
+        localStorage.setItem('auth-token', loginRes.data.token);
+        loginRes.data.user.role === 'USER' ? history.push('/dashboard') : history.push('/dashboardPro');
+      }
     }
   };
   const googleError = () => console.log('Google Sign In was unsuccessful. Try again later');

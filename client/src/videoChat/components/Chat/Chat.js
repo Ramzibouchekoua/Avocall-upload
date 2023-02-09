@@ -1,9 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import CallObjectContext from '../../CallObjectContext';
+import UserContext from '../../../context/userContext.js';
 import './Chat.css';
 
 export default function Chat(props) {
   const callObject = useContext(CallObjectContext);
+  const { userData, setUserData } = useContext(UserContext);
   const [inputValue, setInputValue] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
 
@@ -14,9 +16,7 @@ export default function Chat(props) {
   function handleSubmit(event) {
     event.preventDefault();
     callObject.sendAppMessage({ message: inputValue }, '*');
-    const name = callObject.participants().local.user_name
-      ? callObject.participants().local.user_name
-      : 'Guest';
+    const name = userData ? userData.user.name : 'Guest';
     setChatHistory([
       ...chatHistory,
       {
@@ -38,9 +38,7 @@ export default function Chat(props) {
 
     function handleAppMessage(event) {
       const participants = callObject.participants();
-      const name = participants[event.fromId].user_name
-        ? participants[event.fromId].user_name
-        : 'Guest';
+      const name = participants[event.fromId].user_name ? participants[event.fromId].user_name : 'Guest';
       setChatHistory([
         ...chatHistory,
         {
@@ -79,7 +77,7 @@ export default function Chat(props) {
           onChange={handleChange}
         ></input>
         <button type="submit" className="send-chat-button">
-        إرسال
+          إرسال
         </button>
       </form>
     </div>
