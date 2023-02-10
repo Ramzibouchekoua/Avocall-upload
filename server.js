@@ -16,7 +16,6 @@ import emptyOutUploadDir from './helpers/emptyOutUploadDir';
 
 const morgan = require('morgan');
 const app = express();
-
 const server = require('http').createServer(app);
 
 // db connexion
@@ -48,15 +47,11 @@ app.use(mongoSanitize());
 app.use(compression());
 
 // enable cors
-app.use('*', cors());
+app.use(cors());
 app.options('*', cors());
-app.all('*', function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
-  next();
-});
+
 // api routes
-app.use('*', routes);
+app.use('/api', routes);
 
 // handle error
 app.use(notFound);

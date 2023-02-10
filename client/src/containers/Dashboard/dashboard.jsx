@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { List } from "antd";
-import { EditOutlined, CreditCardOutlined, SolutionOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import moment from "moment";
+import React, { useState, useEffect } from 'react';
+import { List } from 'antd';
+import { EditOutlined, CreditCardOutlined, SolutionOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import moment from 'moment';
 import 'moment/locale/ar-tn';
 const Dashboard = () => {
   const [list, setList] = useState([]);
   useEffect(() => {
     axios
-      .get(`https://api.avocall.com/api/user/allConsultation`, {
+      .get(process.env.REACT_APP_API_URL + 'api/user/allConsultation', {
         headers: {
           'x-auth-token': localStorage.getItem('auth-token'),
         },
@@ -51,8 +51,8 @@ const Dashboard = () => {
                 <Link
                   to={`/update-consultation/${item._id}`}
                   key="edit"
-                  className={!item.isClosed ? "edit" : "edit end-icon"}
-                  style={moment(item.date).date()>moment().date() ? { opacity: 1 } : { opacity: 0, pointerEvents: "none" }}
+                  className={!item.isClosed ? 'edit' : 'edit end-icon'}
+                  style={moment(item.date).date() > moment().date() ? { opacity: 1 } : { opacity: 0, pointerEvents: 'none' }}
                 >
                   <EditOutlined />
                 </Link>,
@@ -60,30 +60,26 @@ const Dashboard = () => {
             >
               <Link
                 to={
-                  item.type === "video"
+                  item.type === 'video'
                     ? `/vid-page/${item._id}`
-                    : item.type === "phone"
-                      ? "/phone-not-ready"
-                      : `/text-chat/${item._id}`
+                    : item.type === 'phone'
+                    ? '/phone-not-ready'
+                    : `/text-chat/${item._id}`
                 }
-                className={!item.isClosed ? "list" : "list end"}
+                className={!item.isClosed ? 'list' : 'list end'}
               >
                 <div className="list-content">
-                  <div className="list-content_type">{item.type === "video"
-                    ? "إستشارة بالفيديو"
-                    : "إستشارة كتابيّة"}</div>
+                  <div className="list-content_type">{item.type === 'video' ? 'إستشارة بالفيديو' : 'إستشارة كتابيّة'}</div>
                   <div className="list-content_title">{item.title}</div>
                   <div className="list-content_desc">{item.description}</div>
                 </div>
                 <div className="list-content date">
                   <div className="list-content_title">التاريخ</div>
-                  <div className="list-content_desc">{moment(item.date).format("LLLL")}</div>
+                  <div className="list-content_desc">{moment(item.date).format('LLLL')}</div>
                 </div>
                 <div className="list-content state">
                   <div className="list-content_title">الحالة</div>
-                  <div className="list-content_desc state">
-                    {item.isClosed ? "منتهية" : "مفتوحة"}
-                  </div>
+                  <div className="list-content_desc state">{item.isClosed ? 'منتهية' : 'مفتوحة'}</div>
                 </div>
               </Link>
             </List.Item>

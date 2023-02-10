@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Input, Button } from 'antd';
-import { UserOutlined , FileDoneOutlined  } from '@ant-design/icons';
+import { UserOutlined, FileDoneOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -20,7 +20,7 @@ const Consultation = () => {
     };
     axios
       .post(
-        'https://api.avocall.com/api/admin/updateUserConsultationsTotal',
+        process.env.REACT_APP_API_URL + '/api/admin/updateUserConsultationsTotal',
         { email: email, consultationNumber: consultation },
         config
       )
@@ -30,21 +30,16 @@ const Consultation = () => {
 
   return (
     <div className="alluser">
-    <span className='title'>Add user consultation</span>
+      <span className="title">Add user consultation</span>
       <form onSubmit={handleSubmit}>
-        <Input
-          placeholder="User Email"
-          prefix={<UserOutlined />}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <Input placeholder="User Email" prefix={<UserOutlined />} value={email} onChange={(e) => setEmail(e.target.value)} />
         <Input
           placeholder="Consultation Number"
           prefix={<FileDoneOutlined />}
           value={consultation}
           onChange={(e) => setConsultation(e.target.value)}
         />
-        <button  onClick={handleSubmit}>Add Consultation</button>
+        <button onClick={handleSubmit}>Add Consultation</button>
       </form>
     </div>
   );

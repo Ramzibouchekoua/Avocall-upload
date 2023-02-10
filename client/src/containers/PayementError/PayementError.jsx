@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Result  } from 'antd';
+import { Result } from 'antd';
 import { useLocation, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
@@ -23,13 +23,13 @@ const PayementError = () => {
           token = '';
         }
         const newConsultation = await axios.post(
-          'https://api.avocall.com/api/user/buyPack',
+          process.env.REACT_APP_API_URL + '/api/user/buyPack',
           {
             consultationNumber: Number(query.get('amount') === '29000' ? 0 : 0),
-            filename: 'online-payment'
+            filename: 'online-payment',
           },
           {
-            headers: { 'x-auth-token': token }
+            headers: { 'x-auth-token': token },
           }
         );
       } catch (err) {

@@ -1,15 +1,11 @@
 import React from 'react';
-import {  message } from 'antd';
-import {  CheckOutlined } from '@ant-design/icons';
+import { message } from 'antd';
+import { CheckOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { isEmpty } from 'lodash';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
-
-
-
 
 const packs = [
   {
@@ -17,15 +13,15 @@ const packs = [
     title: 'إستشارة',
     price: '29TND',
     nbr: 0,
-    amount: 29000
+    amount: 29000,
   },
   {
     id: 2,
     title: 'عرض : 3 إستشارات',
     price: '69TND',
     nbr: 0,
-    amount: 69000
-  }
+    amount: 69000,
+  },
 ];
 
 const Payement = () => {
@@ -33,13 +29,13 @@ const Payement = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const history = useHistory();
 
-  const onFileChange = event => {
+  const onFileChange = (event) => {
     setSelectedFile(event.target.files);
   };
 
   const onClick = async () => {
     const formData = new FormData();
-    selectedFile && Object.values(selectedFile).map(e => formData.append('file', e, e.name));
+    selectedFile && Object.values(selectedFile).map((e) => formData.append('file', e, e.name));
     let filename = '';
 
     if (isEmpty(isChecked)) {
@@ -56,21 +52,21 @@ const Payement = () => {
           token = '';
         }
 
-        const upFile = await axios.post('https://api.avocall.com/api/file/upload', formData, {
-          headers: { 'x-auth-token': token }
+        const upFile = await axios.post(process.env.REACT_APP_API_URL + '/api/file/upload', formData, {
+          headers: { 'x-auth-token': token },
         });
 
         filename = upFile.data.data.fileName;
         message.success('uploaded');
 
         const newConsultation = await axios.post(
-          'https://api.avocall.com/api/user/buyPack',
+          process.env.REACT_APP_API_URL + '/api/user/buyPack',
           {
             consultationNumber: isChecked.nbr,
-            filename
+            filename,
           },
           {
-            headers: { 'x-auth-token': token }
+            headers: { 'x-auth-token': token },
           }
         );
         message.success('سيضاف لكم الرصيد في اجل اقصاه 48 ساعة شكرا');
@@ -88,7 +84,7 @@ const Payement = () => {
         <span className="title"> اختر خطة الاشتراك المناسبة لك</span>
 
         <div className="pricings">
-          {packs.map(e => (
+          {packs.map((e) => (
             <div
               onClick={() => setIsChecked(e)}
               className={isChecked.id === e.id ? 'card-type checked' : 'card-type'}
@@ -107,11 +103,11 @@ const Payement = () => {
         <span className="under-title">يمكنك الدفع عبر حوالة مصرفية او عبر استعمال بطاقتك البنكية</span>
         <div className="credit-card">
           <span>للدفع عبر البطاقة المصرفية اختر العرض المرغوب فيه</span>
-        {isChecked.amount && (
-          <Link to={`/OrderConfirmation?amount=${isChecked.amount}`}>
-            <button className="ant-btn">البطاقة المصرفية</button>
-          </Link>
-        )}
+          {isChecked.amount && (
+            <Link to={`/OrderConfirmation?amount=${isChecked.amount}`}>
+              <button className="ant-btn">البطاقة المصرفية</button>
+            </Link>
+          )}
         </div>
         <div className="Bank-detail">
           <span className="under-title">للدفع عبر الحوالة البنكية الرجاء ارسال حوالة للحسابات التالية :</span>
@@ -127,8 +123,6 @@ const Payement = () => {
           <span className="under-title">الرجاء تحميل إثبات الدفع من هنا</span>
         </div>
         <input type="file" name="file" onChange={onFileChange} multiple />
-       
-     
 
         <button className="pay" onClick={onClick}>
           Finaliser
