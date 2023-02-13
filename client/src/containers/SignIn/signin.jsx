@@ -41,7 +41,6 @@ const SignIn = () => {
     const loginRes = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/googleLogin`, {
       ...result,
     });
-    console.log('Test : ',loginRes);
     try {
       setError(undefined);
       setUserData({

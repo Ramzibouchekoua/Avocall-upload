@@ -7,7 +7,7 @@ function UserSearch() {
   const [data, setData] = useState([]);
   const [q, setQ] = useState('');
   useEffect(() => {
-    fetch('https://api.avocall.com/api/user/all', {
+    fetch(process.env.REACT_APP_API_URL + '/api/user/all', {
       headers: {
         'x-auth-token': localStorage.getItem('auth-token'),
       },
@@ -19,7 +19,7 @@ function UserSearch() {
       .catch((err) => {
         console.log(err);
       });
-    fetch('https://api.avocall.com/api/admin/getAllConsultations?page=1&limit=10000', {
+    fetch(process.env.REACT_APP_API_URL + '/api/admin/getAllConsultations?page=1&limit=10000', {
       headers: {
         'x-auth-token': localStorage.getItem('auth-token'),
       },

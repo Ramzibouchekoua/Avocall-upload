@@ -10,7 +10,7 @@ const Consultation = () => {
   const [q, setQ] = useState('');
   useEffect(() => {
     axios
-      .get('https://api.avocall.com/api/admin/getAllPayments?page=1&limit=10000', {
+      .get(process.env.REACT_APP_API_URL + '/api/admin/getAllPayments?page=1&limit=10000', {
         headers: {
           'x-auth-token': localStorage.getItem('auth-token'),
         },

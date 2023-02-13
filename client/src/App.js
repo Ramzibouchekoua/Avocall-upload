@@ -56,7 +56,7 @@ export default function App() {
   const setupSocket = () => {
     const token = localStorage.getItem('auth-token');
     if (token && !socket) {
-      const newSocket = io('https://api.avocall.com', {
+      const newSocket = io(process.env.REACT_APP_API_URL, {
         query: {
           token: localStorage.getItem('auth-token'),
         },
@@ -88,12 +88,12 @@ export default function App() {
       localStorage.setItem('auth-token', '');
       token = '';
     } else {
-      const tokenRes = await axios.get("https://api.avocall.com/api/user/tokenIsValid", {
+      const tokenRes = await axios.get(process.env.REACT_APP_API_URL + '/api/user/tokenIsValid', {
         headers: { 'x-auth-token': token },
       });
       try {
         if (tokenRes.data) {
-          const userRes = await axios.get("https://api.avocall.com/api/user/", {
+          const userRes = await axios.get(process.env.REACT_APP_API_URL + '/api/user/', {
             headers: { 'x-auth-token': token },
           });
           setUserData({
@@ -135,7 +135,7 @@ export default function App() {
                   <PrivateAuth exact path="/sign-up-pro" component={SignupPro} />
                   <PrivateAuth exact path="/sign-in" component={Signin} />
                   <Route exact path="/Wallet" component={Wallet} />
-                  
+
                   <Route exact path="/vid-page/:id" component={VidPage} />
                   <Route exact path="/text-chat/:id" render={() => <Textchat socket={socket} />} />
 

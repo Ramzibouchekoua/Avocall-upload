@@ -8,7 +8,7 @@ function AllUsers() {
   const [data, setData] = useState([]);
   const [q, setQ] = useState('');
   useEffect(() => {
-    fetch('https://api.avocall.com/api/user/all', {
+    fetch(process.env.REACT_APP_API_URL + '/api/user/all', {
       headers: {
         'x-auth-token': localStorage.getItem('auth-token'),
       },
