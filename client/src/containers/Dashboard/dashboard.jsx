@@ -9,7 +9,7 @@ const Dashboard = () => {
   const [list, setList] = useState([]);
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_API_URL + 'api/user/allConsultation', {
+      .get(process.env.REACT_APP_API_URL + '/api/user/allConsultation', {
         headers: {
           'x-auth-token': localStorage.getItem('auth-token'),
         },

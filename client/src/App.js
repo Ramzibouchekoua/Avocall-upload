@@ -64,7 +64,7 @@ export default function App() {
 
       newSocket.on('disconnect', () => {
         setSocket(null);
-        setTimeout(setupSocket, 3000);
+        setTimeout(setupSocket, 20000);
         console.log('Socket Disconnected!');
       });
 
