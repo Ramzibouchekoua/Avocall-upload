@@ -33,7 +33,7 @@ export default function App() {
   // console.log('now', moment('2010-10-20').isBefore(moment().today));
   useEffect(() => {
     axios
-      .get(`https://api.avocall.com/api/user/consultation/${chatroomId}`, {
+      .get(process.env.REACT_APP_API_URL + `/api/user/consultation/${chatroomId}`, {
         headers: {
           'x-auth-token': localStorage.getItem('auth-token'),
         },
@@ -229,10 +229,10 @@ export default function App() {
       // that want to access call object state and bind event listeners to the
       // call object, this can be a helpful pattern.
       <div className="call-box">
-      <CallObjectContext.Provider value={callObject}>
-        <Call roomUrl={roomUrl} />
-        <Tray disabled={!enableCallButtons} onClickLeaveCall={startLeavingCall} />
-      </CallObjectContext.Provider>
+        <CallObjectContext.Provider value={callObject}>
+          <Call roomUrl={roomUrl} />
+          <Tray disabled={!enableCallButtons} onClickLeaveCall={startLeavingCall} />
+        </CallObjectContext.Provider>
       </div>
     ) : (
       <StartButton
@@ -302,17 +302,21 @@ export default function App() {
       </div>
       <div className="redirection">
         <Alert
-      message={ <span className="title">
-      لقد تم حجز المكالمة الالكترونية بنجاح بتاريخ {moment(theConsultation.date).format('LLLL')}
-    </span>}
-      description={   <span className="text">
-      سيتصل بك مستشارنا القانوني الكترونيا للاجابة على استفساراتك القانونية. لذا نلتمس منكم مراعات الموعد الالكتروني و
-      الحرص على تواجدكم بالموقع بالوقت المحدد
-    </span>}
-      type={moment(theConsultation.date).isSame(moment().today)?"success":"error"}
-      // showIcon
-      className="alert"
-    />
+          message={
+            <span className="title">
+              لقد تم حجز المكالمة الالكترونية بنجاح بتاريخ {moment(theConsultation.date).format('LLLL')}
+            </span>
+          }
+          description={
+            <span className="text">
+              سيتصل بك مستشارنا القانوني الكترونيا للاجابة على استفساراتك القانونية. لذا نلتمس منكم مراعات الموعد الالكتروني
+              و الحرص على تواجدكم بالموقع بالوقت المحدد
+            </span>
+          }
+          type={moment(theConsultation.date).isSame(moment().today) ? 'success' : 'error'}
+          // showIcon
+          className="alert"
+        />
         {callVideo()}
       </div>
     </div>

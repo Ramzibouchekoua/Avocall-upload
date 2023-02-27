@@ -22,7 +22,7 @@
     "invariant": "2.2.4",
     "ip": "1.1.5",
     "lodash": "^4.17.20",
-    "node-sass": "^4.14.1",
+    "node-sass": "npm:sass@^1.55.0",
     "prop-types": "15.7.2",
     "query-string": "^6.13.2",
     "react": "^16.13.1",
@@ -70,7 +70,6 @@
   },
   "description": "Istichara ",
   "main": "index.js",
-  "devDependencies": {},
   "author": "Ramzi",
   "license": "ISC"
 }

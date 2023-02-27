@@ -25,12 +25,12 @@ export const register = asyncHandler(async (req, res) => {
     name,
     role: 'USER',
     address,
-    birthDate
+    birthDate,
   });
   const savedUser = await newUser.save();
   savedUser.password = undefined;
   try {
-    emailService.sendVerifMail(email, name,await generateToken(savedUser._id, config.email.secret));
+    emailService.sendVerifMail(email, name, await generateToken(savedUser._id, config.email.secret));
   } catch (error) {
     console.log({ error });
   }
@@ -54,7 +54,7 @@ export const registerAdmin = asyncHandler(async (req, res) => {
     name,
     role: 'ADMIN',
     address,
-    birthDate
+    birthDate,
   });
   const savedUser = await newUser.save();
   savedUser.password = undefined;
@@ -85,7 +85,7 @@ export const update = asyncHandler(async (req, res) => {
   user.birthDate = req.body.birthDate || user.birthDate;
   const updateduser = await user.save();
   res.json({
-    newUser: updateduser
+    newUser: updateduser,
   });
 });
 
@@ -103,7 +103,7 @@ export const verifMail = asyncHandler(async (req, res) => {
     emailService.confirmAccEmail(user.email, user.name, await generateToken(user._id, config.email.secret));
   }
   // res.json('لقد تم تفعيل حسابكم' );
-  res.redirect(`https://avocall.com/sign-in`);
+  res.redirect(`${process.env.REACT_APP_CLIENT_URL}/sign-in`);
 });
 
 //@des get user details
@@ -140,7 +140,7 @@ export const newConsultation = asyncHandler(async (req, res) => {
   if (!user.wallet || user.wallet < 1) return res.status(400).json({ msg: 'Empty wallet' });
   const newConsultation = {
     ...req.body,
-    userId: req.user
+    userId: req.user,
   };
   console.log('newConsultation', newConsultation);
   const consultation = await Consultation.create(newConsultation);
@@ -179,7 +179,7 @@ export const updateConsultation = asyncHandler(async (req, res) => {
   consultation.date = req.body.date || consultation.date;
   const updatedconsultation = await consultation.save();
   res.json({
-    newConsultation: updatedconsultation
+    newConsultation: updatedconsultation,
   });
 });
 

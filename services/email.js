@@ -38,9 +38,9 @@ const sendEmailWithImageAttached = async (to, subject, text, html, imageFileName
       {
         filename: imageFileName,
         contentType: 'image/jpeg' || 'image/png',
-        path: path.join(process.cwd(), 'uploads', imageFileName)
-      }
-    ]
+        path: path.join(process.cwd(), 'uploads', imageFileName),
+      },
+    ],
   };
 
   await transport.sendMail(msg);
@@ -52,7 +52,7 @@ const sendVerifMail = async (to, name, token) => {
     const html = verifEmailTemplate(to, name, token);
     await sendEmail(to, subject, '', html);
   } catch (error) {
-    console.log('sendVerifMail::', { error });
+    console.log('sendVerifMail:', { error });
   }
 };
 
@@ -95,5 +95,5 @@ export default {
   sendVerifAvocatMail,
   newConsultationEmail,
   confirmAccEmail,
-  buyPackEmail
+  buyPackEmail,
 };
