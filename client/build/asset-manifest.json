@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.7cb3b25e.chunk.css",
-    "main.js": "/static/js/main.d360d4f8.chunk.js",
-    "main.js.map": "/static/js/main.d360d4f8.chunk.js.map",
+    "main.css": "/static/css/main.4ac118c8.chunk.css",
+    "main.js": "/static/js/main.42252c60.chunk.js",
+    "main.js.map": "/static/js/main.42252c60.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.9b7d8fd3.js",
     "runtime-main.js.map": "/static/js/runtime-main.9b7d8fd3.js.map",
     "static/css/2.dc60d64d.chunk.css": "/static/css/2.dc60d64d.chunk.css",
-    "static/js/2.691d96d3.chunk.js": "/static/js/2.691d96d3.chunk.js",
-    "static/js/2.691d96d3.chunk.js.map": "/static/js/2.691d96d3.chunk.js.map",
+    "static/js/2.f3cb3179.chunk.js": "/static/js/2.f3cb3179.chunk.js",
+    "static/js/2.f3cb3179.chunk.js.map": "/static/js/2.f3cb3179.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.77d3f6dcc0506470dfab4b10fb79b639.js": "/precache-manifest.77d3f6dcc0506470dfab4b10fb79b639.js",
+    "precache-manifest.aa4903c3922309fbd649a22950ff3d46.js": "/precache-manifest.aa4903c3922309fbd649a22950ff3d46.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.dc60d64d.chunk.css.map": "/static/css/2.dc60d64d.chunk.css.map",
-    "static/css/main.7cb3b25e.chunk.css.map": "/static/css/main.7cb3b25e.chunk.css.map",
-    "static/js/2.691d96d3.chunk.js.LICENSE.txt": "/static/js/2.691d96d3.chunk.js.LICENSE.txt",
-    "static/js/main.d360d4f8.chunk.js.LICENSE.txt": "/static/js/main.d360d4f8.chunk.js.LICENSE.txt",
+    "static/css/main.4ac118c8.chunk.css.map": "/static/css/main.4ac118c8.chunk.css.map",
+    "static/js/2.f3cb3179.chunk.js.LICENSE.txt": "/static/js/2.f3cb3179.chunk.js.LICENSE.txt",
+    "static/js/main.42252c60.chunk.js.LICENSE.txt": "/static/js/main.42252c60.chunk.js.LICENSE.txt",
     "static/media/4014702_call_phone_service_support_icon (1).svg": "/static/media/4014702_call_phone_service_support_icon (1).2a48cd1c.svg",
     "static/media/4831018_direction_location_map_maps_pin_icon.svg": "/static/media/4831018_direction_location_map_maps_pin_icon.8d063ffd.svg",
     "static/media/6457560_24 hours_24_7_customer_delivery_service_icon.svg": "/static/media/6457560_24 hours_24_7_customer_delivery_service_icon.61cf0cd4.svg",
@@ -35,8 +35,8 @@
   "entrypoints": [
     "static/js/runtime-main.9b7d8fd3.js",
     "static/css/2.dc60d64d.chunk.css",
-    "static/js/2.691d96d3.chunk.js",
-    "static/css/main.7cb3b25e.chunk.css",
-    "static/js/main.d360d4f8.chunk.js"
+    "static/js/2.f3cb3179.chunk.js",
+    "static/css/main.4ac118c8.chunk.css",
+    "static/js/main.42252c60.chunk.js"
   ]
 }
