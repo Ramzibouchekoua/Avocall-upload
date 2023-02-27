@@ -87,27 +87,27 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-span {
-  color: $primary-color;
-  font-weight: 700;
-  text-align: center;
-}
-button {
-  margin: 20px 0px;
-  color: white;
-  background-color: $success-color;
-  border: 1px solid $success-color;
-  border-radius: 4px;
-  &:hover {
-    color:$success-color;
-    border: 1px solid $success-color;
-    border-radius: 4px;
-    background-color: $light;
-  }
-}
+      span {
+        color: $primary-color;
+        font-weight: 700;
+        text-align: center;
+      }
+      button {
+        margin: 20px 0px;
+        color: white;
+        background-color: $success-color;
+        border: 1px solid $success-color;
+        border-radius: 4px;
+        &:hover {
+          color: $success-color;
+          border: 1px solid $success-color;
+          border-radius: 4px;
+          background-color: $light;
+        }
+      }
     }
     input {
-     margin-top: 10px;
+      margin-top: 10px;
     }
     .Bank-detail {
       display: flex;
@@ -122,37 +122,37 @@ button {
         font-size: 16px;
         color: $primary-color;
         margin-top: 20px;
-font-weight: 700;
-text-align: center;
+        font-weight: 700;
+        text-align: center;
       }
       .rib {
         font-size: 16px;
         color: $primary-color;
         margin-top: 20px;
-font-weight: 700;
-text-align: center;
-direction: ltr;
+        font-weight: 700;
+        text-align: center;
+        direction: ltr;
       }
     }
-  
+
     .payement-logo {
       margin-top: 10px;
       display: flex;
-      
+
       justify-content: center;
       align-items: center;
-    
-  img {
-    filter: blur(2px);
-    -webkit-filter: blur(2px);
-    width: 80px;
-  }
- 
+
+      img {
+        filter: blur(2px);
+        -webkit-filter: blur(2px);
+        width: 80px;
+      }
+
       span {
-       font-size: 22px;
-       font-weight: 700;
-       color: $primary-color;
-       text-align: center;
+        font-size: 22px;
+        font-weight: 700;
+        color: $primary-color;
+        text-align: center;
       }
     }
     .pay {
@@ -163,6 +163,7 @@ direction: ltr;
       color: $light;
       border-radius: 8px;
       margin-top: 10%;
+      cursor: pointer;
     }
   }
 }
@@ -186,7 +187,7 @@ direction: ltr;
         font-weight: bold;
         color: $title-color;
       }
-  
+
       .pricings {
         margin-top: 50px !important;
         .card-type {
@@ -241,7 +242,7 @@ direction: ltr;
       margin-top: 10%;
       display: flex;
       flex-flow: column;
-      
+
       .title {
         font-size: 16px;
         font-weight: bold;
@@ -295,9 +296,6 @@ direction: ltr;
   }
 }
 
-
-
-
 .gateway {
   display: flex;
   flex-direction: column;
@@ -322,14 +320,13 @@ direction: ltr;
     text-align: center;
     padding: 10px;
     &:hover {
-      color:$success-color;
+      color: $success-color;
       border: 1px solid $success-color;
       border-radius: 4px;
       background-color: $light;
     }
-}
-.contact {
-  
+  }
+  .contact {
     margin: 20px 0px;
     color: white;
     background-color: $primary-color;
@@ -337,11 +334,10 @@ direction: ltr;
     border-radius: 4px;
     padding: 10px;
     &:hover {
-      color:$primary-color;
+      color: $primary-color;
       border: 1px solid $primary-color;
       border-radius: 4px;
       background-color: $light;
     }
-
-}
+  }
 }

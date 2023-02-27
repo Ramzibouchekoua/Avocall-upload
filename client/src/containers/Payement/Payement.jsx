@@ -125,7 +125,7 @@ const Payement = () => {
         <input type="file" name="file" onChange={onFileChange} multiple />
 
         <button className="pay" onClick={onClick}>
-          Finaliser
+          إرسال الطلب
         </button>
       </div>
     </div>
