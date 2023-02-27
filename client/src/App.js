@@ -42,6 +42,7 @@ import PrivateUser from './privateRoutes/PrivateUser';
 import PrivateUserPro from './privateRoutes/PrivateUserPro';
 import PrivateAuth from './privateRoutes/PrivateAuth';
 import PrivateUserAdmin from './privateRoutes/PrivateUserAdmin';
+import ScrollToTop from './ScrollToTop';
 
 export default function App() {
   const [socket, setSocket] = useState(null);
@@ -88,12 +89,12 @@ export default function App() {
       localStorage.setItem('auth-token', '');
       token = '';
     } else {
-      const tokenRes = await axios.get("https://api.avocall.com/api/user/tokenIsValid", {
+      const tokenRes = await axios.get('https://api.avocall.com/api/user/tokenIsValid', {
         headers: { 'x-auth-token': token },
       });
       try {
         if (tokenRes.data) {
-          const userRes = await axios.get("https://api.avocall.com/api/user/", {
+          const userRes = await axios.get('https://api.avocall.com/api/user/', {
             headers: { 'x-auth-token': token },
           });
           setUserData({
@@ -120,6 +121,7 @@ export default function App() {
   return (
     <div dir="rtl">
       <BrowserRouter>
+        <ScrollToTop />
         <UserContext.Provider value={{ userData, setUserData }}>
           {isLoading ? (
             <Spin tip="جاري..." spinning={isLoading} />
@@ -135,7 +137,6 @@ export default function App() {
                   <PrivateAuth exact path="/sign-up-pro" component={SignupPro} />
                   <PrivateAuth exact path="/sign-in" component={Signin} />
                   <Route exact path="/Wallet" component={Wallet} />
-                  
                   <Route exact path="/vid-page/:id" component={VidPage} />
                   <Route exact path="/text-chat/:id" render={() => <Textchat socket={socket} />} />
 
