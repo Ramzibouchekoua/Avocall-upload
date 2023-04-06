@@ -59,13 +59,7 @@ const Dashboard = () => {
               ]}
             >
               <Link
-                to={
-                  item.type === 'video'
-                    ? `/vid-page/${item._id}`
-                    : item.type === 'phone'
-                    ? '/phone-not-ready'
-                    : `/text-chat/${item._id}`
-                }
+                to={item.type === 'video' ? `/vid-page/${item._id}` : `/text-chat/${item._id}`}
                 className={!item.isClosed ? 'list' : 'list end'}
               >
                 <div className="list-content">

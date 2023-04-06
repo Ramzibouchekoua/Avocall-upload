@@ -14,13 +14,15 @@ const packs = [
     price: '29TND',
     nbr: 0,
     amount: 29000,
+    oldprice: '50TND',
   },
   {
     id: 2,
-    title: 'عرض : 3 إستشارات',
+    title: ' 3 إستشارات',
     price: '69TND',
     nbr: 0,
     amount: 69000,
+    oldprice: '90TND',
   },
 ];
 
@@ -92,6 +94,7 @@ const Payement = () => {
             >
               <CheckOutlined />
               <span className="title">{e.title}</span>
+              <span className="old-price">{e.oldprice}</span>
               <span className="price">{e.price}</span>
             </div>
           ))}

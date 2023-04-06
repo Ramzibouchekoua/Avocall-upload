@@ -46,7 +46,8 @@ typings/
 .env
 # Optional eslint cache
 .eslintcache
-
+client/.env
+.env
 # Optional REPL history
 .node_repl_history
 
