@@ -36,8 +36,8 @@ const Footer = () => {
         </div>
       </div>
       <div className="powred ">
-        <span>Copyright © 2021 Avocall</span>
-        <span>Powered by FabLab</span>
+        <span>Copyright © 2023 Avocall</span>
+        <span>Powered by WK-Intelligence</span>
       </div>
     </div>
   );
