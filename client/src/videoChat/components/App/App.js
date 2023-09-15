@@ -317,7 +317,7 @@ export default function App() {
           // showIcon
           className="alert"
         />
-        {callVideo()}
+        {moment(theConsultation.date).isSame(moment().today) ? callVideo() : ''}
       </div>
     </div>
   );
