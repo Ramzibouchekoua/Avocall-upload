@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Input } from 'antd';
-import Datatable from './Datatable';
+import Datatable from './Datatable/index';
 
 function UserSearch() {
   const { Search } = Input;
@@ -59,7 +59,7 @@ function UserSearch() {
         <span className="bold">User Email</span>
         <span className="bold">Status </span>
       </div>
-      <Datatable data={search(data)} />
+      {/* <Datatable data={search(data)} /> */}
     </div>
   );
 }
