@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Input } from 'antd';
-import Datatable from './Datatable';
-import Users from './Datatable/users';
+import Datatable from './AllUsers';
+import Users from './users';
 
 function AllUsers() {
   const { Search } = Input;

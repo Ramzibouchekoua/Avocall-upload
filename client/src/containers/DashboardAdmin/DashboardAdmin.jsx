@@ -1,38 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import 'moment/locale/ar-tn';
-import Consultation from './allConsultations';
-import UserSearch from './UserSearch';
-import Wallet from './updateConsultation';
-import AllUsers from './AllUsers';
-import DataTable from './NewDataTable';
+import AllPayements from './AllPayments/allConsultations';
+import AllConsultations from './AllConsultations/UserSearch';
+import Wallet from './AddConsultations/updateConsultation';
+import AllUsers from './AllConsultations/UserSearch';
+import FileAttached from './FileAttached';
+import { Input, Space } from 'antd';
 
 const DashboardAdmin = () => {
-  useEffect(() => {
-    mappedData();
-  }, []);
+  const { SearchInp } = Input;
+  const [filtredData, setFiltredData] = useState('');
+  const [data, setData] = useState([]);
 
-  const Head = ['test1', 'test2', 'test3'];
-  const Body = [
-    { a: 'test1', b: 'test1', c: 'test1' },
-    { a: 'test2', b: 'test2', c: 'test2' },
-    { a: 'test1', b: 'test1', c: 'test1' },
-  ];
-  let Data = [];
-  const mappedData = () =>
-    Body.map((object) => {
-      // Use Object.keys() to get an array of keys for each object
-      const keys = Object.values(object);
+  function search(item) {
+    const colmuns = item[0] && Object.keys(item[0]);
+    return data.filter((item) =>
+      colmuns.some(() => item.createdAt.toString().toLowerCase().indexOf(data.toLowerCase()) > -1)
+    );
+  }
 
-      Data.push(keys);
-    });
   return (
     <div className="admin-dashboard">
-      {/* <UserSearch /> */}
-      <Consultation />
+      <AllConsultations />
+      <AllPayements />
       <AllUsers />
       <Wallet />
-      <DataTable tableHead={Head} tableBody={Data} />
-      {console.log(Data)}
+      <FileAttached />
     </div>
   );
 };

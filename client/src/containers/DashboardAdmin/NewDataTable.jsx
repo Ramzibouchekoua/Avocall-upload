@@ -2,8 +2,15 @@ import React, { useEffect, useState } from 'react';
 
 function NewDataTable({ tableHead, tableBody }) {
   const [first, setfirst] = useState([]);
+
   useEffect(() => {
-    setfirst(tableBody);
+    let Data = [];
+    tableBody?.map((object) => {
+      const keys = Object.values(object);
+
+      Data.push(keys);
+    });
+    setfirst(Data);
   }, [tableBody]);
 
   return (
@@ -15,7 +22,7 @@ function NewDataTable({ tableHead, tableBody }) {
         <table>
           <thead>
             <tr>
-              {tableHead.map((item) => (
+              {tableHead?.map((item) => (
                 <th key={item}>{item}</th>
               ))}
             </tr>

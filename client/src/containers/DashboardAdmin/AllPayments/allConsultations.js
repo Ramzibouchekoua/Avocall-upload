@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'moment/locale/ar-tn';
-import Posts from './Consultation';
+import Posts from '.';
 import { Input, Space } from 'antd';
 
 const Consultation = () => {

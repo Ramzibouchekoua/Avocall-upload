@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import 'moment/locale/ar-tn';
-import Posts from './Consultation';
+import Posts from '../AllPayments';
 
 const Consultation = () => {
   const [email, setEmail] = useState('');
