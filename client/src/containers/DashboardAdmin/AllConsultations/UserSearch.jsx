@@ -53,7 +53,9 @@ function UserSearch() {
     <div className="alluser">
       <span className="title">All Consultations</span>
       <Search placeholder="User search" type="text" value={q} onChange={(e) => setQ(e.target.value)} enterButton />
-      <button onClick={toggleSortOrder}>XX</button>{' '}
+      <button onClick={toggleSortOrder} className="sort-button">
+        {ascending ? 'A' : 'D'}
+      </button>{' '}
       <div className="table">
         <span className="bold email">User Email</span>
         <span className="bold">Title</span>

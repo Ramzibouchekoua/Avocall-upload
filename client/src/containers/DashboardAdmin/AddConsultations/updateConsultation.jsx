@@ -56,7 +56,6 @@ const Consultation = () => {
         <button onClick={handleSubmit}>Add Consultation</button>
       </form>
       <Modal title="Add Consultation " open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        {console.log(user)}
         {Object.keys(user).length === 0 ? (
           <b>Error</b>
         ) : (

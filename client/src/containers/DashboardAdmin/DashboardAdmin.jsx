@@ -55,7 +55,7 @@ const DashboardAdmin = () => {
         </button>
       </div>
       <MenuDashboard />
-      <FileAttached />
+      {/* <FileAttached /> */}
     </div>
   );
 };
