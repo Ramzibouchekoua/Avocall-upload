@@ -5,7 +5,9 @@ import Datatable from './index';
 function UserSearch() {
   const { Search } = Input;
   const [data, setData] = useState([]);
+  const [ascending, setAscending] = useState(true);
   const [q, setQ] = useState('');
+
   useEffect(() => {
     fetch(process.env.REACT_APP_API_URL + '/api/user/all', {
       headers: {
@@ -43,12 +45,16 @@ function UserSearch() {
       return;
     }
   }
+  const toggleSortOrder = () => {
+    setAscending(!ascending);
+  };
   return (
     <div className="alluser">
       <span className="title">All Consultations</span>
-
       <Search placeholder="User search" type="text" value={q} onChange={(e) => setQ(e.target.value)} enterButton />
+      <button onClick={toggleSortOrder}>XX</button>{' '}
       <div className="table">
+        <span className="bold email">User Email</span>
         <span className="bold">Title</span>
         <span className="bold">Created</span>
         <span className="bold">Date </span>
@@ -56,10 +62,9 @@ function UserSearch() {
         <span className="bold">Field </span>
         <span className="bold">Type </span>
         <span className="bold">Updated at </span>
-        <span className="bold">User Email</span>
         <span className="bold">Status </span>
       </div>
-      <Datatable data={search(data)} />
+      <Datatable data={search(data)} setAscending={setAscending} ascending={ascending} setData={setData} />
     </div>
   );
 }

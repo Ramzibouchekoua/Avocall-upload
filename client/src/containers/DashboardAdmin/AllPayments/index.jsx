@@ -7,7 +7,6 @@ export default function Datatable({ data }) {
       {data.map((item) => (
         <div key={item.id} className="user">
           <span className="bold">{item.fileName}</span>
-          {item.originalName}
           <span className="bold"> {moment(new Date(item.createdAt)).format('YYYY-MM-DD')} </span>
         </div>
       ))}

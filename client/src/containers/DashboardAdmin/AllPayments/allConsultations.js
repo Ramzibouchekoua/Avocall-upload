@@ -32,7 +32,7 @@ const Consultation = () => {
         <span className="bold">File name</span>
         <span className="bold">Date</span>
       </div>
-      <Posts data={search(data)} />
+      <Posts data={search(data)} setData={setData} />
     </div>
   );
 };
