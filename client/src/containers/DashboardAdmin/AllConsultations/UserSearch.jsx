@@ -48,6 +48,7 @@ function UserSearch() {
   const toggleSortOrder = () => {
     setAscending(!ascending);
   };
+
   return (
     <div className="alluser">
       <span className="title">All Consultations</span>
@@ -64,7 +65,11 @@ function UserSearch() {
         <span className="bold">Updated at </span>
         <span className="bold">Status </span>
       </div>
-      <Datatable data={search(data)} setAscending={setAscending} ascending={ascending} setData={setData} />
+      {data.length < 1 ? (
+        <p className="alert-datatable">No Data</p>
+      ) : (
+        <Datatable data={search(data)} setAscending={setAscending} ascending={ascending} setData={setData} />
+      )}
     </div>
   );
 }

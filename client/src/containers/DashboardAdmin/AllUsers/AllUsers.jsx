@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Input } from 'antd';
 import Datatable from './AllUsers';
 import Users from './users';
+import axios from 'axios';
 
 function AllUsers() {
   const { Search } = Input;
@@ -10,19 +11,24 @@ function AllUsers() {
   const [ascending, setAscending] = useState(true);
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_API_URL + '/api/user/all', {
-      headers: {
-        'x-auth-token': localStorage.getItem('auth-token'),
-      },
-    })
-      .then((response) => response.json())
-      .then((res) => {
-        setData(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    fetchData();
   }, []);
+  function fetchData() {
+    const apiUrl = process.env.REACT_APP_API_URL + '/api/user/all';
+
+    axios
+      .get(apiUrl, {
+        headers: {
+          'x-auth-token': localStorage.getItem('auth-token'),
+        },
+      })
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
   function search(item) {
     if (item[0]) {
       const colmuns = item[0] && Object.keys(item[0]);
@@ -33,14 +39,11 @@ function AllUsers() {
       return '';
     }
   }
-  const toggleSortOrder = () => {
-    setAscending(!ascending);
-  };
+
   return (
     <div className="alluser">
       <span className="title">All Users</span>
       <Search placeholder="Email" type="text" value={q} onChange={(e) => setQ(e.target.value)} enterButton />
-      <button onClick={toggleSortOrder}>XX</button>{' '}
       <div className="table">
         <span className="bold">Name</span>
         <span className="bold">Created</span>
