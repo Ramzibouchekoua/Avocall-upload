@@ -13,7 +13,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
 import 'moment/locale/ar-tn';
-import { Alert } from 'antd';
+import { Alert, Spin } from 'antd';
 
 const STATE_IDLE = 'STATE_IDLE';
 const STATE_CREATING = 'STATE_CREATING';
@@ -27,10 +27,9 @@ export default function App() {
   const [roomUrl, setRoomUrl] = useState(null);
   const [callObject, setCallObject] = useState(null);
 
-  const [theConsultation, setTheConsultation] = useState({});
+  const [theConsultation, setTheConsultation] = useState(false);
   const { id } = useParams();
   const chatroomId = id;
-  // console.log('now', moment('2010-10-20').isBefore(moment().today));
   useEffect(() => {
     axios
       .get(process.env.REACT_APP_API_URL + `/api/user/consultation/${chatroomId}`, {
@@ -245,80 +244,78 @@ export default function App() {
     );
   return (
     <div className="video-chat">
-      <div className="Table">
-        <table className="az">
-          <tbody>
-            <tr>
-              <th>إستشارة كتابيّة</th>
-            </tr>
-            <tr>
-              <td>{theConsultation.field}</td>
-            </tr>
-            <tr>
-              <td>{theConsultation.title}</td>
-            </tr>
-          </tbody>
+      {theConsultation ? (
+        <>
+          <div className="Table">
+            <table className="az">
+              <tbody>
+                <tr>
+                  <th>إستشارة كتابيّة</th>
+                </tr>
+                <tr>
+                  <td>{theConsultation.field}</td>
+                </tr>
+                <tr>
+                  <td>{theConsultation.title}</td>
+                </tr>
+              </tbody>
 
-          <tbody>
-            <tr>
-              <th> التاريخ</th>
-            </tr>
-            <tr>
-              <td>{moment(theConsultation.date).format('LLLL')}</td>
-            </tr>
-          </tbody>
+              <tbody>
+                <tr>
+                  <th> التاريخ</th>
+                </tr>
+                <tr>
+                  <td>{moment(theConsultation.date).format('LLLL')}</td>
+                </tr>
+              </tbody>
 
-          <tbody>
-            <tr>
-              <th> الحالة</th>
-            </tr>
-            <tr>
-              <td> {theConsultation.isClosed || 'مفتوحة'}</td>
-            </tr>
-          </tbody>
-          <tbody>
-            <tr>
-              <th>تفاصيل الاستشارة</th>
-            </tr>
-            <tr>
-              <td>{theConsultation.description}</td>
-            </tr>
-          </tbody>
-          {/* <tbody>
-            <tr>
-              <div className="consultant">
-                <img src={User} alt="Consultant" />
-                <div>
-                  <th> المستشار القانوني</th>
-                  <tr> ابراهيم رمضان</tr>
-                </div>
-              </div>
-            </tr>
-          </tbody> */}
-        </table>
-        <button className="button-blue">أغلق الاستشارة</button>
-        <button className="button-blue">تعديل الاستشارة</button>
-        <button className="Connexion ">مشكلة في الاستشارة ؟</button>
-      </div>
-      <div className="redirection">
-        <Alert
-          message={
-            <span className="title">
-              لقد تم حجز المكالمة الالكترونية بنجاح بتاريخ {moment(theConsultation.date).format('LLLL')}
-            </span>
-          }
-          description={
-            <span className="text">
-              سيتصل بك مستشارنا القانوني الكترونيا للاجابة على استفساراتك القانونية. لذا نلتمس منكم مراعات الموعد الالكتروني
-              و الحرص على تواجدكم بالموقع بالوقت المحدد
-            </span>
-          }
-          type={moment(theConsultation.date).isSame(moment().today) ? 'success' : 'error'}
-          // showIcon
-          className="alert"
-        />
-        {moment(theConsultation.date).isSame(moment().today) ? '' : callVideo()}
-      </div>
+
+              <tbody>
+                <tr>
+                  <th> الحالة</th>
+                </tr>
+                <tr>
+                  <td> {theConsultation.isClosed || 'مفتوحة'}</td>
+                </tr>
+              </tbody>
+              <tbody>
+                <tr>
+                  <th>تفاصيل الاستشارة</th>
+                </tr>
+                <tr>
+                  <td>{theConsultation.description}</td>
+                </tr>
+              </tbody>
+            </table>
+            <button className="button-blue">أغلق الاستشارة</button>
+            <button className="button-blue">تعديل الاستشارة</button>
+            <button className="Connexion ">مشكلة في الاستشارة ؟</button>
+          </div>
+          <div className="redirection">
+            <Alert
+              message={
+                <span className="title">
+                  لقد تم حجز المكالمة الالكترونية بنجاح بتاريخ {moment(theConsultation.date).format('LLLL')}
+                </span>
+              }
+              description={
+                <span className="text">
+                  سيتصل بك مستشارنا القانوني الكترونيا للاجابة على استفساراتك القانونية. لذا نلتمس منكم مراعات الموعد
+                  الالكتروني و الحرص على تواجدكم بالموقع بالوقت المحدد
+                </span>
+              }
+              type={moment(theConsultation.date).isSame(moment().today) ? 'success' : 'error'}
+              // showIcon
+              className="alert"
+            />
+            {console.log(moment())}
+            {moment(theConsultation.date).isSame(moment().today) ? callVideo() : ''}
+          </div>
+        </>
+      ) : (
+        <Spin tip="جاري..." />
+      )}
+
     </div>
   );
 }
