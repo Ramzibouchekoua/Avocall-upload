@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Input, Button } from 'antd';
+import { Input, Button, Modal } from 'antd';
 import { UserOutlined, FileDoneOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import 'moment/locale/ar-tn';
-import Posts from './Consultation';
+import Posts from '../AllPayments';
 
 const Consultation = () => {
   const [email, setEmail] = useState('');
   const [consultation, setConsultation] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [user, setuser] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,10 +26,22 @@ const Consultation = () => {
         { email: email, consultationNumber: consultation },
         config
       )
-      .then((res) => console.log(res))
-      .catch((err) => console.error(err));
+      .then((res) => setuser(res.data.user))
+      .then(setIsModalOpen(true))
+      .catch((err) => alert(err));
   };
 
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   return (
     <div className="alluser">
       <span className="title">Add user consultation</span>
@@ -41,6 +55,18 @@ const Consultation = () => {
         />
         <button onClick={handleSubmit}>Add Consultation</button>
       </form>
+      <Modal title="Add Consultation " open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+        {Object.keys(user).length === 0 ? (
+          <b>Error</b>
+        ) : (
+          <>
+            <b>Success</b>
+            <p>Name: {user.name}</p>
+            <p>Email:{user.email} </p>
+            <p>Wallet: {user.wallet}</p>
+          </>
+        )}
+      </Modal>
     </div>
   );
 };

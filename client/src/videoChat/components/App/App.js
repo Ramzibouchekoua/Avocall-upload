@@ -269,6 +269,7 @@ export default function App() {
                 </tr>
               </tbody>
 
+
               <tbody>
                 <tr>
                   <th> الحالة</th>
@@ -314,6 +315,7 @@ export default function App() {
       ) : (
         <Spin tip="جاري..." />
       )}
+
     </div>
   );
 }
