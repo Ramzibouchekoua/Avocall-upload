@@ -43,11 +43,10 @@ typings/
 
 # Optional npm cache directory
 .npm
-.env
 # Optional eslint cache
 .eslintcache
 client/.env
-.env
+*.env
 # Optional REPL history
 .node_repl_history
 
