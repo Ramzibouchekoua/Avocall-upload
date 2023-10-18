@@ -46,3 +46,13 @@ body {
 .ant-modal-close-x {
   display: none;
 }
+.disabled-button {
+  width: 200px;
+  height: 47.15px;
+  background-color: #a1a1a1;
+  border: 1px #252525 solid;
+  color: $light;
+  border-radius: 8px;
+  margin-top: 10%;
+  cursor: not-allowed !important;
+}
