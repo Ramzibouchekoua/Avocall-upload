@@ -49,6 +49,7 @@ function AllUsers() {
         <span className="bold">Created</span>
         <span className="bold">Email</span>
         <span className="bold">Role </span>
+        <span className="bold">Phone </span>
         <span className="bold">Wallet </span>
         <span className="bold">Verified </span>
       </div>

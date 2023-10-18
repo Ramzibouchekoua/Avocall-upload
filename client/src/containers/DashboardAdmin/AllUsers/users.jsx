@@ -13,6 +13,7 @@ function Users({ data, ascending, setData, setAscending }) {
               <span className="bold">{item?.createdAt ? moment(new Date(item?.createdAt)).format('YYYY-MM-DD ') : ''}</span>
               <span className="bold">{item?.email}</span>
               <span className="bold">{item?.role}</span>
+              <span className="bold">{item.phone ? item?.phone : 'N/A'}</span>
               <span className="bold">{item?.wallet}</span>
               <span className="bold">{item?.status?.isVerified ? <CloseCircleOutlined /> : <CheckCircleOutlined />}</span>
             </div>
