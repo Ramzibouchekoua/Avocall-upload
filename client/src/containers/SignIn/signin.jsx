@@ -51,11 +51,10 @@ const SignIn = () => {
       loginRes.data.user.role === 'USER' ? history.push('/dashboard') : history.push('/dashboardPro');
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
-      console.log("Google Sign In was't successful : ", err);
     }
   };
 
-  const googleError = () => console.log('Google Sign In was unsuccessful. Try again later');
+  const googleError = () => alert('Google Sign In was unsuccessful. Try again later');
 
   return (
     <div className="login">

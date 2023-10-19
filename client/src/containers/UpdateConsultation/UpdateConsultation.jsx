@@ -32,9 +32,7 @@ const WrittenAdvice = () => {
         });
         setTheConsultation(res.data[0]);
         setIsLoading(false);
-      } catch {
-        console.log("couldn't get data");
-      }
+      } catch {}
     };
     getData();
     setIsChecked(theConsultation.type);
@@ -42,7 +40,6 @@ const WrittenAdvice = () => {
   useEffect(() => {
     theConsultation && setIsChecked(theConsultation.type);
   }, [theConsultation]);
-  // console.log(history.go("https://call-object-react.netlify.app/?roomUrl=https%3A%2F%2Fdailyphil.daily.co%2FGMGj6dPwbXaycZhblXjb"))
 
   const submitRequest = async (values) => {
     const formData = new FormData();

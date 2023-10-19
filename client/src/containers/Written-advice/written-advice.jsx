@@ -19,8 +19,6 @@ const WrittenAdvice = () => {
     setSelectedFile(event.target.files);
   };
 
-  // console.log(history.go("https://call-object-react.netlify.app/?roomUrl=https%3A%2F%2Fdailyphil.daily.co%2FGMGj6dPwbXaycZhblXjb"))
-
   const submitRequest = async (values) => {
     const formData = new FormData();
     selectedFile && Object.values(selectedFile).map((e) => formData.append('file', e, e.name));
@@ -50,7 +48,6 @@ const WrittenAdvice = () => {
         }
       }
       setFileIds((state) => {
-        console.log(state);
         return state;
       });
       setActive(false);
@@ -74,7 +71,6 @@ const WrittenAdvice = () => {
       setActive(true);
 
       message.warning('ليس لديك إستشارات');
-      console.log('err:', err);
       history.push('/checkout');
     }
   };

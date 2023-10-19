@@ -8,7 +8,7 @@ import ErrorNotice from '../../components/ErrorNotice';
 import moment from 'moment';
 import { GoogleLogin } from 'react-google-login';
 
-const clientId = '592293472212-psaab73gie2sf6c40r2i9qang27ts35t.apps.googleusercontent.com';
+// const clientId = '592293472212-psaab73gie2sf6c40r2i9qang27ts35t.apps.googleusercontent.com';
 
 const Signup = () => {
   const [form] = Form.useForm();
@@ -51,9 +51,8 @@ const Signup = () => {
       loginRes.data.user.role === 'USER' ? history.push('/dashboard') : history.push('/dashboardPro');
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
-      console.log('Google Sign In was not successful', err.response.status == 500);
 
-      if (err.response.status == 500) {
+      if (err.response.status === 500) {
         setError(undefined);
         const loginRes = await axios.post(process.env.REACT_APP_API_URL + '/api/auth/googleLogin', {
           ...result,
@@ -67,7 +66,7 @@ const Signup = () => {
       }
     }
   };
-  const googleError = () => console.log('Google Sign In was unsuccessful. Try again later');
+  const googleError = () => alert('Google Sign In was unsuccessful. Try again later');
   const onFinish = async (values) => {
     try {
       setError(undefined);

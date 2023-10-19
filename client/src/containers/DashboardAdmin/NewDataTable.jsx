@@ -15,7 +15,6 @@ function NewDataTable({ tableHead, tableBody }) {
 
   return (
     <div className="datatable">
-      {console.log('first', first)}
       {first.length < 1 ? (
         <p className="alert-datatable">No Data</p>
       ) : (

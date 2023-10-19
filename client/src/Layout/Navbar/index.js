@@ -26,7 +26,6 @@ const Navbar = () => {
       user: undefined,
     });
     localStorage.clear();
-    console.log('clear ?');
     history.push('/sign-in');
   };
   return width < breakpoint ? (

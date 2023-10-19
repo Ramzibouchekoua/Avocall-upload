@@ -49,7 +49,6 @@ export default function App() {
       .createRoom()
       .then((room) => room.url)
       .catch((error) => {
-        console.log('Error creating room', error);
         setRoomUrl(null);
         setAppState(STATE_IDLE);
       });
@@ -180,7 +179,6 @@ export default function App() {
     function handleAppMessage(event) {
       if (event) {
         logDailyEvent(event);
-        console.log(`received app message from ${event.fromId}: `, event.data);
       }
     }
 
@@ -307,7 +305,6 @@ export default function App() {
               // showIcon
               className="alert"
             />
-            {console.log(moment())}
             {moment(theConsultation.date).isSame(moment().today) ? callVideo() : ''}
           </div>
         </>

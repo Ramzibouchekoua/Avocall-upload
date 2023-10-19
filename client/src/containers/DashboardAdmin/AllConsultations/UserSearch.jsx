@@ -15,12 +15,8 @@ function UserSearch() {
       },
     })
       .then((response) => response.json())
-      .then((res) => {
-        console.log('Users', res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .then((res) => {})
+      .catch((err) => {});
     fetch(process.env.REACT_APP_API_URL + '/api/admin/getAllConsultations?page=1&limit=10000', {
       headers: {
         'x-auth-token': localStorage.getItem('auth-token'),
@@ -29,11 +25,8 @@ function UserSearch() {
       .then((response) => response.json())
       .then((res) => {
         setData(res.consultations);
-        // console.log(res);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
   function search(item) {
     if (item[0]) {

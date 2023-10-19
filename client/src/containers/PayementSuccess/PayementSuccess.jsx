@@ -32,9 +32,7 @@ const PayementSuccess = () => {
             headers: { 'x-auth-token': token },
           }
         );
-      } catch (err) {
-        console.log('error in addPack', err);
-      }
+      } catch (err) {}
     };
     addPack();
   }, []);
