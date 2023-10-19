@@ -1,20 +1,31 @@
 // COLORS
-$primary-color:#202F84;
-$warning-color:#D0BA72;
-$success-color:#83BF85;
-$secondary-color:#FFB34B;
-$danger-color:#C44641;
-$text-color:#544837;
-$title-color:#7C7C7C;
-$second-title-color:#2F281E;
-$light:#FFFFFF;
-$grey:#F6F6F6;
+$primary-color: #202f84;
+$warning-color: #d0ba72;
+$success-color: #83bf85;
+$secondary-color: #ffb34b;
+$danger-color: #c44641;
+$text-color: #544837;
+$title-color: #7c7c7c;
+$second-title-color: #2f281e;
+$light: #ffffff;
+$grey: #f6f6f6;
 
 // FONTS
 
 @font-face {
-    font-family: 'Beauty';
-    src: url(./Almarai/Almarai-Regular.ttf) format("truetype");
- }
- $font-style: 'Beauty', sans-serif;
+  font-family: 'Beauty';
+  src: url(./Almarai/Almarai-Regular.ttf) format('truetype');
+}
+$font-style: 'Beauty', sans-serif;
 
+.alert-datatable {
+  font-size: 24px;
+  color: $danger-color;
+  border-radius: 4px;
+  border: 2px $danger-color solid;
+  font-weight: 700;
+  width: 250px;
+  height: 50px;
+  text-align: center;
+  background-color: $light;
+}

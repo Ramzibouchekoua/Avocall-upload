@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Form, message, Button,  DatePicker } from 'antd';
+import { Form, message, Button, DatePicker, Spin } from 'antd';
 import { List, Text, TextArea } from '../../components/Inputs';
-import {  VideoCameraOutlined, FormOutlined } from '@ant-design/icons';
+import { VideoCameraOutlined, FormOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import { InlineWidget } from 'react-calendly';
 import axios from 'axios';
@@ -12,17 +12,18 @@ const WrittenAdvice = () => {
   const [fileIds, setFileIds] = useState([]);
   const [isChecked, setIsChecked] = useState('');
   const [dateString, setDateString] = useState('');
+  const [active, setActive] = useState(true);
   const history = useHistory();
 
-  const onFileChange = event => {
+  const onFileChange = (event) => {
     setSelectedFile(event.target.files);
   };
 
   // console.log(history.go("https://call-object-react.netlify.app/?roomUrl=https%3A%2F%2Fdailyphil.daily.co%2FGMGj6dPwbXaycZhblXjb"))
 
-  const submitRequest = async values => {
+  const submitRequest = async (values) => {
     const formData = new FormData();
-    selectedFile && Object.values(selectedFile).map(e => formData.append('file', e, e.name));
+    selectedFile && Object.values(selectedFile).map((e) => formData.append('file', e, e.name));
     let filename = '';
     try {
       let token = localStorage.getItem('auth-token');
@@ -36,20 +37,23 @@ const WrittenAdvice = () => {
       }
       if (!_.isEmpty(selectedFile)) {
         const upFile = await axios.post(process.env.REACT_APP_API_URL + '/api/file/upload', formData, {
-          headers: { 'x-auth-token': token }
+          headers: { 'x-auth-token': token },
         });
-        filename = upFile.data.data.fileName
+        filename = upFile.data.data.fileName;
         try {
           setFileIds(fileIds.concat(upFile.data.data._id));
           message.success('uploaded');
+          setActive(true);
         } catch (err) {
           message.warning('error');
+          setActive(true);
         }
       }
-      setFileIds(state => {
+      setFileIds((state) => {
         console.log(state);
         return state;
       });
+      setActive(false);
       const newCons = await axios.post(
         process.env.REACT_APP_API_URL + '/api/user/newConsultation',
         {
@@ -57,16 +61,18 @@ const WrittenAdvice = () => {
           files: values.files ? values.files.concat(fileIds) : [],
           type: isChecked,
           date: dateString,
-          filename
+          filename,
         },
         {
-          headers: { 'x-auth-token': token }
+          headers: { 'x-auth-token': token },
         }
       );
-      console.log('consultation', newCons);
       const consultationId = newCons.data.consultation._id;
       isChecked === 'video' ? history.push(`/vid-page/${consultationId}`) : history.push(`/text-chat/${consultationId}`);
+      setActive(true);
     } catch (err) {
+      setActive(true);
+
       message.warning('ليس لديك إستشارات');
       console.log('err:', err);
       history.push('/checkout');
@@ -81,17 +87,17 @@ const WrittenAdvice = () => {
         hideEventTypeDetails: false,
         hideLandingPageDetails: false,
         primaryColor: '202F84',
-        textColor: '2F281E'
+        textColor: '2F281E',
       }}
       styles={{
-        height: '1000px'
+        height: '1000px',
       }}
       utm={{
         utmCampaign: 'Spring Sale 2019',
         utmContent: 'Shoe and Shirts',
         utmMedium: 'Ad',
         utmSource: 'Facebook',
-        utmTerm: 'Spring'
+        utmTerm: 'Spring',
       }}
     />
   );
@@ -115,12 +121,11 @@ const WrittenAdvice = () => {
               'نزاعات الجوار ',
               'قانون الأسرة',
               'قانون الأكرية',
-              'حادث'
+              'حادث',
             ]}
           />
-
           {/* <Upload {...props}> */}
-          <input type="file" name="file" onChange={onFileChange} multiple />          {/* </Upload> */}
+          <input type="file" name="file" onChange={onFileChange} multiple /> {/* </Upload> */}
         </div>
         <div className="section-left">
           <Form.Item label="تاريخ الاستشارة*" rules={[{ required: true }]}>
@@ -128,7 +133,7 @@ const WrittenAdvice = () => {
               showTime
               onChange={(v, d) => setDateString(d)}
               bordered={false}
-              disabledDate={current => current && current < moment().endOf('day')}
+              disabledDate={(current) => current && current < moment().endOf('day')}
               placeholder=""
             />
           </Form.Item>
@@ -137,7 +142,7 @@ const WrittenAdvice = () => {
       </div>
 
       <Form.Item>
-        <Button htmlType="submit" className="submit-button">
+        <Button htmlType="submit" className={active ? 'submit-button ' : 'disabled'}>
           ارسل طلب الاستشارة
         </Button>
       </Form.Item>
@@ -148,11 +153,11 @@ const WrittenAdvice = () => {
       <div className="head">
         <div className="title"> استشارة جديدة</div>
         <div className="pricing">
-          <div className={isChecked === 'text' ? 'card-type checked' : 'card-type'} onClick={e => setIsChecked('text')}>
+          <div className={isChecked === 'text' ? 'card-type checked' : 'card-type'} onClick={(e) => setIsChecked('text')}>
             <FormOutlined />
             <span className="consultationtype">إستشارة كتابيّة</span>
           </div>
-          <div className={isChecked === 'video' ? 'card-type checked' : 'card-type'} onClick={e => setIsChecked('video')}>
+          <div className={isChecked === 'video' ? 'card-type checked' : 'card-type'} onClick={(e) => setIsChecked('video')}>
             <VideoCameraOutlined />
             <span className="consultationtype">إستشارة بالفيديو</span>
           </div>
@@ -165,8 +170,7 @@ const WrittenAdvice = () => {
             className={isChecked === 'call' ? 'card-type checked' : 'card-type'}
           /> */}
         </div>
-        {DescForm()}
-        {/* {Book()} */}
+        {active ? DescForm() : <Spin tip="جاري..." />}
       </div>
     </div>
   );

@@ -14,19 +14,22 @@ const packs = [
     price: '29TND',
     nbr: 0,
     amount: 29000,
+    oldprice: '50TND',
   },
   {
     id: 2,
-    title: 'عرض : 3 إستشارات',
+    title: ' 3 إستشارات',
     price: '69TND',
     nbr: 0,
     amount: 69000,
+    oldprice: '90TND',
   },
 ];
 
 const Payement = () => {
   const [isChecked, setIsChecked] = useState({});
   const [selectedFile, setSelectedFile] = useState(null);
+  const [active, setActive] = useState(true);
   const history = useHistory();
 
   const onFileChange = (event) => {
@@ -46,6 +49,7 @@ const Payement = () => {
     }
     if (!isEmpty(isChecked) && !isEmpty(selectedFile)) {
       try {
+        setActive(false);
         let token = localStorage.getItem('auth-token');
         if (token === null) {
           localStorage.setItem('auth-token', '');
@@ -71,8 +75,10 @@ const Payement = () => {
         );
         message.success('سيضاف لكم الرصيد في اجل اقصاه 48 ساعة شكرا');
         //history.push('/OrderConfirmation');
+        setActive(true);
       } catch (err) {
-        console.log('error in buypack', err);
+        alert('error in buypack', err);
+        setActive(true);
         history.push('/dashboard');
       }
     }
@@ -92,6 +98,7 @@ const Payement = () => {
             >
               <CheckOutlined />
               <span className="title">{e.title}</span>
+              <span className="old-price">{e.oldprice}</span>
               <span className="price">{e.price}</span>
             </div>
           ))}
@@ -124,7 +131,7 @@ const Payement = () => {
         </div>
         <input type="file" name="file" onChange={onFileChange} multiple />
 
-        <button className="pay" onClick={onClick}>
+        <button className={active ? 'pay' : 'disabled-button'} onClick={onClick}>
           إرسال الطلب
         </button>
       </div>

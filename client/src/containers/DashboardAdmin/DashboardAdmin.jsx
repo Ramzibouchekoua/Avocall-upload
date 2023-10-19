@@ -1,17 +1,61 @@
 import React, { useState, useEffect } from 'react';
 import 'moment/locale/ar-tn';
-import Consultation from './allConsultations';
-import UserSearch from './UserSearch';
-import Wallet from './updateConsultation';
-import AllUsers from './AllUsers';
+import AllPayements from './AllPayments/allConsultations';
+import AllConsultations from './AllConsultations/UserSearch';
+import Wallet from './AddConsultations/updateConsultation.jsx';
+import AllUsers from './AllUsers/AllUsers';
+import FileAttached from './FileAttached';
+import { Input, Space } from 'antd';
 
 const DashboardAdmin = () => {
+  const { SearchInp } = Input;
+  const [filtredData, setFiltredData] = useState('');
+  const [data, setData] = useState([]);
+  const [value, setValue] = useState('All Consultations');
+
+  function search(item) {
+    const colmuns = item[0] && Object.keys(item[0]);
+    return data.filter((item) =>
+      colmuns.some(() => item.createdAt.toString().toLowerCase().indexOf(data.toLowerCase()) > -1)
+    );
+  }
+
+  const MenuDashboard = () => {
+    switch (value) {
+      case 'All Payments':
+        return <AllPayements />;
+        break;
+      case 'All Users':
+        return <AllUsers />;
+        break;
+      case 'Add Consultation':
+        return <Wallet />;
+        break;
+      default:
+        return <AllConsultations />;
+        break;
+    }
+  };
   return (
     <div className="admin-dashboard">
-      <UserSearch />
-      <Consultation />
-      <AllUsers />
-      <Wallet />
+      <div className="menu-admin-dashboard">
+        <button className={value === 'All Consultations' ? 'selected' : ''} onClick={() => setValue('All Consultations')}>
+          {' '}
+          All Consultations
+        </button>
+        <button className={value === 'All Payments' ? 'selected' : ''} onClick={() => setValue('All Payments')}>
+          {' '}
+          All Payments
+        </button>
+        <button className={value === 'All Users' ? 'selected' : ''} onClick={() => setValue('All Users')}>
+          All Users{' '}
+        </button>
+        <button className={value === 'Add Consultation' ? 'selected' : ''} onClick={() => setValue('Add Consultation')}>
+          Add Consultations{' '}
+        </button>
+      </div>
+      <MenuDashboard />
+      {/* <FileAttached /> */}
     </div>
   );
 };

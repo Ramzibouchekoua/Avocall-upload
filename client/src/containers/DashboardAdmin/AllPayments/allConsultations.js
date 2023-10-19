@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import 'moment/locale/ar-tn';
-import Posts from './Consultation';
+import Posts from '.';
 import { Input, Space } from 'antd';
 
 const Consultation = () => {
@@ -32,7 +32,7 @@ const Consultation = () => {
         <span className="bold">File name</span>
         <span className="bold">Date</span>
       </div>
-      <Posts data={search(data)} />
+      <Posts data={search(data)} setData={setData} />
     </div>
   );
 };
