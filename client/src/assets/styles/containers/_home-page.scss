@@ -4,7 +4,7 @@
   align-items: center;
   position: relative;
   height: 80vh;
-  background-image: url("../../images/Bg-Section1.png");
+  background-image: url('../../images/Bg-Section1.png');
   background-repeat: no-repeat;
   background-size: cover;
   z-index: 0;
@@ -62,7 +62,7 @@
     }
   }
   .right {
-    .title{
+    .title {
       font-size: 32px;
       color: #202f84;
       font-weight: 700;
@@ -87,7 +87,7 @@
     .icon-container {
       background-color: $primary-color;
       .icon {
-        background: url("../../icons/messenger.png");
+        background: url('../../icons/messenger.png');
         background-repeat: no-repeat;
         background-size: cover;
         background-position: left;
@@ -97,7 +97,7 @@
   .left {
     background-color: rgba(32, 47, 132, 0.9);
     min-width: 675px;
-    .title{
+    .title {
       font-size: 32px;
       color: $light;
       font-weight: 700;
@@ -116,7 +116,7 @@
     .icon-container {
       background-color: $light;
       .icon {
-        background: url("../../icons/call.png");
+        background: url('../../icons/call.png');
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
@@ -133,7 +133,7 @@
   height: 100%;
   width: 100%;
   padding: 100px 0;
-  background-image: url("../../images/Bg-sec2.png");
+  background-image: url('../../images/Bg-sec2.png');
   background-position: center;
   background-repeat: no-repeat;
 
@@ -246,31 +246,42 @@
   }
   .desc {
     margin: 50px;
-    &_icon {
-      background-color: $primary-color;
-      padding: 5px;
-      border-radius: 19px;
-      width: 50px;
-      height: 50px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      margin: 15px;
-      text-align: center;
-    }
-    &_subtitle {
-      font-size: 16px;
-      color: $second-title-color;
-      width: 200px;
-      text-align: center;
-    }
-    &_text {
-      font-size: 22px;
-      color: $second-title-color;
-      text-align: center;
 
+    a {
+      text-decoration: none;
+      .desc_icon {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        img {
+          background-color: $primary-color;
+          padding: 20px;
+          border-radius: 4px;
+          width: 30px;
+          height: 30px;
+          display: flex;
+          margin: 15px;
+          box-sizing: content-box;
+        }
+        h3 {
+          font-size: 22px;
+          color: $second-title-color;
+          text-align: center;
+        }
+        h4 {
+          font-size: 16px;
+          color: $second-title-color;
+          width: 200px;
+          text-align: center;
+        }
+        &:hover {
+          cursor: pointer;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+          border-radius: 8px;
+        }
+      }
     }
+
     .ant-col {
       display: flex;
       flex-direction: column;
@@ -538,7 +549,7 @@
     margin: 25px 0;
     font-size: 24px;
   }
-  .form{
+  .form {
     width: 25%;
   }
   button {
@@ -561,7 +572,6 @@
       cursor: pointer;
     }
   }
- 
 }
 .section-eight {
   display: flex;
@@ -569,10 +579,10 @@
   justify-content: center;
   align-items: center;
   span {
-font-size: 22px;
-font-weight: 700;
-color: $second-title-color;
-margin-bottom: 50px;
+    font-size: 22px;
+    font-weight: 700;
+    color: $second-title-color;
+    margin-bottom: 50px;
   }
   button {
     font-size: 16px;
@@ -603,7 +613,7 @@ margin-bottom: 50px;
     align-items: center;
     position: relative;
     min-height: 750px;
-    background-image: url("../../images/Bg-Section1.png");
+    background-image: url('../../images/Bg-Section1.png');
     background-repeat: no-repeat;
     background-size: cover;
     z-index: 0;
@@ -669,7 +679,7 @@ margin-bottom: 50px;
       .icon-container {
         background-color: $primary-color;
         .icon {
-          background: url("../../icons/messenger.png");
+          background: url('../../icons/messenger.png');
           background-repeat: no-repeat;
           background-size: cover;
           background-position: left;
@@ -678,7 +688,7 @@ margin-bottom: 50px;
     }
     .left {
       background-color: rgba(32, 47, 132, 0.9);
-     
+
       min-width: 100%;
       .title,
       .desc {
@@ -694,7 +704,7 @@ margin-bottom: 50px;
       .icon-container {
         background-color: $light;
         .icon {
-          background: url("../../icons/call.png");
+          background: url('../../icons/call.png');
           background-repeat: no-repeat;
           background-size: cover;
           background-position: center;
@@ -709,7 +719,7 @@ margin-bottom: 50px;
     align-items: center;
     height: 100vh;
     padding: 20px 0;
-    background-image: url("../../images/Bg-sec2.png");
+    background-image: url('../../images/Bg-sec2.png');
     background-position: center;
     .title {
       font-size: 24px;
@@ -803,12 +813,11 @@ margin-bottom: 50px;
         color: $second-title-color;
         margin: 0px 0px 30px;
       }
-
     }
   }
   .section-four {
     display: flex;
-   margin-bottom: 50px;
+    margin-bottom: 50px;
     flex-direction: column;
     padding: 0px 0px;
     .title {
@@ -824,42 +833,13 @@ margin-bottom: 50px;
     }
     .desc {
       margin-bottom: 10%;
-      &_icon {
-        background-color: $primary-color;
-        padding: 25px;
-        border-radius: 19px;
-        width: 100px;
-        height: 100px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        
-        text-align: center;
-        
-      }
-      &_subtitle {
-        margin-top: 10px;
-        font-size: 16px;
-        color: $second-title-color;
-        width: 100%;
-        text-align: center;
-        font-weight: 300;
-      }
-      &_text {
-        margin-top: 15px;
-        font-size: 22px;
-        color: $second-title-color;
-        font-weight: 700;
-        text-align: center;
-      }
+
       .ant-row {
         display: flex;
         align-items: baseline;
         justify-content: center;
         .ant-col {
-       
-        width: 80%;
+          width: 80%;
         }
       }
     }
@@ -1034,42 +1014,42 @@ margin-bottom: 50px;
   }
   .section-seven {
     display: none;
-margin-bottom: 20%;
-height: 100%;
-.title {
-  font-size: 24px;
-  font-weight: bold;
-  color: #2f281e;
-}
-.desc {
-  width: 80%;
-  text-align: center;
-  margin: 25px 0;
-  font-size: 16px;
-}
-.form{
-  width: 80%;
-}
-button {
-  font-size: 16px;
-  width: 268px;
-  color: #fff;
-  font-weight: bold;
-  border: 1px solid #202f84;
-  border-radius: 4px;
-  height: 46px;
-  background-color: #202f84;
-  a {
-    color: $light;
-  }
-  &:hover {
-    color: #fff;
-    border: 1px solid #202f84;
-    border-radius: 4px;
-    background-color: #202f84;
-    cursor: pointer;
-  }
-}
+    margin-bottom: 20%;
+    height: 100%;
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #2f281e;
+    }
+    .desc {
+      width: 80%;
+      text-align: center;
+      margin: 25px 0;
+      font-size: 16px;
+    }
+    .form {
+      width: 80%;
+    }
+    button {
+      font-size: 16px;
+      width: 268px;
+      color: #fff;
+      font-weight: bold;
+      border: 1px solid #202f84;
+      border-radius: 4px;
+      height: 46px;
+      background-color: #202f84;
+      a {
+        color: $light;
+      }
+      &:hover {
+        color: #fff;
+        border: 1px solid #202f84;
+        border-radius: 4px;
+        background-color: #202f84;
+        cursor: pointer;
+      }
+    }
   }
   .section-eight {
     display: flex;
@@ -1077,7 +1057,6 @@ button {
     justify-content: center;
 
     span {
-
     }
   }
 }
@@ -1089,11 +1068,11 @@ button {
     align-items: center;
     position: relative;
     height: auto;
-    background-image: url("../../images/Bg-Section1.png");
+    background-image: url('../../images/Bg-Section1.png');
     background-repeat: no-repeat;
     background-size: cover;
     z-index: 0;
-  
+
     .bg {
       background-color: rgba($color: #fff, $alpha: 0.6);
       position: absolute;
@@ -1153,7 +1132,7 @@ button {
       .icon-container {
         background-color: $primary-color;
         .icon {
-          background: url("../../icons/messenger.png");
+          background: url('../../icons/messenger.png');
           background-repeat: no-repeat;
           background-size: cover;
           background-position: left;
@@ -1162,7 +1141,7 @@ button {
     }
     .left {
       background-color: rgba(32, 47, 132, 0.9);
-      
+
       min-width: 50%;
       .title,
       .desc {
@@ -1178,7 +1157,7 @@ button {
       .icon-container {
         background-color: $light;
         .icon {
-          background: url("../../icons/call.png");
+          background: url('../../icons/call.png');
           background-repeat: no-repeat;
           background-size: cover;
           background-position: center;
