@@ -7,6 +7,7 @@ import axios from 'axios';
 import io from 'socket.io-client';
 //PAGES
 import HomePage from './containers/HomePage';
+import ContactUs from './containers/ContactUs/contact';
 import Signup from './containers/SignUp';
 import SignupPro from './containers/SignUp/SignUpPro';
 import Signin from './containers/SignIn';
@@ -89,16 +90,12 @@ export default function App() {
       localStorage.setItem('auth-token', '');
       token = '';
     } else {
-
       const tokenRes = await axios.get(process.env.REACT_APP_API_URL + '/api/user/tokenIsValid', {
-
         headers: { 'x-auth-token': token },
       });
       try {
         if (tokenRes.data) {
-
           const userRes = await axios.get(process.env.REACT_APP_API_URL + '/api/user/', {
-
             headers: { 'x-auth-token': token },
           });
           setUserData({
@@ -140,6 +137,7 @@ export default function App() {
                   <PrivateAuth exact path="/sign-up" component={Signup} />
                   <PrivateAuth exact path="/sign-up-pro" component={SignupPro} />
                   <PrivateAuth exact path="/sign-in" component={Signin} />
+                  <PrivateAuth exact path="/contact" component={ContactUs} />
                   <Route exact path="/Wallet" component={Wallet} />
                   <Route exact path="/vid-page/:id" component={VidPage} />
                   <Route exact path="/text-chat/:id" render={() => <Textchat socket={socket} />} />
