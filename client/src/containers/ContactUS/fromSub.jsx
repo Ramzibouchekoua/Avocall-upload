@@ -7,7 +7,11 @@ const FormSub = () => {
   const [emailForm, setEmailForm] = useState('');
   const [phoneForm, setPhoneForm] = useState('');
   const [descriptionForm, setDescriptionForm] = useState('');
+  const [type, setType] = useState(false);
 
+  const typeForm = () => {
+    setType(!type);
+  };
   const handleNameChange = (e) => {
     setNameForm(e.target.value);
   };
@@ -60,12 +64,24 @@ const FormSub = () => {
         email: emailForm,
         phone: phoneForm,
         desc: descriptionForm,
+        type: type ? 'pro' : 'clarification',
       });
     } else displayNotification('error', 'خطأ', 'يرجى ملء جميع الفراغات في النموذج قبل الإرسال. شكرًا لك');
   };
 
   return (
     <Form>
+      <Form.Item>
+        {console.log('first', type)}
+        <div className="type-form">
+          <span className={type ? 'form-pro-active' : 'form-pro'} onClick={typeForm}>
+            استشارات للشركات
+          </span>{' '}
+          <span className={type ? 'form-user' : 'form-user-active'} onClick={typeForm}>
+            اتصل بنا
+          </span>
+        </div>
+      </Form.Item>
       <Form.Item label="الاسم" name="الاسم" rules={[{ required: true }]}>
         <Input value={nameForm} placeholder="الاسم" onChange={handleNameChange} onBlur={handleNameOnBlur} />
       </Form.Item>
@@ -79,9 +95,9 @@ const FormSub = () => {
         <Input.TextArea value={descriptionForm} placeholder="الوصف" onChange={handleDescriptionChange} />
       </Form.Item>
       <Form.Item>
-        <Button type="primary" htmlType="submit" onClick={submitForm}>
+        <button type="primary" htmlType="submit" onClick={submitForm} className="button-form-contact">
           ارسال
-        </Button>
+        </button>
       </Form.Item>
     </Form>
   );
