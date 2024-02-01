@@ -7,7 +7,7 @@ import axios from 'axios';
 import io from 'socket.io-client';
 //PAGES
 import HomePage from './containers/HomePage';
-import ContactUs from './containers/ContactUs/contact';
+import ContactUs from './containers/ContactUS/index';
 import Signup from './containers/SignUp';
 import SignupPro from './containers/SignUp/SignUpPro';
 import Signin from './containers/SignIn';
