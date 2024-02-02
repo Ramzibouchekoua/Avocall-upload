@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Input, Button } from 'antd';
 import displayNotification from '../../components/displayNotification';
+import Axios from 'axios';
 
 const FormSub = () => {
   const [nameForm, setNameForm] = useState('');
@@ -8,6 +9,8 @@ const FormSub = () => {
   const [phoneForm, setPhoneForm] = useState('');
   const [descriptionForm, setDescriptionForm] = useState('');
   const [type, setType] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [done, setDone] = useState(false);
 
   const typeForm = () => {
     setType(!type);
@@ -38,14 +41,11 @@ const FormSub = () => {
     setPhoneForm(e.target.value);
   };
   const handlePhoneOnBlur = () => {
-    // Regular expression for validating phone numbers (only digits allowed)
-    const phoneRegex = /^\+?\d{1,3}?[- .]?\(?\d{3}\)?[- .]?\d{3}[- .]?\d{4}$/;
-    // Check if the phone number contains only digits
-    const containsOnlyDigits = /^\d+$/.test(phoneForm);
-    // Return false if the phone number contains non-digit characters
-    // Return true if the phone number matches the regex pattern
-    if (!phoneRegex.test(phoneForm) || !containsOnlyDigits) {
-      displayNotification('error', 'خطأ', '00216 20 200 200 يرجى كتابة رقم الهاتف الصحيح');
+    // Regular expression for validating phone numbers (8 digits only or international format)
+    const phoneRegex = /^(\+\d{1,3}\s?)?\d{8}$/;
+    // Check if the phone number matches the regex pattern
+    if (!phoneRegex.test(phoneForm)) {
+      displayNotification('error', 'خطأ', '+216 يرجى كتابة رقم الهاتف المكون من 8 أرقام أو بتنسيق دولي');
       setPhoneForm('');
     }
   };
@@ -59,47 +59,74 @@ const FormSub = () => {
 
   const submitForm = () => {
     if (emailForm && nameForm && phoneForm && descriptionForm) {
-      console.log({
+      const dataObject = {
         name: nameForm,
         email: emailForm,
         phone: phoneForm,
-        desc: descriptionForm,
+        description: descriptionForm,
         type: type ? 'pro' : 'clarification',
-      });
+      };
+      setLoading(true);
+      postData(dataObject);
     } else displayNotification('error', 'خطأ', 'يرجى ملء جميع الفراغات في النموذج قبل الإرسال. شكرًا لك');
   };
-
+  const postData = async (data) => {
+    try {
+      // Make a POST request using Axios
+      await Axios.post(process.env.REACT_APP_API_URL + '/api/form/sendEmailForm', data);
+      // Handle response data
+      displayNotification('success', 'تم', ' شكرًا لك');
+      setLoading(false);
+      setDone(true);
+    } catch (error) {
+      // Handle errors
+      displayNotification('error', 'خطأ', 'حاول مرة أخرى. شكرًا لك');
+      setLoading(false);
+    }
+  };
   return (
-    <Form>
-      <Form.Item>
-        {console.log('first', type)}
-        <div className="type-form">
-          <span className={type ? 'form-pro-active' : 'form-pro'} onClick={typeForm}>
-            استشارات للشركات
-          </span>{' '}
-          <span className={type ? 'form-user' : 'form-user-active'} onClick={typeForm}>
-            اتصل بنا
-          </span>
-        </div>
-      </Form.Item>
-      <Form.Item label="الاسم" name="الاسم" rules={[{ required: true }]}>
-        <Input value={nameForm} placeholder="الاسم" onChange={handleNameChange} onBlur={handleNameOnBlur} />
-      </Form.Item>
-      <Form.Item label="بريد إلكتروني" name="بريد إلكتروني" rules={[{ required: true }]}>
-        <Input value={emailForm} placeholder="بريد إلكتروني" onChange={handleEmailChange} onBlur={handleEmailBlur} />
-      </Form.Item>
-      <Form.Item label="رقم الهاتف" name="رقم الهاتف" rules={[{ required: true }]}>
-        <Input value={phoneForm} placeholder="رقم الهاتف" onChange={handlePhoneChange} onBlur={handlePhoneOnBlur} />
-      </Form.Item>
-      <Form.Item label="الوصف" name="الوصف" rules={[{ required: true }]}>
-        <Input.TextArea value={descriptionForm} placeholder="الوصف" onChange={handleDescriptionChange} />
-      </Form.Item>
-      <Form.Item>
-        <button type="primary" htmlType="submit" onClick={submitForm} className="button-form-contact">
-          ارسال
-        </button>
-      </Form.Item>
-    </Form>
+    <>
+      {done ? (
+        <h1 className="success-message-form"> شكرا لتواصلك معنا سنعود إليك في أسرع وقت ممكن. </h1>
+      ) : (
+        <Form>
+          {' '}
+          <Form.Item>
+            {console.log('first', type)}
+            <div className="type-form">
+              <span className={type ? 'form-pro-active' : 'form-pro'} onClick={typeForm}>
+                استشارات للشركات
+              </span>{' '}
+              <span className={type ? 'form-user' : 'form-user-active'} onClick={typeForm}>
+                اتصل بنا
+              </span>
+            </div>
+          </Form.Item>
+          <Form.Item label="الاسم" name="الاسم" rules={[{ required: true }]}>
+            <Input value={nameForm} placeholder="الاسم" onChange={handleNameChange} onBlur={handleNameOnBlur} />
+          </Form.Item>
+          <Form.Item label="بريد إلكتروني" name="بريد إلكتروني" rules={[{ required: true }]}>
+            <Input value={emailForm} placeholder="بريد إلكتروني" onChange={handleEmailChange} onBlur={handleEmailBlur} />
+          </Form.Item>
+          <Form.Item label="رقم الهاتف" name="رقم الهاتف" rules={[{ required: true }]}>
+            <Input value={phoneForm} placeholder="رقم الهاتف" onChange={handlePhoneChange} onBlur={handlePhoneOnBlur} />
+          </Form.Item>
+          <Form.Item label="الوصف" name="الوصف" rules={[{ required: true }]}>
+            <Input.TextArea value={descriptionForm} placeholder="الوصف" onChange={handleDescriptionChange} />
+          </Form.Item>
+          <Form.Item>
+            <button
+              type="primary"
+              htmlType="submit"
+              onClick={submitForm}
+              className={loading ? 'not-allowed' : 'button-form-contact'}
+            >
+              ارسال
+            </button>
+          </Form.Item>{' '}
+        </Form>
+      )}
+    </>
   );
 };
 

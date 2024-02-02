@@ -21,6 +21,10 @@
     img {
       width: 45%;
     }
+    .success-message-form {
+      width: 45%;
+      color: $success-color;
+    }
     form {
       width: 45%;
       display: flex;
@@ -94,6 +98,17 @@
           color: $primary-color; // Reverse color
           background-color: white; // Reverse background
         }
+      }
+      .not-allowed {
+        width: 200px;
+        font-size: 22px;
+        font-weight: 700;
+        color: white;
+        background-color: $title-color;
+        border: 1px solid black;
+        border-radius: 4px;
+        cursor: not-allowed;
+        padding: 5px 0px;
       }
     }
   }

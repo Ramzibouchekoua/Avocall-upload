@@ -11,19 +11,19 @@ const packs = [
   {
     id: 1,
     title: 'إستشارة',
-    price: '29TND',
+    price: '100TND',
     nbr: 0,
-    amount: 29000,
-    oldprice: '50TND',
+    amount: 100000,
+    // oldprice: '50TND',
   },
-  {
-    id: 2,
-    title: ' 3 إستشارات',
-    price: '69TND',
-    nbr: 0,
-    amount: 69000,
-    oldprice: '90TND',
-  },
+  // {
+  //   id: 2,
+  //   title: ' 3 إستشارات',
+  //   price: '69TND',
+  //   nbr: 0,
+  //   amount: 69000,
+  //   oldprice: '90TND',
+  // },
 ];
 
 const Payement = () => {
