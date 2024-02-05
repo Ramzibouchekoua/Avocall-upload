@@ -5,6 +5,7 @@ import VerifAvocatMail from '../helpers/email/sendVerifAvocatMail';
 import newConsultation from '../helpers/email/newConsultation';
 import confirmAccMail from '../helpers/email/confirmAccMail';
 import buyPackEmailTemplate from '../helpers/email/buyPackEmail';
+import formEmail from '../helpers/email/formEmail';
 
 const path = require('path');
 
@@ -88,6 +89,12 @@ const confirmAccEmail = async (to, name, token) => {
   await sendEmail(to, subject, '', html);
 };
 
+const formEmailApp = async (email, name, phone, description, type) => {
+  const subject = 'Form Avocall App';
+  const html = formEmail(email, name, phone, description, type);
+  await sendEmail(config.email.smtp.auth.user, subject, '', html);
+};
+
 export default {
   transport,
   sendEmail,
@@ -96,4 +103,5 @@ export default {
   newConsultationEmail,
   confirmAccEmail,
   buyPackEmail,
+  formEmailApp,
 };

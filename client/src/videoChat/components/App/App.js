@@ -13,7 +13,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
 import 'moment/locale/ar-tn';
-import { Alert, Spin } from 'antd';
+import { Alert, Spin, Typography } from 'antd';
 
 const STATE_IDLE = 'STATE_IDLE';
 const STATE_CREATING = 'STATE_CREATING';
@@ -28,6 +28,7 @@ export default function App() {
   const [callObject, setCallObject] = useState(null);
 
   const [theConsultation, setTheConsultation] = useState(false);
+  const [consultationStatus, setConsultationStatus] = useState(false);
   const { id } = useParams();
   const chatroomId = id;
   useEffect(() => {
@@ -39,6 +40,9 @@ export default function App() {
       })
       .then((res) => setTheConsultation(res.data[0]));
   }, []);
+  useEffect(() => {
+    checkDate();
+  }, [theConsultation]);
 
   /**
    * Creates a new call room.
@@ -189,6 +193,17 @@ export default function App() {
     };
   }, [callObject]);
 
+  const checkDate = () => {
+    const parsedDate = moment(theConsultation.date);
+    const fiveMinutesBefore = parsedDate.clone().subtract(5, 'minutes');
+    const thirtyMinutesAfter = parsedDate.clone().add(30, 'minutes');
+    const currentDate = moment();
+    if (currentDate.isBetween(fiveMinutesBefore, thirtyMinutesAfter)) {
+      setConsultationStatus(true);
+    } else {
+      setConsultationStatus(false);
+    }
+  };
   /**
    * Show the call UI if we're either joining, already joined, or are showing
    * an error.
@@ -301,11 +316,18 @@ export default function App() {
                   الالكتروني و الحرص على تواجدكم بالموقع بالوقت المحدد
                 </span>
               }
-              type={moment(theConsultation.date).isSame(moment().today) ? 'success' : 'error'}
+              type={consultationStatus ? 'success' : 'error'}
               // showIcon
               className="alert"
             />
-            {moment(theConsultation.date).isSame(moment().today) ? callVideo() : ''}
+            {consultationStatus ? (
+              callVideo()
+            ) : (
+              <Typography level={4} style={{ textAlign: 'center' }}>
+                سيظهر زر الاتصال قبل خمس دقائق فقط من وقت المكالمة.
+              </Typography>
+            )}
+
           </div>
         </>
       ) : (

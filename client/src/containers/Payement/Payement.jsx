@@ -6,24 +6,25 @@ import { useState } from 'react';
 import { isEmpty } from 'lodash';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import displayNotification from '../../components/displayNotification';
 
 const packs = [
   {
     id: 1,
     title: 'إستشارة',
-    price: '29TND',
+    price: '100TND',
     nbr: 0,
-    amount: 29000,
-    oldprice: '50TND',
+    amount: 100000,
+    // oldprice: '50TND',
   },
-  {
-    id: 2,
-    title: ' 3 إستشارات',
-    price: '69TND',
-    nbr: 0,
-    amount: 69000,
-    oldprice: '90TND',
-  },
+  // {
+  //   id: 2,
+  //   title: ' 3 إستشارات',
+  //   price: '69TND',
+  //   nbr: 0,
+  //   amount: 69000,
+  //   oldprice: '90TND',
+  // },
 ];
 
 const Payement = () => {
@@ -42,10 +43,10 @@ const Payement = () => {
     let filename = '';
 
     if (isEmpty(isChecked)) {
-      message.warning('اختر الباقة المناسبة');
+      displayNotification('error', 'خطأ', 'اختر الباقة المناسبة');
     }
     if (isEmpty(selectedFile)) {
-      message.warning('الرجاء تحميل صورة');
+      displayNotification('error', 'خطأ', 'الرجاء تحميل صورة');
     }
     if (!isEmpty(isChecked) && !isEmpty(selectedFile)) {
       try {
@@ -61,7 +62,7 @@ const Payement = () => {
         });
 
         filename = upFile.data.data.fileName;
-        message.success('uploaded');
+        displayNotification('success', 'تم', 'تم تحميل الصورة');
 
         const newConsultation = await axios.post(
           process.env.REACT_APP_API_URL + '/api/user/buyPack',
@@ -73,13 +74,17 @@ const Payement = () => {
             headers: { 'x-auth-token': token },
           }
         );
-        message.success('سيضاف لكم الرصيد في اجل اقصاه 48 ساعة شكرا');
+        displayNotification('success', 'تم', 'سيضاف لكم الرصيد في اجل اقصاه 48 ساعة شكرا');
+
         //history.push('/OrderConfirmation');
         setActive(true);
+        setTimeout(() => {
+          history.push('/written-advice');
+        }, 5000);
       } catch (err) {
-        alert('error in buypack', err);
+        displayNotification('error', 'خطأ', 'حاول مرة أخرى. شكرًا لك');
+
         setActive(true);
-        history.push('/dashboard');
       }
     }
   };

@@ -25,7 +25,9 @@ const PayementSuccess = () => {
         const newConsultation = await axios.post(
           process.env.REACT_APP_API_URL + '/api/user/buyPack',
           {
-            consultationNumber: Number(query.get('amount') === '29000' ? 1 : 3),
+            // consultationNumber: Number(query.get('amount') === '100000' ? 1 : 3),
+            consultationNumber: 1,
+
             filename: 'online-payment',
           },
           {

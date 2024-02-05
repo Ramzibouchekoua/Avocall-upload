@@ -151,7 +151,7 @@ const WrittenAdvice = () => {
         <div className="pricing">
           <div className={isChecked === 'text' ? 'card-type checked' : 'card-type'} onClick={(e) => setIsChecked('text')}>
             <FormOutlined />
-            <span className="consultationtype">إستشارة كتابيّة</span>
+            <span className="consultationtype">إستشارة عبر الارساليات</span>
           </div>
           <div className={isChecked === 'video' ? 'card-type checked' : 'card-type'} onClick={(e) => setIsChecked('video')}>
             <VideoCameraOutlined />
