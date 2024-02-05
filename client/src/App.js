@@ -67,15 +67,11 @@ export default function App() {
       newSocket.on('disconnect', () => {
         setSocket(null);
         setTimeout(setupSocket, 20000);
-        console.log('Socket Disconnected!');
       });
 
-      newSocket.on('connect', () => {
-        console.log('Socket Connected!');
-      });
+      newSocket.on('connect', () => {});
 
       setSocket(newSocket);
-      // console.log('newSocket', newSocket);
     }
   };
   useEffect(() => {
@@ -104,7 +100,6 @@ export default function App() {
           });
         }
       } catch (err) {
-        console.log('tokenRes.data err', err);
         setUserData({
           token: undefined,
           user: undefined,
@@ -118,11 +113,10 @@ export default function App() {
 
     // // eslint-disable-next-line
   }, []);
-  // console.log("userData:",userData)
   return (
     <div dir="rtl">
       <BrowserRouter>
-        <ScrollToTop />
+        {/* <ScrollToTop /> */}
         <UserContext.Provider value={{ userData, setUserData }}>
           {isLoading ? (
             <Spin tip="جاري..." spinning={isLoading} />

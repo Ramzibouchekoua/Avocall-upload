@@ -133,7 +133,6 @@ function getMessage(callState) {
   let isError = false;
   if (callState.fatalError) {
     // header = `Fatal error: ${callState.fatalError}`;
-    console.log("Fatal error: ",callState.fatalError)
     header = `Error`;
     isError = true;
   } else if (callState.camOrMicError) {
@@ -144,7 +143,7 @@ function getMessage(callState) {
     header = 'Click "Allow" to enable camera and mic access';
   } else if (Object.keys(callState.callItems).length === 1) {
     // header = ' سينضم الطرف الآخر  قريبا';
-    header = <Spin tip="سينضم الطرف الآخر  قريبا..."  />;
+    header = <Spin tip="سينضم الطرف الآخر  قريبا..." />;
     // detail = window.location.href;
   }
   return header || detail ? { header, detail, isError } : null;

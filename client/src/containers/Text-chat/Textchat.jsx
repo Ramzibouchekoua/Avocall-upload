@@ -41,7 +41,6 @@ const Textchat = ({ socket }) => {
         },
       })
       .then((res) => {
-        console.log('object', messages.length === res.data.length);
         messages.length !== res.data.length && setMessages(res.data);
       });
   }, [chatroomId, messages]);
@@ -82,9 +81,7 @@ const Textchat = ({ socket }) => {
     });
     try {
       setPics(pics.concat(file.data));
-    } catch (err) {
-      console.log('error');
-    }
+    } catch (err) {}
   };
   return (
     <div className="Text-chat">

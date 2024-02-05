@@ -53,7 +53,6 @@ export default function App() {
       .createRoom()
       .then((room) => room.url)
       .catch((error) => {
-        console.log('Error creating room', error);
         setRoomUrl(null);
         setAppState(STATE_IDLE);
       });
@@ -184,7 +183,6 @@ export default function App() {
     function handleAppMessage(event) {
       if (event) {
         logDailyEvent(event);
-        console.log(`received app message from ${event.fromId}: `, event.data);
       }
     }
 
@@ -329,6 +327,7 @@ export default function App() {
                 سيظهر زر الاتصال قبل خمس دقائق فقط من وقت المكالمة.
               </Typography>
             )}
+
           </div>
         </>
       ) : (

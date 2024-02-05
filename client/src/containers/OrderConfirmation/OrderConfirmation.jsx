@@ -32,10 +32,7 @@ const OrderConfirmation = () => {
           headers: { 'x-auth-token': token },
         });
         setOrderNumber(response.data.orderNumber);
-        console.log('Order Number', response.data.orderNumber);
-      } catch (err) {
-        console.log('error in createOrderNumber', err);
-      }
+      } catch (err) {}
     };
 
     createOrderNumber();
@@ -68,9 +65,7 @@ const OrderConfirmation = () => {
       );
       setUrl(formUrl);
       setPressed(true);
-    } catch (err) {
-      console.log('error in createOrderNumber', err);
-    }
+    } catch (err) {}
   };
   const openModel = () => {
     if (url.length > 1) {
