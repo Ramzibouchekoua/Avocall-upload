@@ -29,19 +29,52 @@ export default function App() {
 
   const [theConsultation, setTheConsultation] = useState(false);
   const [consultationStatus, setConsultationStatus] = useState(false);
+  const [roleUser, setRoleUser] = useState(null);
   const { id } = useParams();
   const chatroomId = id;
   useEffect(() => {
-    axios
-      .get(process.env.REACT_APP_API_URL + `/api/user/consultation/${chatroomId}`, {
-        headers: {
-          'x-auth-token': localStorage.getItem('auth-token'),
-        },
-      })
-      .then((res) => setTheConsultation(res.data[0]));
+    fetchData();
   }, []);
+  const authToken = localStorage.getItem('auth-token');
+
+  const fetchData = async () => {
+    try {
+      if (!authToken) {
+        // Redirect to sign-in page if auth token is not present
+        window.location.href = '/sign-in';
+      } else {
+        const userResponse = await axios.get(process.env.REACT_APP_API_URL + `/api/user/`, {
+          headers: {
+            'x-auth-token': authToken,
+          },
+        });
+        const role = userResponse.data.role;
+        setRoleUser(role);
+
+        if (role) {
+          const consultationResponse = await axios.get(
+            process.env.REACT_APP_API_URL + `/api/user/consultation/${chatroomId}`,
+            {
+              headers: {
+                'x-auth-token': authToken,
+              },
+            }
+          );
+          setTheConsultation(consultationResponse.data[0]);
+        } else {
+          // Redirect to sign-in page if role is not present
+          window.location.href = '/sign-in';
+        }
+      }
+    } catch (error) {
+      // Handle errors here
+      console.error('Error fetching data:', error);
+    }
+  };
   useEffect(() => {
-    checkDate();
+    if (roleUser === 'ADMIN') {
+      setTheConsultation(true);
+    } else checkDate();
   }, [theConsultation]);
 
   /**
@@ -327,7 +360,6 @@ export default function App() {
                 سيظهر زر الاتصال قبل خمس دقائق فقط من وقت المكالمة.
               </Typography>
             )}
-
           </div>
         </>
       ) : (

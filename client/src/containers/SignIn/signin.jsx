@@ -29,6 +29,7 @@ const SignIn = () => {
         user: loginRes.data.user,
       });
       localStorage.setItem('auth-token', loginRes.data.token);
+      localStorage.setItem('role', loginRes.data.user.role);
       loginRes.data.user.role === 'USER' ? history.push('/dashboard') : history.push('/dashboardPro');
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
@@ -48,6 +49,7 @@ const SignIn = () => {
         user: loginRes.data.user,
       });
       localStorage.setItem('auth-token', loginRes.data.token);
+      localStorage.setItem('role', loginRes.data.user.role);
       loginRes.data.user.role === 'USER' ? history.push('/dashboard') : history.push('/dashboardPro');
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
