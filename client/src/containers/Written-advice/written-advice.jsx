@@ -7,6 +7,7 @@ import { InlineWidget } from 'react-calendly';
 import axios from 'axios';
 import moment from 'moment';
 import _ from 'lodash';
+import displayNotification from '../../components/displayNotification';
 const WrittenAdvice = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [fileIds, setFileIds] = useState([]);
@@ -30,7 +31,11 @@ const WrittenAdvice = () => {
         token = '';
       }
       if (!isChecked) {
-        message.warning('نوع الإستشارة إجباري');
+        displayNotification('error', 'خطأ', 'نوع الإستشارة إجباري');
+        return;
+      }
+      if (!dateString) {
+        displayNotification('error', 'خطأ', 'التاريخ إجباري');
         return;
       }
       if (!_.isEmpty(selectedFile)) {
@@ -41,9 +46,12 @@ const WrittenAdvice = () => {
         try {
           setFileIds(fileIds.concat(upFile.data.data._id));
           message.success('uploaded');
+          displayNotification('success', 'أحسنت', ' تم رفع الملف بنجاح');
+
           setActive(true);
         } catch (err) {
-          message.warning('error');
+          displayNotification('error', 'خطأ', 'حاول مرة اخرى');
+
           setActive(true);
         }
       }
@@ -70,7 +78,8 @@ const WrittenAdvice = () => {
     } catch (err) {
       setActive(true);
 
-      message.warning('ليس لديك إستشارات');
+      displayNotification('error', 'خطأ', 'ليس لديك إستشارات');
+
       history.push('/checkout');
     }
   };

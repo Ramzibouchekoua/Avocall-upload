@@ -19,10 +19,10 @@ function ModalPayement({ setIsModalOpen, url, isModalOpen }) {
           {/* <img src={Paypal} alt="Clicktopay" /> */}
           <a href={url}>الدفع</a>
           <span>نظام الدفع آمن إذا تعرضت الى اي اشكال</span>
-          <a className="contact" href="https://avocall.tn/contactez-nous">
+          <Link className="contact" to="/contact">
             {' '}
             اتصل بنا
-          </a>
+          </Link>
           <Link to="/checkout" className="contact">
             العودة إلى قائمة الاختيارات
           </Link>

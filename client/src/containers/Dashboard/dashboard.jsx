@@ -42,7 +42,7 @@ const Dashboard = () => {
         )}
       </div>
 
-      <div className="dashboard">
+      <div className="dashboard-user">
         <div className="action-btn">
           <div className="consulting">
             <div className="icon">
@@ -70,20 +70,7 @@ const Dashboard = () => {
             itemLayout="horizontal"
             dataSource={list}
             renderItem={(item) => (
-              <List.Item
-                actions={[
-                  <Link
-                    to={`/update-consultation/${item._id}`}
-                    key="edit"
-                    className={!item.isClosed ? 'edit' : 'edit end-icon'}
-                    style={
-                      moment(item.date).date() > moment().date() ? { opacity: 1 } : { opacity: 0, pointerEvents: 'none' }
-                    }
-                  >
-                    <EditOutlined />
-                  </Link>,
-                ]}
-              >
+              <List.Item>
                 <Link
                   to={item.type === 'video' ? `/vid-page/${item._id}` : `/text-chat/${item._id}`}
                   className={!item.isClosed ? 'list' : 'list end'}
@@ -100,6 +87,17 @@ const Dashboard = () => {
                   <div className="list-content state">
                     <div className="list-content_title">الحالة</div>
                     <div className="list-content_desc state">{item.isClosed ? 'منتهية' : 'مفتوحة'}</div>
+                    <Link
+                      to={`/update-consultation/${item._id}`}
+                      key="edit"
+                      className={!item.isClosed ? 'edit' : 'edit end-icon'}
+                      style={
+                        moment(item.date).date() > moment().date() ? { opacity: 1 } : { opacity: 0, pointerEvents: 'none' }
+                      }
+                    >
+                      تعديل
+                      <EditOutlined />
+                    </Link>
                   </div>
                 </Link>
               </List.Item>
