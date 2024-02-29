@@ -131,7 +131,7 @@ export default function App() {
                   <PrivateAuth exact path="/sign-up" component={Signup} />
                   <PrivateAuth exact path="/sign-up-pro" component={SignupPro} />
                   <PrivateAuth exact path="/sign-in" component={Signin} />
-                  <PrivateAuth exact path="/contact" component={ContactUs} />
+                  <Route exact path="/contact" component={ContactUs} />
                   <Route exact path="/Wallet" component={Wallet} />
                   <Route exact path="/vid-page/:id" component={VidPage} />
                   <Route exact path="/text-chat/:id" render={() => <Textchat socket={socket} />} />
