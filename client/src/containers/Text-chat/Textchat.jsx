@@ -18,6 +18,8 @@ const Textchat = ({ socket }) => {
   const [userId, setUserId] = useState('');
   const [userOwner, setUserOwner] = useState(null);
   const [statusOfPage, setStatusOfPage] = useState('Loading');
+  const [lastNotifiedMessage, setLastNotifiedMessage] = useState(null);
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -36,7 +38,6 @@ const Textchat = ({ socket }) => {
         });
         const owner = userResponse.data;
         setUserOwner(owner);
-        console.log('azz s', userResponse.data._id);
         if (owner) {
           try {
             const consultationResponse = await axios.get(
@@ -88,6 +89,15 @@ const Textchat = ({ socket }) => {
       messageRef.current.value = '';
     }
   };
+  const handleKeyDown = (event) => {
+    // Check if the pressed key is "Enter" (key code 13)
+    if (event.keyCode === 13) {
+      // Prevent the default action (form submission)
+      event.preventDefault();
+      // Call the sendMessage function
+      sendMessage();
+    }
+  };
   useEffect(() => {
     axios
       .get(process.env.REACT_APP_API_URL + `/api/message/${chatroomId}`, {
@@ -109,9 +119,24 @@ const Textchat = ({ socket }) => {
       socket.on('newMessage', (message) => {
         const newMessages = [...messages, message];
         setMessages(newMessages);
+        showNotification(message);
       });
+
+      // Cleanup function to remove event listener when component unmounts
+      return () => {
+        socket.off('newMessage');
+      };
     }
-  }, [messages]);
+  }, [messages, socket]);
+
+  const showNotification = (message) => {
+    if (userOwner && message && message !== lastNotifiedMessage) {
+      if (message.name !== userOwner.name) {
+        displayNotification('info', 'New message: ' + message.name, message.message);
+        setLastNotifiedMessage(message);
+      }
+    }
+  };
 
   useEffect(() => {
     if (socket) {
@@ -196,19 +221,22 @@ const Textchat = ({ socket }) => {
           </div>
           <div className="chat-box-section">
             <div className="chatroom-content">
-              {messages.map((message, i) => (
-                <div key={i} className="message">
-                  <span className={userId === message.user ? 'ownMessage' : 'otherMessage'}>{message.name}:</span>{' '}
-                  <p className="message-content"> {message.message}</p>
-                </div>
-              ))}
+              {messages
+                .slice()
+                .reverse()
+                .map((message, i) => (
+                  <div key={i} className="message">
+                    <span className={userId === message.user ? 'ownMessage' : 'otherMessage'}>{message.name}:</span>{' '}
+                    <p className="message-content">{message.message}</p>
+                  </div>
+                ))}
             </div>
             <div className="chatroom-actions">
               <div className="message-field">
-                <input type="text" name="message" placeholder="Say something" ref={messageRef} />
+                <input type="text" name="message" placeholder="Say something" ref={messageRef} onKeyDown={handleKeyDown} />
               </div>
               <div className="action-btn">
-                <button className="join upload" onClick={sendMessage}>
+                <button className="join upload-hidden" onClick={sendMessage}>
                   <PaperClipOutlined />
                 </button>
                 <button className="join send" onClick={sendMessage}>
