@@ -9,6 +9,7 @@ const consultationSchema = new mongoose.Schema(
     date: { type: Date },
     description: { type: String },
     field: { type: String },
+    name: { type: String },
     files: [
       {
         type: ObjectId,

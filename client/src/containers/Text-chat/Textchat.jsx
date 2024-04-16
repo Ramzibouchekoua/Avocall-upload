@@ -233,7 +233,13 @@ const Textchat = ({ socket }) => {
             </div>
             <div className="chatroom-actions">
               <div className="message-field">
-                <input type="text" name="message" placeholder="Say something" ref={messageRef} onKeyDown={handleKeyDown} />
+                <input
+                  type="text"
+                  name="message"
+                  placeholder="اكتب الرسالة هنا "
+                  ref={messageRef}
+                  onKeyDown={handleKeyDown}
+                />
               </div>
               <div className="action-btn">
                 <button className="join upload-hidden" onClick={sendMessage}>

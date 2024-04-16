@@ -40,31 +40,31 @@ export const register = asyncHandler(async (req, res) => {
 //@des register new admin
 //@route POST /api/user/registerAdmin
 //@access public
-export const registerAdmin = asyncHandler(async (req, res) => {
-  const { email, password, phone, name, address, birthDate } = req.body;
-  //validation
-  if (!email || !password || !name || !birthDate) return res.status(400).json({ msg: 'خانات إلزامية.' });
-  if (password.length < 5) return res.status(400).json({ msg: 'يجب أن تتكون كلمة المرور من 5 أحرف على الأقل.' });
-  const existingUser = await User.findOne({ email: email });
-  if (existingUser) return res.status(400).json({ msg: 'الحساب مع هذا البريد الإلكتروني موجود بالفعل.' });
-  const newUser = new User({
-    email,
-    password,
-    phone,
-    name,
-    role: 'ADMIN',
-    address,
-    birthDate,
-  });
-  const savedUser = await newUser.save();
-  savedUser.password = undefined;
-  try {
-    emailService.sendVerifMail(email, name, await generateToken(savedUser._id, config.email.secret));
-  } catch (error) {
-    console.log({ error });
-  }
-  res.json(savedUser);
-});
+// export const registerAdmin = asyncHandler(async (req, res) => {
+//   const { email, password, phone, name, address, birthDate } = req.body;
+//   //validation
+//   if (!email || !password || !name || !birthDate) return res.status(400).json({ msg: 'خانات إلزامية.' });
+//   if (password.length < 5) return res.status(400).json({ msg: 'يجب أن تتكون كلمة المرور من 5 أحرف على الأقل.' });
+//   const existingUser = await User.findOne({ email: email });
+//   if (existingUser) return res.status(400).json({ msg: 'الحساب مع هذا البريد الإلكتروني موجود بالفعل.' });
+//   const newUser = new User({
+//     email,
+//     password,
+//     phone,
+//     name,
+//     role: 'ADMIN',
+//     address,
+//     birthDate,
+//   });
+//   const savedUser = await newUser.save();
+//   savedUser.password = undefined;
+//   try {
+//     emailService.sendVerifMail(email, name, await generateToken(savedUser._id, config.email.secret));
+//   } catch (error) {
+//     console.log({ error });
+//   }
+//   res.json(savedUser);
+// });
 
 //@des test if token is valid
 //@route GET /api/user/tokenIsValid
@@ -142,7 +142,6 @@ export const newConsultation = asyncHandler(async (req, res) => {
     ...req.body,
     userId: req.user,
   };
-  console.log('newConsultation', newConsultation);
   const consultation = await Consultation.create(newConsultation);
   const avocats = await User.find({ role: 'PRO' });
   user.wallet = user.wallet - 1;

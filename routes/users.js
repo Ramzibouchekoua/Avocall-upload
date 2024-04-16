@@ -5,7 +5,7 @@ import * as UserController from '../controllers/user';
 const router = express.Router();
 
 router.post('/register', UserController.register);
-router.post('/registerAdmin', UserController.registerAdmin);
+// router.post('/registerAdmin', UserController.registerAdmin);
 router.get('/verifMail/:token', verifTokenEmail, UserController.verifMail);
 router.get('/tokenIsValid', auth, UserController.tokenIsValid);
 router.put('/update', auth, UserController.update);

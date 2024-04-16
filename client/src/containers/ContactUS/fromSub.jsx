@@ -92,7 +92,6 @@ const FormSub = () => {
         <Form>
           {' '}
           <Form.Item>
-            {console.log('first', type)}
             <div className="type-form">
               <span className={type ? 'form-pro-active' : 'form-pro'} onClick={typeForm}>
                 استشارات للشركات

@@ -14,12 +14,35 @@ const WrittenAdvice = () => {
   const [isChecked, setIsChecked] = useState('');
   const [dateString, setDateString] = useState('');
   const [active, setActive] = useState(true);
+  const [userData, setUserData] = useState(null);
   const history = useHistory();
 
   const onFileChange = (event) => {
     setSelectedFile(event.target.files);
   };
 
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+  const fetchUserData = async () => {
+    try {
+      let authToken = localStorage.getItem('auth-token');
+      if (!authToken) {
+        // Redirect to sign-in page if auth token is not present
+        window.location.href = '/sign-in';
+      } else {
+        const userResponse = await axios.get(process.env.REACT_APP_API_URL + `/api/user/`, {
+          headers: {
+            'x-auth-token': authToken,
+          },
+        });
+        setUserData(userResponse.data);
+      }
+    } catch (error) {
+      // Handle errors here
+      console.error('Error fetching data:', error);
+    }
+  };
   const submitRequest = async (values) => {
     const formData = new FormData();
     selectedFile && Object.values(selectedFile).map((e) => formData.append('file', e, e.name));
@@ -29,6 +52,12 @@ const WrittenAdvice = () => {
       if (token === null) {
         localStorage.setItem('auth-token', '');
         token = '';
+      }
+      if (userData.wallet < 1) {
+        displayNotification('error', 'خطأ', 'ليس لديك إستشارات');
+        history.push('/checkout');
+
+        return;
       }
       if (!isChecked) {
         displayNotification('error', 'خطأ', 'نوع الإستشارة إجباري');
@@ -66,6 +95,7 @@ const WrittenAdvice = () => {
           files: values.files ? values.files.concat(fileIds) : [],
           type: isChecked,
           date: dateString,
+          name: userData.name,
           filename,
         },
         {
@@ -78,9 +108,7 @@ const WrittenAdvice = () => {
     } catch (err) {
       setActive(true);
 
-      displayNotification('error', 'خطأ', 'ليس لديك إستشارات');
-
-      history.push('/checkout');
+      displayNotification('error', 'خطأ', 'يرجى المحاولة مرة أخرى أو الاتصال بنا ');
     }
   };
 
@@ -145,7 +173,6 @@ const WrittenAdvice = () => {
           <TextArea label="تفاصيل الاستشارة" name="description" />
         </div>
       </div>
-
       <Form.Item>
         <Button htmlType="submit" className={active ? 'submit-button ' : 'disabled'}>
           ارسل طلب الاستشارة

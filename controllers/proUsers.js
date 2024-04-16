@@ -11,7 +11,7 @@ export const register = asyncHandler(async (req, res) => {
   const { email, password, name } = req.body;
   //validation
   if (!email || !password || !name) return res.status(400).json({ msg: 'خانات إلزامية.' });
-  if (password.length < 5) return res.status(400).json({ msg: 'يجب أن تتكون كلمة المرور من 5 أحرف على الأقل.' });
+  if (password.length < 8) return res.status(400).json({ msg: 'يجب أن تتكون كلمة المرور من 8 أحرف على الأقل.' });
   const existingUser = await User.findOne({ email: email });
   if (existingUser) return res.status(400).json({ msg: 'الحساب مع هذا البريد الإلكتروني موجود بالفعل.' });
 
@@ -21,7 +21,7 @@ export const register = asyncHandler(async (req, res) => {
   });
   const savedUser = await newUser.save();
   savedUser.password = undefined;
-  const token = await generateToken(savedUser._id, config.email.secret)
+  const token = await generateToken(savedUser._id, config.email.secret);
   await emailService.sendVerifAvocatMail(savedUser, token);
   res.json({ msg: 'email sent to an admin', savedUser });
 });
