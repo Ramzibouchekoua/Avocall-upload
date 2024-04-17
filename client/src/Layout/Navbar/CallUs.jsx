@@ -16,7 +16,7 @@ function CallUs() {
     >
       <p style={{ direction: 'rtl', fontWeight: 900, marginLeft: '10px', color: 'black' }}>اتصل بنا:</p>
 
-      <a style={{ direction: 'ltr', fontWeight: 900, textDecoration: 'none', color: '#0000f' }} href="tel:+21622250738">
+      <a style={{ direction: 'ltr', fontWeight: 900, textDecoration: 'none', color: '#fff' }} href="tel:+21622250738">
         +216 22 250 738
       </a>
     </div>

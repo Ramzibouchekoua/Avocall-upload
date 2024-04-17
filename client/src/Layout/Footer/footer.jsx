@@ -37,7 +37,7 @@ const Footer = () => {
       </div>
       <div className="powred ">
         <span>Copyright © 2023 Avocall</span>
-        <span>Powered by WK-Intelligence</span>
+        {/* <span>Powered by WK-Intelligence</span> */}
       </div>
     </div>
   );
