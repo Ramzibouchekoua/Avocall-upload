@@ -14,6 +14,8 @@ import { useParams } from 'react-router-dom';
 import moment from 'moment';
 import 'moment/locale/ar-tn';
 import { Alert, Spin, Typography } from 'antd';
+import ReportModal from '../../../components/ReportModal';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const STATE_IDLE = 'STATE_IDLE';
 const STATE_CREATING = 'STATE_CREATING';
@@ -31,6 +33,9 @@ export default function App() {
   const [consultationStatus, setConsultationStatus] = useState(false);
   const [roleUser, setRoleUser] = useState(null);
   const { id } = useParams();
+  const [userOwner, setUserOwner] = useState(null);
+  const [reportVisible, setReportVisible] = useState(false);
+
   const chatroomId = id;
   useEffect(() => {
     fetchData();
@@ -48,6 +53,7 @@ export default function App() {
             'x-auth-token': authToken,
           },
         });
+        setUserOwner(userResponse.data);
         const role = userResponse.data.role;
         setRoleUser(role);
 
@@ -332,9 +338,13 @@ export default function App() {
                 </tr>
               </tbody>
             </table>
-            <button className="button-blue">أغلق الاستشارة</button>
-            <button className="button-blue">تعديل الاستشارة</button>
-            <button className="Connexion ">مشكلة في الاستشارة ؟</button>
+            <Link to="/dashboard">
+              <button className="button-blue">أغلق الاستشارة</button>
+            </Link>{' '}
+            {/* <button className="button-blue">تعديل الاستشارة</button> */}
+            <button className="connexion " onClick={() => setReportVisible(true)}>
+              مشكلة في الاستشارة ؟
+            </button>
           </div>
           <div className="redirection">
             <Alert
@@ -360,6 +370,16 @@ export default function App() {
                 سيظهر زر الاتصال قبل خمس دقائق فقط من وقت المكالمة.
               </Typography>
             )}
+            <ReportModal
+              visible={reportVisible}
+              userOwner={userOwner}
+              handleCancel={() => {
+                setReportVisible(false);
+              }}
+              handleOk={() => {
+                setReportVisible(false);
+              }}
+            />
           </div>
         </>
       ) : (

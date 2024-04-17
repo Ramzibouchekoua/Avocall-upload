@@ -212,10 +212,10 @@ const Textchat = ({ socket }) => {
             <Link to="/dashboard">
               <button className="button-blue">أغلق الاستشارة</button>
             </Link>
-            <Link to="/written-advice">
+            {/* <Link to="/written-advice">
               <button className="button-blue">تعديل الاستشارة</button>
-            </Link>
-            <button className="Connexion" onClick={() => setReportVisible(true)}>
+            </Link> */}
+            <button className="connexion" onClick={() => setReportVisible(true)}>
               مشكلة في الاستشارة ؟
             </button>
           </div>
@@ -253,6 +253,7 @@ const Textchat = ({ socket }) => {
           </div>
           <ReportModal
             visible={reportVisible}
+            userOwner={userOwner}
             handleCancel={() => {
               setReportVisible(false);
             }}

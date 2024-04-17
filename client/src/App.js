@@ -28,6 +28,8 @@ import PayementFailed from './containers/PayementError';
 import PayementSuccess from './containers/PayementSuccess';
 import PayementGateway from './containers/PayementGateway';
 import Verification from './containers/AccountVerification';
+import Validaton from './containers/AccountVerification/AccountValidation';
+
 import Confirmation from './containers/OrderConfirmation';
 import Book from './containers/Book';
 import Wallet from './containers/Wallet';
@@ -131,6 +133,8 @@ export default function App() {
                   <PrivateAuth exact path="/sign-up" component={Signup} />
                   <PrivateAuth exact path="/sign-up-pro" component={SignupPro} />
                   <PrivateAuth exact path="/sign-in" component={Signin} />
+                  <Route exact path="/AccountValidation" component={Validaton} />
+
                   <Route exact path="/contact" component={ContactUs} />
                   {/* <Route exact path="/Wallet" component={Wallet} /> */}
                   <Route exact path="/vid-page/:id" component={VidPage} />
@@ -154,7 +158,7 @@ export default function App() {
                   <PrivateUser exact path="/update-consultation/:id" component={updateConsultation} />
                   {/*<PrivateUser exact path="/PayementError" component={PayementFailed} />
                 <PrivateUser exact path="/PayementSuccess" component={PayementSuccess} />*/}
-                  <PrivateUser exact path="/AccountVerification" component={Verification} />
+                  <Route exact path="/AccountVerification" component={Verification} />
                   <Route exact path="/OrderConfirmation">
                     <Confirmation />
                   </Route>

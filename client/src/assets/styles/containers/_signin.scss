@@ -1,6 +1,28 @@
 .login {
   background-color: #fff;
   padding: 5% 35%;
+  .google-sign-up {
+    width: 100%;
+    display: flex;
+
+    flex-direction: column;
+    padding: 40px 0;
+    border-bottom: 1px solid #202f84;
+    margin-bottom: 10px;
+    .button-google {
+      width: 250px !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      border: #202f84 2px solid !important;
+      cursor: pointer;
+      border-radius: 4px !important;
+      span {
+        color: #202f84 !important;
+        font-weight: 700 !important;
+      }
+    }
+  }
   h1 {
     color: #202f84;
     font-weight: 600;
@@ -17,6 +39,7 @@
     padding-bottom: 10%;
 
     .button-blue {
+      cursor: pointer;
       margin-top: 50px;
       margin-bottom: 20px;
       font-size: 16px;
@@ -37,7 +60,7 @@
         background-color: #202f84;
       }
     }
-    .Connexion {
+    .connexion {
       font-size: 16px;
       width: 100%;
       color: #202f84;
@@ -49,6 +72,8 @@
       align-items: center;
       display: flex;
       justify-content: center;
+      cursor: pointer;
+
       span {
         color: #202f84;
       }
@@ -57,6 +82,7 @@
         border: 1px solid #202f84;
         border-radius: 4px;
         background-color: #202f84;
+        cursor: pointer;
         span {
           color: #fff;
         }
@@ -85,10 +111,8 @@
     .Container {
       display: flex;
       flex-direction: column;
-    width: 100%;
-    µ
-  
-      .Right-Signup {
+      width: 100%;
+      µ .Right-Signup {
         width: 100% !important;
       }
       .Left-Signup {

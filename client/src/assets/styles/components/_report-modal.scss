@@ -13,3 +13,41 @@
     }
   }
 }
+.ant-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #202f84;
+  div {
+    color: #fff;
+  }
+}
+.modal-report-consultation {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  direction: rtl;
+  .cursor-not-allowed {
+    cursor: not-allowed !important;
+  }
+  .connexion {
+    margin: 20px 0;
+    font-size: 16px;
+    width: 250px;
+    color: #202f84;
+    font-weight: bold;
+    border: 1px solid #202f84;
+    border-radius: 4px;
+
+    padding: 10px 0px;
+    background-color: #fff;
+    cursor: pointer;
+    &:hover {
+      color: #fff;
+      border: 1px solid #202f84;
+      border-radius: 4px;
+      background-color: #202f84;
+    }
+  }
+}

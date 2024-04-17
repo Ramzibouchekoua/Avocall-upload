@@ -57,3 +57,38 @@ body {
   margin-top: 10%;
   cursor: not-allowed !important;
 }
+.account-verification {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  h3 {
+    font-weight: 600;
+    font-size: 24;
+  }
+  h4 {
+    margin-top: 20px;
+  }
+  a {
+    width: 200px;
+    border: 1px solid #202f84;
+    border-radius: 4px;
+    padding: 10px 0px;
+    background-color: #202f84;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 700;
+    &:hover {
+      color: #202f84;
+      border: 1px solid #202f84;
+      border-radius: 4px;
+      background-color: #fff;
+      cursor: pointer;
+    }
+  }
+}
+.ant-input-password-icon {
+  color: #fff !important;
+}
