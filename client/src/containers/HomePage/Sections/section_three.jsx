@@ -31,15 +31,12 @@ const section_three = () => {
     <div className="section-three">
       <div className="title">كيف نعمل؟</div>
       <Row>
-        {steps.map(e => (
+        {steps.map((e) => (
           <Col xs={24} md={12} lg={6} key={e.index}>
             <div className="desc">
               <div className="desc_icon">
-                <div className="desc_icon_steps" > {e.index} </div>
-                <img
-                  src={require(`../../../assets/images/${e.icon}`)}
-                  alt=""
-                />
+                <div className="desc_icon_steps"> {e.index} </div>
+                <img src={require(`../../../assets/images/${e.icon}`)} alt="Avocall - استشارة قانونية " />
               </div>
               <div className="desc_subtitle">{e.subtitle}</div>
               <div className="desc_text">{e.text}</div>

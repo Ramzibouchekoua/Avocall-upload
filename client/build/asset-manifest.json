@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.79a5347d.chunk.css",
-    "main.js": "/static/js/main.e1ffe2c0.chunk.js",
-    "main.js.map": "/static/js/main.e1ffe2c0.chunk.js.map",
+    "main.css": "/static/css/main.0c6d3b52.chunk.css",
+    "main.js": "/static/js/main.93978916.chunk.js",
+    "main.js.map": "/static/js/main.93978916.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.9b7d8fd3.js",
     "runtime-main.js.map": "/static/js/runtime-main.9b7d8fd3.js.map",
     "static/css/2.07102e08.chunk.css": "/static/css/2.07102e08.chunk.css",
-    "static/js/2.f8ab3762.chunk.js": "/static/js/2.f8ab3762.chunk.js",
-    "static/js/2.f8ab3762.chunk.js.map": "/static/js/2.f8ab3762.chunk.js.map",
+    "static/js/2.50d45181.chunk.js": "/static/js/2.50d45181.chunk.js",
+    "static/js/2.50d45181.chunk.js.map": "/static/js/2.50d45181.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.54b15dd1a3f626ed93553237aa12a319.js": "/precache-manifest.54b15dd1a3f626ed93553237aa12a319.js",
+    "precache-manifest.a507e2075175d476f6f3b278871c98a4.js": "/precache-manifest.a507e2075175d476f6f3b278871c98a4.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.07102e08.chunk.css.map": "/static/css/2.07102e08.chunk.css.map",
-    "static/css/main.79a5347d.chunk.css.map": "/static/css/main.79a5347d.chunk.css.map",
-    "static/js/2.f8ab3762.chunk.js.LICENSE.txt": "/static/js/2.f8ab3762.chunk.js.LICENSE.txt",
+    "static/css/main.0c6d3b52.chunk.css.map": "/static/css/main.0c6d3b52.chunk.css.map",
+    "static/js/2.50d45181.chunk.js.LICENSE.txt": "/static/js/2.50d45181.chunk.js.LICENSE.txt",
     "static/media/4014702_call_phone_service_support_icon (1).svg": "/static/media/4014702_call_phone_service_support_icon (1).2a48cd1c.svg",
     "static/media/4831018_direction_location_map_maps_pin_icon.svg": "/static/media/4831018_direction_location_map_maps_pin_icon.8d063ffd.svg",
     "static/media/6457560_24 hours_24_7_customer_delivery_service_icon.svg": "/static/media/6457560_24 hours_24_7_customer_delivery_service_icon.61cf0cd4.svg",
@@ -35,8 +35,8 @@
   "entrypoints": [
     "static/js/runtime-main.9b7d8fd3.js",
     "static/css/2.07102e08.chunk.css",
-    "static/js/2.f8ab3762.chunk.js",
-    "static/css/main.79a5347d.chunk.css",
-    "static/js/main.e1ffe2c0.chunk.js"
+    "static/js/2.50d45181.chunk.js",
+    "static/css/main.0c6d3b52.chunk.css",
+    "static/js/main.93978916.chunk.js"
   ]
 }

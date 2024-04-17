@@ -99,7 +99,10 @@ const section_four = () => {
             <Col xs={24} md={8} lg={6} key={e.index}>
               <a href={e.articlelink} target="blank">
                 <div className="desc_icon">
-                  <img src={require(`../../../assets/icons/${e.icon}`)} alt={e.subtext} />
+                  <img
+                    src={require(`../../../assets/icons/${e.icon}`)}
+                    alt={'Avocall - ' + ' استشارة قانونية  في ' + e.subtext}
+                  />
                   <h3 className="desc_text">{e.subtext}</h3>
                   <h4 className="desc_subtitle">{e.text}</h4>
                 </div>

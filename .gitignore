@@ -38,7 +38,7 @@ node_modules/
 jspm_packages/
 client/.env
 ./env
-./uploads
+./uploads/*
 # TypeScript v1 declaration files
 typings/
 
