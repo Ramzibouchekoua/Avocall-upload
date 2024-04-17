@@ -39,6 +39,7 @@
     padding-bottom: 10%;
 
     .button-blue {
+      cursor: pointer;
       margin-top: 50px;
       margin-bottom: 20px;
       font-size: 16px;
@@ -59,7 +60,7 @@
         background-color: #202f84;
       }
     }
-    .Connexion {
+    .connexion {
       font-size: 16px;
       width: 100%;
       color: #202f84;
@@ -71,6 +72,8 @@
       align-items: center;
       display: flex;
       justify-content: center;
+      cursor: pointer;
+
       span {
         color: #202f84;
       }
@@ -79,6 +82,7 @@
         border: 1px solid #202f84;
         border-radius: 4px;
         background-color: #202f84;
+        cursor: pointer;
         span {
           color: #fff;
         }

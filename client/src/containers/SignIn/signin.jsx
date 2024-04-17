@@ -90,7 +90,7 @@ const SignIn = () => {
             الدخول
           </Button>
         </Form.Item>
-        <Link to="/sign-up" className="Connexion">
+        <Link to="/sign-up" className="connexion">
           التسجيل
         </Link>
       </Form>
