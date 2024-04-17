@@ -1,6 +1,28 @@
 .registration {
   background-color: #fff;
   padding: 5% 20%;
+  .google-sign-up {
+    width: 100%;
+    display: flex;
+
+    flex-direction: column;
+    padding: 40px 0;
+    border-bottom: 1px solid #202f84;
+    margin-bottom: 10px;
+    .button-google {
+      width: 250px !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      border: #202f84 2px solid !important;
+      cursor: pointer;
+      border-radius: 4px !important;
+      span {
+        color: #202f84 !important;
+        font-weight: 700 !important;
+      }
+    }
+  }
   h1 {
     color: #202f84;
     font-weight: 600;
@@ -85,7 +107,7 @@
       justify-content: center;
       align-items: center;
       .ant-btn {
-        width: 32rem;
+        width: 250px;
         border: 1px solid #202f84;
         border-radius: 4px;
         height: 46px;
@@ -107,10 +129,6 @@
             font-weight: bold;
           }
         }
-      }
-      .button-google {
-        width: 32rem;
-        justify-content: center;
       }
     }
   }
@@ -216,13 +234,13 @@
           padding-right: 30px;
         }
       }
-      .form-button{
+      .form-button {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         .button-google {
-width: 200px;
+          width: 200px;
         }
         .ant-btn {
           width: 200px;
@@ -264,4 +282,7 @@ width: 200px;
       }
     }
   }
+}
+.ant-picker-borderless {
+  width: 100% !important;
 }

@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import ErrorNotice from '../../components/ErrorNotice';
 
 import { GoogleLogin } from 'react-google-login';
+import displayNotification from '../../components/displayNotification';
 
 const clientId = '592293472212-psaab73gie2sf6c40r2i9qang27ts35t.apps.googleusercontent.com';
 
@@ -32,7 +33,7 @@ const SignIn = () => {
       localStorage.setItem('role', loginRes.data.user.role);
       loginRes.data.user.role === 'USER' ? history.push('/dashboard') : history.push('/dashboardPro');
     } catch (err) {
-      err.response.data.msg && setError(err.response.data.msg);
+      err.response.data.msg && displayNotification('error', 'خطأ', err.response.data.msg);
     }
   };
 
@@ -52,20 +53,34 @@ const SignIn = () => {
       localStorage.setItem('role', loginRes.data.user.role);
       loginRes.data.user.role === 'USER' ? history.push('/dashboard') : history.push('/dashboardPro');
     } catch (err) {
-      err.response.data.msg && setError(err.response.data.msg);
+      err.response.data.msg && displayNotification('error', 'خطأ', err.response.data.msg);
     }
   };
 
-  const googleError = () => alert('Google Sign In was unsuccessful. Try again later');
+  const googleError = () => displayNotification('error', 'لم ينجح تسجيل الدخول   حاول مرة أخرى في وقت لاحق');
 
   return (
     <div className="login">
+      <div className="google-sign-up">
+        <h1>الدخول من خلال Google </h1>
+        <GoogleLogin
+          clientId="592293472212-psaab73gie2sf6c40r2i9qang27ts35t.apps.googleusercontent.com"
+          buttonText="تسجيل الدخول  Google"
+          className="button-google"
+          onSuccess={googleSuccess}
+          onFailure={googleError}
+          cookiePolicy="single_host_origin"
+          isSignedIn={false}
+          icon={true}
+        />
+      </div>
+
       <h1>الدخول</h1>
-      {error && (
+      {/* {error && (
         <div className="error-notice">
           <ErrorNotice err={error} />
         </div>
-      )}
+      )} */}
       <Form className="container" form={form} name="register" onFinish={onFinish} scrollToFirstError>
         <Email label="البريد الالكتروني" name="email" />
         <Password label="كلمة السر" name="password" />
@@ -78,16 +93,6 @@ const SignIn = () => {
         <Link to="/sign-up" className="Connexion">
           التسجيل
         </Link>
-        <GoogleLogin
-          clientId="592293472212-psaab73gie2sf6c40r2i9qang27ts35t.apps.googleusercontent.com"
-          buttonText="تسجيل الدخول  Google"
-          className="button-google"
-          onSuccess={googleSuccess}
-          onFailure={googleError}
-          cookiePolicy="single_host_origin"
-          isSignedIn={false}
-          icon={true}
-        />
       </Form>
     </div>
   );

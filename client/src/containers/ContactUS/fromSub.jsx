@@ -32,7 +32,7 @@ const FormSub = () => {
     // Regular expression for validating email addresses
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(emailForm)) {
-      displayNotification('error', 'خطأ', 'يرجى كتابة عنوان البريد الإلكتروني الصحيح');
+      displayNotification('error', 'خطأ', 'يرجى كتابة  البريد الإلكتروني الصحيح');
       setEmailForm('');
     }
   };

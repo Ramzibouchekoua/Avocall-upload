@@ -7,6 +7,7 @@ import UserContext from '../../context/userContext';
 import ErrorNotice from '../../components/ErrorNotice';
 import moment from 'moment';
 import { GoogleLogin } from 'react-google-login';
+import displayNotification from '../../components/displayNotification';
 
 // const clientId = '592293472212-psaab73gie2sf6c40r2i9qang27ts35t.apps.googleusercontent.com';
 
@@ -66,14 +67,41 @@ const Signup = () => {
       }
     }
   };
-  const googleError = () => alert('Google Sign In was unsuccessful. Try again later');
+  const googleError = () => displayNotification('error', 'لم ينجح تسجيل الدخول   حاول مرة أخرى في وقت لاحق');
   const onFinish = async (values) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^(\+\d{1,3}\s?)?\d{8}$/;
+
+    if (!emailRegex.test(values.email)) {
+      displayNotification('error', 'خطأ', 'يرجى كتابة  البريد الإلكتروني الصحيح');
+      return;
+    }
+    if (!values.password || values.password.length < 5) {
+      displayNotification('error', 'خطأ', 'يجب أن تحتوي كلمة المرور على 6 أحرف أو أكثر');
+      return;
+    }
+    if (!phoneRegex.test(values.phone)) {
+      displayNotification('error', 'خطأ', '+216 يرجى كتابة رقم الهاتف المكون من 8 أرقام أو بتنسيق دولي');
+      return;
+    }
+
+    if (!values.name || values.name.length < 1) {
+      displayNotification('error', 'خطأ', 'لا ينبغي أن يكون الاسم فارغًا!');
+      return;
+    }
+
+    if (!values.address || values.address.length < 1) {
+      displayNotification('error', 'خطأ', 'لا ينبغي أن يكون عنوان فارغًا!');
+      return;
+    }
+
+    if (dateString && moment().year() - moment(dateString).year() < 18) {
+      displayNotification('error', 'خطأ', 'هذه الخدمة مقيدة بعمر 18 سنة فما فوق');
+      return;
+    }
     try {
       setError(undefined);
-      if (dateString && moment().year() - moment(dateString).year() < 18) {
-        setError('هذه الخدمة مقيدة بعمر 18 سنة فما فوق');
-        return;
-      }
+
       const newUser = {
         email: values.email,
         password: values.password,
@@ -82,20 +110,34 @@ const Signup = () => {
         address: values.address,
         birthDate: values.birthDate,
       };
+
       await axios.post(process.env.REACT_APP_API_URL + '/api/user/register', newUser);
-      history.push('/AccountVerification');
+      displayNotification('success', 'تم', ' شكرًا لك');
+      history.push('/AccountVerification?name=' + newUser.name);
     } catch (err) {
-      err.response.data.msg && setError(err.response.data.msg);
+      const errorMsg = err.response.data.msg || 'حدث خطأ ما';
+      setError(errorMsg);
+      displayNotification('error', 'خطأ', errorMsg);
     }
   };
+
   return (
     <div className="registration">
+      <div className="google-sign-up">
+        <h1>إنشاء حساب جديد من خلال Google </h1>
+        <GoogleLogin
+          clientId="592293472212-psaab73gie2sf6c40r2i9qang27ts35t.apps.googleusercontent.com"
+          buttonText="انشاء حساب جديد"
+          className="button-google"
+          onSuccess={googleSuccess}
+          onFailure={googleError}
+          cookiePolicy="single_host_origin"
+          isSignedIn={false}
+          icon={true}
+        />
+      </div>
       <h1>تسجيل حساب جديد</h1>
-      {error && (
-        <div className="error-notice">
-          <ErrorNotice err={error} />
-        </div>
-      )}
+
       <Form className="Container" {...formItemLayout} form={form} name="register" onFinish={onFinish} scrollToFirstError>
         <div className="form-input">
           <div className="Right-Signup">
@@ -107,7 +149,8 @@ const Signup = () => {
               valuePropName="checked"
               rules={[
                 {
-                  validator: (_, value) => (value ? Promise.resolve() : setError('الرجاء قبول الشروط العامة للإستعمال')),
+                  validator: (_, value) =>
+                    value ? Promise.resolve() : displayNotification('error', 'خطأ', 'الرجاء قبول الشروط العامة للإستعمال'),
                 },
               ]}
             >
@@ -134,16 +177,6 @@ const Signup = () => {
           <Form.Item>
             <Button htmlType="submit">التسجيل</Button>
           </Form.Item>
-          <GoogleLogin
-            clientId="592293472212-psaab73gie2sf6c40r2i9qang27ts35t.apps.googleusercontent.com"
-            buttonText="تسجيل الدخول  Google"
-            className="button-google"
-            onSuccess={googleSuccess}
-            onFailure={googleError}
-            cookiePolicy="single_host_origin"
-            isSignedIn={false}
-            icon={true}
-          />
         </div>
       </Form>
     </div>
