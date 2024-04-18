@@ -5,7 +5,6 @@ import { Email, Password } from '../../components/Inputs';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../../context/userContext';
 import { Link } from 'react-router-dom';
-import ErrorNotice from '../../components/ErrorNotice';
 
 import { GoogleLogin } from 'react-google-login';
 import displayNotification from '../../components/displayNotification';
@@ -39,7 +38,6 @@ const SignIn = () => {
 
   const googleSuccess = async (res) => {
     const result = res?.profileObj;
-    const token = res?.tokenId;
     const loginRes = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/googleLogin`, {
       ...result,
     });
@@ -64,7 +62,7 @@ const SignIn = () => {
       <div className="google-sign-up">
         <h1>الدخول من خلال Google </h1>
         <GoogleLogin
-          clientId="592293472212-psaab73gie2sf6c40r2i9qang27ts35t.apps.googleusercontent.com"
+          clientId={clientId}
           buttonText="تسجيل الدخول  Google"
           className="button-google"
           onSuccess={googleSuccess}

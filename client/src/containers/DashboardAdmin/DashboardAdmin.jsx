@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import 'moment/locale/ar-tn';
 import AllPayements from './AllPayments/allConsultations';
 import AllConsultations from './AllConsultations/UserSearch';
 import Wallet from './AddConsultations/updateConsultation.jsx';
 import AllUsers from './AllUsers/AllUsers';
-import FileAttached from './FileAttached';
-import { Input, Space } from 'antd';
+import { Input } from 'antd';
 
 const DashboardAdmin = () => {
-  const { SearchInp } = Input;
-  const [filtredData, setFiltredData] = useState('');
   const [data, setData] = useState([]);
   const [value, setValue] = useState('All Consultations');
 
