@@ -94,10 +94,9 @@ export const update = asyncHandler(async (req, res) => {
 //@access public
 export const verifMail = asyncHandler(async (req, res) => {
   const id = req.user;
-  console.log(id);
+
   const user = await User.findById(id);
   user.status.isVerified = true;
-  console.log(user);
   await user.save();
   if (user.role === 'PRO') {
     emailService.confirmAccEmail(user.email, user.name, await generateToken(user._id, config.email.secret));

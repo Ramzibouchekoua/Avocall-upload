@@ -3,7 +3,6 @@ import { Form, message, Button, DatePicker, Spin } from 'antd';
 import { List, Text, TextArea } from '../../components/Inputs';
 import { VideoCameraOutlined, FormOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
-import { InlineWidget } from 'react-calendly';
 import axios from 'axios';
 import moment from 'moment';
 import _ from 'lodash';
@@ -44,15 +43,13 @@ const WrittenAdvice = () => {
     }
   };
   const submitRequest = async (values) => {
+    console.log('first', values);
     const formData = new FormData();
     selectedFile && Object.values(selectedFile).map((e) => formData.append('file', e, e.name));
     let filename = '';
     try {
       let token = localStorage.getItem('auth-token');
-      if (token === null) {
-        localStorage.setItem('auth-token', '');
-        token = '';
-      }
+
       if (userData.wallet < 1) {
         displayNotification('error', 'خطأ', 'ليس لديك إستشارات');
         history.push('/checkout');
@@ -63,10 +60,15 @@ const WrittenAdvice = () => {
         displayNotification('error', 'خطأ', 'نوع الإستشارة إجباري');
         return;
       }
+      if (!values.title) {
+        displayNotification('error', 'خطأ', 'عنوان الاستشارة إجباري');
+        return;
+      }
       if (!dateString) {
         displayNotification('error', 'خطأ', 'التاريخ إجباري');
         return;
       }
+
       if (!_.isEmpty(selectedFile)) {
         const upFile = await axios.post(process.env.REACT_APP_API_URL + '/api/file/upload', formData, {
           headers: { 'x-auth-token': token },
@@ -102,6 +104,8 @@ const WrittenAdvice = () => {
           headers: { 'x-auth-token': token },
         }
       );
+      displayNotification('success', 'أحسنت', ' تم حجز الموعد بنجاح');
+
       const consultationId = newCons.data.consultation._id;
       isChecked === 'video' ? history.push(`/vid-page/${consultationId}`) : history.push(`/text-chat/${consultationId}`);
       setActive(true);
@@ -112,33 +116,11 @@ const WrittenAdvice = () => {
     }
   };
 
-  const Book = () => (
-    <InlineWidget
-      url={`https://calendly.com/istichara/istichara-video`}
-      pageSettings={{
-        backgroundColor: 'ffffff',
-        hideEventTypeDetails: false,
-        hideLandingPageDetails: false,
-        primaryColor: '202F84',
-        textColor: '2F281E',
-      }}
-      styles={{
-        height: '1000px',
-      }}
-      utm={{
-        utmCampaign: 'Spring Sale 2019',
-        utmContent: 'Shoe and Shirts',
-        utmMedium: 'Ad',
-        utmSource: 'Facebook',
-        utmTerm: 'Spring',
-      }}
-    />
-  );
   const DescForm = () => (
     <Form name="nest-messages" className="body" onFinish={submitRequest}>
       <div className="form">
         <div className="section-right">
-          <Text label="موضوع الاستشارة" name="title" rule={true} />
+          <Text label="موضوع الاستشارة" name="title" />
           <List
             label="تصنيف الاستشارة"
             name="field"
@@ -161,7 +143,7 @@ const WrittenAdvice = () => {
           <input type="file" name="file" onChange={onFileChange} multiple /> {/* </Upload> */}
         </div>
         <div className="section-left">
-          <Form.Item label="تاريخ الاستشارة*" rules={[{ required: true }]}>
+          <Form.Item label="تاريخ الاستشارة*">
             <DatePicker
               showTime
               onChange={(v, d) => setDateString(d)}
@@ -175,7 +157,7 @@ const WrittenAdvice = () => {
       </div>
       <Form.Item>
         <Button htmlType="submit" className={active ? 'submit-button ' : 'disabled'}>
-          ارسل طلب الاستشارة
+          حجز موعد
         </Button>
       </Form.Item>
     </Form>
@@ -183,7 +165,9 @@ const WrittenAdvice = () => {
   return (
     <div className="written-advice">
       <div className="head">
-        <div className="title"> استشارة جديدة</div>
+        <div className="title">استشارة جديدة</div>
+        <div className="title-black"> حجز موعد مع محام متخصص </div>
+
         <div className="pricing">
           <div className={isChecked === 'text' ? 'card-type checked' : 'card-type'} onClick={(e) => setIsChecked('text')}>
             <FormOutlined />

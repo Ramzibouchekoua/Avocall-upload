@@ -21,7 +21,7 @@ function Datatable({ data, ascending, setData, setAscending }) {
     <div className="users">
       <table>
         <tbody>
-          {data?.map((item, i) => (
+          {first?.map((item, i) => (
             <tr key={i} className="user">
               <td className="email">{item?.userId?.email}</td>
               <td className="bold">{item.title}</td>

@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Phone from '../../../assets/icons/4014702_call_phone_service_support_icon (1).svg';
-
 const Section_one = () => {
   return (
     <div className="section-one">

@@ -4,7 +4,6 @@ import { Form, Checkbox, Button, DatePicker } from 'antd';
 import { Text, Email, Password, Number } from '../../components/Inputs';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../../context/userContext';
-import ErrorNotice from '../../components/ErrorNotice';
 import moment from 'moment';
 import { GoogleLogin } from 'react-google-login';
 import displayNotification from '../../components/displayNotification';

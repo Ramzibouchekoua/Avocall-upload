@@ -8,6 +8,11 @@
   .head {
     margin-bottom: 35px;
     text-align: center;
+    .title-black {
+      color: #484848;
+      font-size: 18px;
+      font-weight: 600;
+    }
     & .title {
       color: #202f84;
       font-size: 22px;
@@ -43,7 +48,6 @@
       margin: 0 37px;
     }
   }
-
 
   .submit-button {
     width: 420px;
@@ -149,8 +153,8 @@
           width: 280px;
           height: 60px;
           .consultationtype {
-            font-size: 16px ;
-           }
+            font-size: 16px;
+          }
         }
       }
     }
@@ -225,7 +229,7 @@
       align-items: center;
     }
   }
-  .ant-picker-time-panel-column  {
+  .ant-picker-time-panel-column {
     width: 30px;
   }
   .ant-picker-ranges .ant-picker-ok {
@@ -235,7 +239,7 @@
     display: none;
   }
   .ant-picker-date-panel {
-    width:250px
+    width: 250px;
   }
   .ant-picker-datetime-panel {
     flex-direction: column;
@@ -243,7 +247,6 @@
   .ant-picker-input {
     max-width: 280px;
   }
- 
 }
 
 @media (min-width: 768px) and (max-width: 950px) {
@@ -269,17 +272,16 @@
       .pricing {
         margin-right: 5% !important;
         display: flex;
-        
+
         align-items: center;
         .card-type {
           width: 300px;
           height: 100px;
-     
         }
       }
     }
-    }
   }
-  .ant-picker-now-btn {
-    display: none;
-  }
+}
+.ant-picker-now-btn {
+  display: none;
+}
