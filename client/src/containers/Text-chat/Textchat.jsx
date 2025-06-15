@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 import ReportModal from '../../components/ReportModal';
-import { PaperClipOutlined, SendOutlined } from '@ant-design/icons';
+import { PaperClipOutlined, SendOutlined, WhatsAppOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import 'moment/locale/ar-tn';
 import displayNotification from '../../components/displayNotification';
-import { Col, Row, Spin } from 'antd';
+import { Col, Row, Spin, Button } from 'antd';
 const Textchat = ({ socket }) => {
   const [reportVisible, setReportVisible] = useState(false);
   const { id } = useParams();
@@ -163,6 +163,55 @@ const Textchat = ({ socket }) => {
       setPics(pics.concat(file.data));
     } catch (err) {}
   };
+  const renderConsultationType = () => {
+    if (theConsultation.type === 'text') {
+      return (
+        <div className="chat-box-section">
+          <div className="chatroom-content">
+            {messages
+              .slice()
+              .reverse()
+              .map((message, i) => (
+                <div key={i} className="message">
+                  <span className={userId === message.user ? 'ownMessage' : 'otherMessage'}>{message.name}:</span>{' '}
+                  <p className="message-content">{message.message}</p>
+                </div>
+              ))}
+          </div>
+          <div className="chatroom-actions">
+            <div className="message-field">
+              <input type="text" name="message" placeholder="اكتب الرسالة هنا " ref={messageRef} onKeyDown={handleKeyDown} />
+            </div>
+            <div className="action-btn">
+              <button className="join upload-hidden" onClick={sendMessage}>
+                <PaperClipOutlined />
+              </button>
+              <button className="join send" onClick={sendMessage}>
+                <SendOutlined />
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    } else if (theConsultation.type === 'whatsapp') {
+      return (
+        <div className="whatsapp-consultation">
+          <p className="whatsapp-text">اضغط على الزر للتحدث مع محامينا عبر الواتساب</p>
+          <Button type="primary" className="whatsapp-button" icon={<WhatsAppOutlined />}>
+            <a href="https://wa.me/+21622250738" target="blank">
+              تواصل عبر الواتساب
+            </a>
+          </Button>
+        </div>
+      );
+    } else if (theConsultation.type === 'sms') {
+      return (
+        <div className="whatsapp-consultation">
+          <h2>سيقوم محامينا بالتواصل معك عبر الرسائل النصية في أقرب وقت ممكن.</h2>
+        </div>
+      );
+    }
+  };
   return (
     <>
       {statusOfPage === 'Loading' ? (
@@ -173,7 +222,15 @@ const Textchat = ({ socket }) => {
             <table className="az">
               <tbody>
                 <tr>
-                  <th>إستشارة كتابيّة</th>
+                  <th>
+                    {theConsultation.type === 'text'
+                      ? 'إستشارة كتابيّة'
+                      : theConsultation.type === 'whatsapp'
+                      ? 'إستشارة عبر الواتساب'
+                      : theConsultation.type === 'sms'
+                      ? 'إستشارة عبر الرسائل النصية'
+                      : 'نوع الاستشارة غير معروف'}
+                  </th>
                 </tr>
                 <tr>
                   <td>{theConsultation.field}</td>
@@ -212,45 +269,11 @@ const Textchat = ({ socket }) => {
             <Link to="/dashboard">
               <button className="button-blue">أغلق الاستشارة</button>
             </Link>
-            {/* <Link to="/written-advice">
-              <button className="button-blue">تعديل الاستشارة</button>
-            </Link> */}
             <button className="connexion" onClick={() => setReportVisible(true)}>
               مشكلة في الاستشارة ؟
             </button>
           </div>
-          <div className="chat-box-section">
-            <div className="chatroom-content">
-              {messages
-                .slice()
-                .reverse()
-                .map((message, i) => (
-                  <div key={i} className="message">
-                    <span className={userId === message.user ? 'ownMessage' : 'otherMessage'}>{message.name}:</span>{' '}
-                    <p className="message-content">{message.message}</p>
-                  </div>
-                ))}
-            </div>
-            <div className="chatroom-actions">
-              <div className="message-field">
-                <input
-                  type="text"
-                  name="message"
-                  placeholder="اكتب الرسالة هنا "
-                  ref={messageRef}
-                  onKeyDown={handleKeyDown}
-                />
-              </div>
-              <div className="action-btn">
-                <button className="join upload-hidden" onClick={sendMessage}>
-                  <PaperClipOutlined />
-                </button>
-                <button className="join send" onClick={sendMessage}>
-                  <SendOutlined />
-                </button>
-              </div>
-            </div>
-          </div>
+          {renderConsultationType()}
           <ReportModal
             visible={reportVisible}
             userOwner={userOwner}

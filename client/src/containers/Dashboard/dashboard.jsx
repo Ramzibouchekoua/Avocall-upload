@@ -76,7 +76,17 @@ const Dashboard = () => {
                   className={!item.isClosed ? 'list' : 'list end'}
                 >
                   <div className="list-content">
-                    <div className="list-content_type">{item.type === 'video' ? 'إستشارة بالفيديو' : 'إستشارة كتابيّة'}</div>
+                    <div className="list-content_type">
+                      {item.type === 'text'
+                        ? 'إستشارة كتابيّة'
+                        : item.type === 'whatsapp'
+                        ? 'إستشارة عبر الواتساب'
+                        : item.type === 'sms'
+                        ? 'إستشارة عبر الرسائل النصية'
+                        : item.type === 'video'
+                        ? 'إستشارة بالفيديو'
+                        : 'نوع الاستشارة غير معروف'}
+                    </div>
                     <div className="list-content_title">{item.title}</div>
                     <div className="list-content_desc">{item.description}</div>
                   </div>

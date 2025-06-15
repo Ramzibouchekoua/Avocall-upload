@@ -102,6 +102,47 @@
       width: 75%;
     }
   }
+  .whatsapp-consultation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    width: 80%;
+  }
+
+  .whatsapp-text {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+  }
+
+  .whatsapp-button {
+    background-color: #25d366;
+    border-color: #25d366;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 20px 40px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
+    span {
+      color: #fff !important;
+      svg {
+        font-size: 20px;
+        margin-left: 8px;
+        color: #fff !important;
+        width: 40px;
+        fill: #fff !important;
+      }
+    }
+  }
 }
 @media (max-width: 767px) {
   .Text-chat {

@@ -177,14 +177,17 @@ const WrittenAdvice = () => {
             <VideoCameraOutlined />
             <span className="consultationtype">إستشارة بالفيديو</span>
           </div>
-
-          {/* <input
-            type="button"
-            value="call"
-            name="call"
-            onClick={(e) => setIsChecked(e.target.name)}
-            className={isChecked === 'call' ? 'card-type checked' : 'card-type'}
-          /> */}
+          <div
+            className={isChecked === 'whatsapp' ? 'card-type checked' : 'card-type'}
+            onClick={(e) => setIsChecked('whatsapp')}
+          >
+            <FormOutlined />
+            <span className="consultationtype">إستشارة عبر الواتساب</span>
+          </div>
+          <div className={isChecked === 'sms' ? 'card-type checked' : 'card-type'} onClick={(e) => setIsChecked('sms')}>
+            <FormOutlined />
+            <span className="consultationtype">إستشارة عبر الرسائل النصية</span>
+          </div>
         </div>
         {active ? DescForm() : <Spin tip="جاري..." />}
       </div>
