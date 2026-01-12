@@ -31,7 +31,7 @@
 
 /*==============================================
 =            COMPONENTS           =
-=============================================*/
+==============================================*/
 @import './components/inputs';
 @import './components/error-notice';
 @import './components/error-result';
@@ -76,6 +76,7 @@ body {
     border-radius: 4px;
     padding: 10px 0px;
     background-color: #202f84;
+
     text-align: center;
     text-decoration: none;
     color: #fff;
@@ -91,4 +92,66 @@ body {
 }
 .ant-input-password-icon {
   color: #fff !important;
+}
+// Promo bar styles
+.promo-bar-banner {
+  display: block;
+  width: 100%;
+  background: linear-gradient(90deg, #b91c1c, #dc2626);
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 10px 0;
+}
+
+.promo-track-banner-header {
+  color: #ffffff !important;
+  text-align: center;
+  margin: 0px !important;
+  font-size: 14px !important;
+  cursor: pointer;
+}
+
+.avocall-promo-bar {
+  display: block;
+  width: 100%;
+  background: linear-gradient(90deg, #b91c1c, #dc2626);
+  color: #ffffff !important;
+  text-decoration: none !important;
+  overflow: hidden;
+  height: 44px;
+  line-height: 44px;
+  direction: rtl;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  
+  &:hover, &:focus, &:active, &:visited {
+    color: #ffffff !important;
+    text-decoration: none !important;
+  }
+}
+
+.avocall-promo-track {
+  display: inline-block;
+  white-space: nowrap;
+  padding-right: 100%;
+  animation: avocall-slide 16s linear infinite;
+  color: #ffffff !important;
+  font-size: 14px;
+  text-shadow: none !important;
+  text-decoration: none !important;
+}
+
+.avocall-promo-bar:hover .avocall-promo-track {
+  animation-play-state: paused;
+}
+
+@keyframes avocall-slide {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }

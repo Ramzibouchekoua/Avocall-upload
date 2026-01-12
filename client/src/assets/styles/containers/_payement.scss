@@ -349,3 +349,14 @@
     }
   }
 }
+.card-type.emergency {
+  border-color: red;
+  background-color: white;
+  color: white;
+  .price {
+    color: red !important;
+  }
+  .title {
+    color: red !important;
+  }
+}

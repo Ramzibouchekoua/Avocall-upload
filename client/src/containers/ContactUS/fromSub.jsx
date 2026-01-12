@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Input, Button } from 'antd';
+import { useLocation } from 'react-router-dom';
+import queryString from 'query-string';
 import displayNotification from '../../components/displayNotification';
 import Axios from 'axios';
 
 const FormSub = () => {
+  const location = useLocation();
   const [nameForm, setNameForm] = useState('');
   const [emailForm, setEmailForm] = useState('');
   const [phoneForm, setPhoneForm] = useState('');
@@ -11,6 +14,15 @@ const FormSub = () => {
   const [type, setType] = useState(false);
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
+
+  // Check URL parameters on component mount
+  useEffect(() => {
+    const params = queryString.parse(location.search);
+    const companyParam = params.company;
+    if (companyParam === 'true' || companyParam === '1') {
+      setType(true); // Set to pro/company mode
+    }
+  }, [location.search]);
 
   const typeForm = () => {
     setType(!type);

@@ -17,14 +17,14 @@ const packs = [
     amount: 100000,
     // oldprice: '50TND',
   },
-  // {
-  //   id: 2,
-  //   title: ' 3 إستشارات',
-  //   price: '69TND',
-  //   nbr: 0,
-  //   amount: 69000,
-  //   oldprice: '90TND',
-  // },
+  {
+    id: 2,
+    title: ' استشارة فورية',
+    price: '199TND',
+    nbr: 1,
+    amount: 199000,
+    // oldprice: '90TND',
+  },
 ];
 
 const Payement = () => {
@@ -98,7 +98,7 @@ const Payement = () => {
           {packs.map((e) => (
             <div
               onClick={() => setIsChecked(e)}
-              className={isChecked.id === e.id ? 'card-type checked' : 'card-type'}
+              className={`${isChecked.id === e.id ? 'card-type checked' : 'card-type'}${e.id === 2 ? ' emergency' : ''}`}
               key={e.id}
             >
               <CheckOutlined />

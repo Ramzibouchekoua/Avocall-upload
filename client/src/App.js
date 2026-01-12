@@ -118,7 +118,7 @@ export default function App() {
   return (
     <div dir="rtl">
       <BrowserRouter>
-        {/* <ScrollToTop /> */}
+        <ScrollToTop />
         <UserContext.Provider value={{ userData, setUserData }}>
           {isLoading ? (
             <Spin tip="جاري..." spinning={isLoading} />
