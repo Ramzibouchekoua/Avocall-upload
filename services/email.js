@@ -22,7 +22,12 @@ transport
  */
 const sendEmail = async (to, subject, text, html) => {
   const msg = { from: config.email.from, to, subject, text, html };
-  await transport.sendMail(msg);
+  try {
+    await transport.sendMail(msg);
+  } catch (error) {
+    console.error('sendEmail failed:', { to, subject, error });
+    throw error;
+  }
 };
 
 /**
@@ -43,8 +48,12 @@ const sendEmailWithImageAttached = async (to, subject, text, html, imageFileName
       },
     ],
   };
-
-  await transport.sendMail(msg);
+  try {
+    await transport.sendMail(msg);
+  } catch (error) {
+    console.error('sendEmailWithImageAttached failed:', { to, subject, imageFileName, error });
+    throw error;
+  }
 };
 
 const sendVerifMail = async (to, name, token) => {
@@ -60,16 +69,16 @@ const sendVerifMail = async (to, name, token) => {
 const sendVerifAvocatMail = async (user, token) => {
   const subject = 'verif mail';
   const html = VerifAvocatMail(user, token);
-  await sendEmail(config.email.smtp.auth.user, subject, '', html);
+  await sendEmail(config.email.to, subject, '', html);
 };
 
 const newConsultationEmail = async (consultation, avocats, imageFileName) => {
   const subject = 'Valid Consultation';
   const html = newConsultation(consultation, avocats);
   if (imageFileName == '') {
-    await sendEmail(config.email.smtp.auth.user, subject, '', html);
+    await sendEmail(config.email.to, subject, '', html);
   } else {
-    await sendEmailWithImageAttached(config.email.smtp.auth.user, subject, '', html, imageFileName);
+    await sendEmailWithImageAttached(config.email.to, subject, '', html, imageFileName);
   }
 };
 
@@ -77,9 +86,9 @@ const buyPackEmail = async (user, imageFileName) => {
   const subject = 'Payment';
   const html = buyPackEmailTemplate(user);
   if (imageFileName === 'online-payment') {
-    await sendEmail(config.email.smtp.auth.user, subject, '', html);
+    await sendEmail(config.email.to, subject, '', html);
   } else {
-    await sendEmailWithImageAttached(config.email.smtp.auth.user, subject, '', html, imageFileName);
+    await sendEmailWithImageAttached(config.email.to, subject, '', html, imageFileName);
   }
 };
 
@@ -92,7 +101,7 @@ const confirmAccEmail = async (to, name, token) => {
 const formEmailApp = async (email, name, phone, description, type) => {
   const subject = 'Form Avocall App';
   const html = formEmail(email, name, phone, description, type);
-  await sendEmail(config.email.smtp.auth.user, subject, '', html);
+  await sendEmail(config.email.to, subject, '', html);
 };
 
 export default {

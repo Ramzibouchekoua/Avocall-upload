@@ -13,6 +13,7 @@ const envVarsSchema = Joi.object()
     JWT_SECRET: Joi.string().required().description('JWT secret key'),
     JWT_ACCESS_EXPIRATION_MINUTES: Joi.number().default(30).description('minutes after which access tokens expire'),
     JWT_REFRESH_EXPIRATION_DAYS: Joi.number().default(30).description('days after which refresh tokens expire'),
+      EMAIL_TO: Joi.string().required().description('Default recipient for system emails'),
   })
   .unknown();
 
@@ -42,13 +43,17 @@ export default {
   },
   email: {
     secret: envVars.MAIL_SECRET,
+      to: envVars.EMAIL_TO, // Default recipient for system emails
     smtp: {
       host: envVars.SMTP_HOST,
       port: envVars.SMTP_PORT,
-      secure: true,
+      secure: false, // false for port 587
       auth: {
-        user: envVars.SMTP_USERNAME,
+          user: envVars.SMTP_USERNAME, // Use SMTP_USERNAME for authentication
         pass: envVars.SMTP_PASSWORD,
+      },
+      tls: {
+        rejectUnauthorized: false,
       },
     },
     from: envVars.EMAIL_FROM,
