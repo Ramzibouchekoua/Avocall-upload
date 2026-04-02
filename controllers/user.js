@@ -7,6 +7,7 @@ import config from '../config';
 import emailService from '../services/email';
 import email from '../services/email';
 import { date } from 'joi';
+import { getPackByAmount, getPackByCode, extendWalletExpiration } from '../helpers/packHelper';
 
 //@des register new user
 //@route POST /api/user/register
@@ -137,6 +138,9 @@ export const deleteUser = asyncHandler(async (req, res) => {
 export const newConsultation = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user);
   if (!user.wallet || user.wallet < 1) return res.status(400).json({ msg: 'Empty wallet' });
+  if (user.walletExpirationDate && user.walletExpirationDate < new Date()) {
+    return res.status(400).json({ msg: 'Pack expired' });
+  }
   const newConsultation = {
     ...req.body,
     userId: req.user,
@@ -186,13 +190,31 @@ export const updateConsultation = asyncHandler(async (req, res) => {
 //@access private
 export const buyPack = asyncHandler(async (req, res) => {
   const fileName = req.body.filename;
-  const consultationNumber = req.body.consultationNumber;
   const user = await User.findById(req.user);
+
   if (fileName !== 'online-payment') {
+    // Bank transfer: attach proof file, do not credit wallet (admin will credit manually)
     const payment = await File.findOne({ fileName });
-    user.files.push(payment);
+    if (payment) user.files.push(payment);
+    await user.save();
+    user.password = undefined;
+    await emailService.buyPackEmail(user, fileName);
+    return res.json({ user });
   }
-  user.wallet = Number(user.wallet) + Number(consultationNumber);
+
+  // Online payment: compute credit from amount or packCode (server-side)
+  const amount = req.body.amount;
+  const packCode = req.body.packCode;
+
+  let pack = packCode ? getPackByCode(packCode) : null;
+  if (!pack && amount) pack = getPackByAmount(amount);
+
+  if (!pack) {
+    return res.status(400).json({ msg: 'Invalid pack' });
+  }
+
+  user.wallet = Number(user.wallet) + pack.walletAdd;
+  extendWalletExpiration(user, pack.months);
   await user.save();
   user.password = undefined;
   await emailService.buyPackEmail(user, fileName);
