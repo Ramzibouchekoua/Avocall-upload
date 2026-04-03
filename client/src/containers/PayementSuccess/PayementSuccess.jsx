@@ -22,12 +22,11 @@ const PayementSuccess = () => {
           localStorage.setItem('auth-token', '');
           token = '';
         }
+        const amount = query.get('amount');
         const newConsultation = await axios.post(
           process.env.REACT_APP_API_URL + '/api/user/buyPack',
           {
-            // consultationNumber: Number(query.get('amount') === '100000' ? 1 : 3),
-            consultationNumber: 1,
-
+            amount,
             filename: 'online-payment',
           },
           {

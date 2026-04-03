@@ -11,19 +11,30 @@ import displayNotification from '../../components/displayNotification';
 const packs = [
   {
     id: 1,
-    title: 'إستشارة',
-    price: '100TND',
-    nbr: 0,
-    amount: 100000,
-    // oldprice: '50TND',
+    packCode: 'PACK_1M',
+    title: 'باقة شهر',
+    price: '199TND',
+    nbr: 3,
+    amount: 199000,
+    duration: '1 شهر',
   },
   {
     id: 2,
-    title: ' استشارة فورية',
-    price: '199TND',
-    nbr: 1,
-    amount: 199000,
-    // oldprice: '90TND',
+    packCode: 'PACK_6M',
+    title: 'باقة 6 أشهر',
+    price: '999TND',
+    nbr: 15,
+    amount: 999000,
+    duration: '6 أشهر',
+  },
+  {
+    id: 3,
+    packCode: 'PACK_12M',
+    title: 'باقة سنة',
+    price: '1799TND',
+    nbr: 30,
+    amount: 1799000,
+    duration: '12 شهرا',
   },
 ];
 
@@ -67,7 +78,8 @@ const Payement = () => {
         const newConsultation = await axios.post(
           process.env.REACT_APP_API_URL + '/api/user/buyPack',
           {
-            consultationNumber: isChecked.nbr,
+            packCode: isChecked.packCode,
+            amount: isChecked.amount,
             filename,
           },
           {
