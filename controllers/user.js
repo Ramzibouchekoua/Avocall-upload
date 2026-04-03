@@ -146,6 +146,9 @@ export const newConsultation = asyncHandler(async (req, res) => {
   }
 
   if (!user.wallet || user.wallet < 1) return res.status(400).json({ msg: 'Empty wallet' });
+  if (user.walletExpirationDate && user.walletExpirationDate < new Date()) {
+    return res.status(400).json({ msg: 'Pack expired' });
+  }
   const newConsultation = {
     ...req.body,
     userId: req.user,

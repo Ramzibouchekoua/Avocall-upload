@@ -99,7 +99,8 @@ const Payement = () => {
         const newConsultation = await axios.post(
           process.env.REACT_APP_API_URL + '/api/user/buyPack',
           {
-            consultationNumber: isChecked.nbr,
+            packCode: isChecked.packCode,
+            amount: isChecked.amount,
             filename,
           },
           {
