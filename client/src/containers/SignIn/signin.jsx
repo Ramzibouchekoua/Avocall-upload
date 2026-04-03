@@ -30,7 +30,11 @@ const SignIn = () => {
       });
       localStorage.setItem('auth-token', loginRes.data.token);
       localStorage.setItem('role', loginRes.data.user.role);
-      loginRes.data.user.role === 'USER' ? history.push('/dashboard') : history.push('/dashboardPro');
+      loginRes.data.user.role === 'USER'
+        ? history.push('/checkout')
+        : loginRes.data.user.role === 'ADMIN'
+          ? history.push('/DashboardAdmin')
+          : history.push('/');
     } catch (err) {
       err.response.data.msg && displayNotification('error', 'خطأ', err.response.data.msg);
     }
@@ -49,7 +53,11 @@ const SignIn = () => {
       });
       localStorage.setItem('auth-token', loginRes.data.token);
       localStorage.setItem('role', loginRes.data.user.role);
-      loginRes.data.user.role === 'USER' ? history.push('/dashboard') : history.push('/dashboardPro');
+      loginRes.data.user.role === 'USER'
+        ? history.push('/checkout')
+        : loginRes.data.user.role === 'ADMIN'
+          ? history.push('/DashboardAdmin')
+          : history.push('/');
     } catch (err) {
       err.response.data.msg && displayNotification('error', 'خطأ', err.response.data.msg);
     }

@@ -48,7 +48,11 @@ const Signup = () => {
         user: loginRes.data.user,
       });
       localStorage.setItem('auth-token', loginRes.data.token);
-      loginRes.data.user.role === 'USER' ? history.push('/dashboard') : history.push('/dashboardPro');
+      loginRes.data.user.role === 'USER'
+        ? history.push('/checkout')
+        : loginRes.data.user.role === 'ADMIN'
+          ? history.push('/DashboardAdmin')
+          : history.push('/');
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
 
@@ -62,7 +66,11 @@ const Signup = () => {
           user: loginRes.data.user,
         });
         localStorage.setItem('auth-token', loginRes.data.token);
-        loginRes.data.user.role === 'USER' ? history.push('/dashboard') : history.push('/dashboardPro');
+        loginRes.data.user.role === 'USER'
+          ? history.push('/checkout')
+          : loginRes.data.user.role === 'ADMIN'
+            ? history.push('/DashboardAdmin')
+            : history.push('/');
       }
     }
   };
