@@ -7,6 +7,7 @@ import config from '../config';
 import emailService from '../services/email';
 import email from '../services/email';
 import { date } from 'joi';
+import { extendWalletExpiration } from '../helpers/walletExpiration';
 
 //@des getUserPayments
 //@route GET /api/admin/getUserPayments
@@ -89,8 +90,12 @@ export const getAllConsultations = asyncHandler(async (req, res) => {
 export const updateUserConsultationsTotal = asyncHandler(async (req, res) => {
   const email = req.body.email;
   const consultationNumber = req.body.consultationNumber;
+  const durationMonths = req.body.durationMonths;
   const user = await User.findOne({ email: email });
   user.wallet = Number(user.wallet) + Number(consultationNumber);
+  if (durationMonths) {
+    extendWalletExpiration(user, Number(durationMonths));
+  }
   await user.save();
   user.password = undefined;
   res.json({ user });

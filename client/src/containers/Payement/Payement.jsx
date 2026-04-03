@@ -9,23 +9,55 @@ import { Link } from 'react-router-dom';
 import displayNotification from '../../components/displayNotification';
 
 const packs = [
+  // Old packs – kept for backward compatibility, 1-year expiration
   {
     id: 1,
     title: 'إستشارة',
     price: '100TND',
-    nbr: 0,
+    nbr: 1,
     amount: 100000,
-    // oldprice: '50TND',
+    duration: 12,
   },
   {
     id: 2,
-    title: ' استشارة فورية',
+    title: 'استشارة فورية',
     price: '199TND',
     nbr: 1,
     amount: 199000,
-    // oldprice: '90TND',
+    duration: 12,
+  },
+  // New packs
+  {
+    id: 3,
+    title: 'باقة شهر',
+    price: '199TND',
+    nbr: 3,
+    amount: 199001,
+    duration: 1,
+  },
+  {
+    id: 4,
+    title: 'باقة 6 شهور',
+    price: '999TND',
+    nbr: 15,
+    amount: 999000,
+    duration: 6,
+  },
+  {
+    id: 5,
+    title: 'باقة سنة',
+    price: '1799TND',
+    nbr: 30,
+    amount: 1799000,
+    duration: 12,
   },
 ];
+
+const getDurationLabel = (months) => {
+  if (months === 1) return 'صالحة لمدة شهر';
+  if (months === 12) return 'صالحة لمدة سنة';
+  return `صالحة لمدة ${months} شهور`;
+};
 
 const Payement = () => {
   const [isChecked, setIsChecked] = useState({});
@@ -105,6 +137,7 @@ const Payement = () => {
               <span className="title">{e.title}</span>
               <span className="old-price">{e.oldprice}</span>
               <span className="price">{e.price}</span>
+              <span className="duration">{getDurationLabel(e.duration)}</span>
             </div>
           ))}
         </div>
