@@ -22,8 +22,8 @@ const PayementSuccess = () => {
           localStorage.setItem('auth-token', '');
           token = '';
         }
-        const amount = query.get('amount');
-        const newConsultation = await axios.post(
+        const amount = Number(query.get('amount'));
+        await axios.post(
           process.env.REACT_APP_API_URL + '/api/user/buyPack',
           {
             amount,

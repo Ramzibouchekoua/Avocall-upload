@@ -7,7 +7,8 @@ import config from '../config';
 import emailService from '../services/email';
 import email from '../services/email';
 import { date } from 'joi';
-import { getPackByAmount, getPackByCode, extendWalletExpiration } from '../helpers/packHelper';
+import { PACK_CONTRACTS } from '../helpers/packContract';
+import { extendWalletExpiration } from '../helpers/walletExpiration';
 
 //@des register new user
 //@route POST /api/user/register
@@ -137,6 +138,13 @@ export const deleteUser = asyncHandler(async (req, res) => {
 //@access private
 export const newConsultation = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user);
+  const now = new Date();
+
+  // Check if the pack has expired
+  if (user.walletExpirationDate && user.walletExpirationDate < now) {
+    return res.status(400).json({ msg: 'لقد انتهت صلاحية باقتك. يرجى تجديد الاشتراك.' });
+  }
+
   if (!user.wallet || user.wallet < 1) return res.status(400).json({ msg: 'Empty wallet' });
   if (user.walletExpirationDate && user.walletExpirationDate < new Date()) {
     return res.status(400).json({ msg: 'Pack expired' });
@@ -193,28 +201,26 @@ export const buyPack = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user);
 
   if (fileName !== 'online-payment') {
-    // Bank transfer: attach proof file, do not credit wallet (admin will credit manually)
+    // Bank transfer path: store proof, send pending email – do NOT credit wallet
     const payment = await File.findOne({ fileName });
-    if (payment) user.files.push(payment);
+    if (payment) {
+      user.files.push(payment);
+    }
     await user.save();
     user.password = undefined;
     await emailService.buyPackEmail(user, fileName);
     return res.json({ user });
   }
 
-  // Online payment: compute credit from amount or packCode (server-side)
-  const amount = req.body.amount;
-  const packCode = req.body.packCode;
-
-  let pack = packCode ? getPackByCode(packCode) : null;
-  if (!pack && amount) pack = getPackByAmount(amount);
-
-  if (!pack) {
-    return res.status(400).json({ msg: 'Invalid pack' });
+  // Online payment path: credit wallet automatically based on amount
+  const amount = Number(req.body.amount);
+  const contract = PACK_CONTRACTS[amount];
+  if (!contract) {
+    return res.status(400).json({ msg: 'Invalid payment amount' });
   }
 
-  user.wallet = Number(user.wallet) + pack.walletAdd;
-  extendWalletExpiration(user, pack.months);
+  user.wallet = Number(user.wallet) + contract.walletAdd;
+  extendWalletExpiration(user, contract.months);
   await user.save();
   user.password = undefined;
   await emailService.buyPackEmail(user, fileName);
