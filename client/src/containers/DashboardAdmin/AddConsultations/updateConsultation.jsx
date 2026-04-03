@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { Input, Button, Modal } from 'antd';
+import React, { useState } from 'react';
+import { DatePicker, Input, Modal } from 'antd';
 import { UserOutlined, FileDoneOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import 'moment/locale/ar-tn';
-import Posts from '../AllPayments';
 
 const Consultation = () => {
   const [email, setEmail] = useState('');
   const [consultation, setConsultation] = useState(0);
+  const [expirationDate, setExpirationDate] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [user, setuser] = useState({});
 
@@ -23,11 +22,15 @@ const Consultation = () => {
     axios
       .post(
         process.env.REACT_APP_API_URL + '/api/admin/updateUserConsultationsTotal',
-        { email: email, consultationNumber: consultation },
-        config
+        {
+          email: email,
+          consultationNumber: consultation,
+          expirationDate: expirationDate ? expirationDate.endOf('day').toISOString() : undefined,
+        },
+        config,
       )
       .then((res) => setuser(res.data.user))
-      .then(setIsModalOpen(true))
+      .then(() => setIsModalOpen(true))
       .catch((err) => alert(err));
   };
 
@@ -53,7 +56,12 @@ const Consultation = () => {
           value={consultation}
           onChange={(e) => setConsultation(e.target.value)}
         />
-        <button onClick={handleSubmit}>Add Consultation</button>
+        <DatePicker
+          style={{ width: '100%', marginTop: 12, marginBottom: 12 }}
+          onChange={(value) => setExpirationDate(value || null)}
+          placeholder="Expiration date"
+        />
+        <button type="submit">Add Consultation</button>
       </form>
       <Modal title="Add Consultation " open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
         {Object.keys(user).length === 0 ? (
@@ -64,6 +72,7 @@ const Consultation = () => {
             <p>Name: {user.name}</p>
             <p>Email:{user.email} </p>
             <p>Wallet: {user.wallet}</p>
+            <p>Wallet expiration: {user.walletExpirationDate || 'Not set'}</p>
           </>
         )}
       </Modal>

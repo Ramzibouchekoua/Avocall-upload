@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { useHistory, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import ModalPayement from './ModalPayement';
 
 function useQuery() {
@@ -9,46 +9,65 @@ function useQuery() {
 }
 
 const OrderConfirmation = () => {
-  const [orderNumber, setOrderNumber] = useState();
   const [currency] = useState(788);
   const [language] = useState('en');
   const [password] = useState(process.env.REACT_APP_CLICK_TO_PAY_PASSWORD);
   const [userName] = useState(process.env.REACT_APP_CLICK_TO_PAY_USERNAME);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [url, setUrl] = useState('');
-  const [pressed, setPressed] = useState(false);
-  const history = useHistory();
-  let query = useQuery();
+  const [transaction, setTransaction] = useState(null);
+  const query = useQuery();
+  const packCode = query.get('packCode');
 
   useEffect(() => {
-    const createOrderNumber = async () => {
+    const createTransaction = async () => {
+      if (!packCode) {
+        return;
+      }
+
       try {
         let token = localStorage.getItem('auth-token');
         if (token === null) {
           localStorage.setItem('auth-token', '');
           token = '';
         }
-        const response = await axios.get(process.env.REACT_APP_API_URL + '/api/user/createOrderNumber', {
-          headers: { 'x-auth-token': token },
-        });
-        setOrderNumber(response.data.orderNumber);
+
+        const response = await axios.post(
+          process.env.REACT_APP_API_URL + '/api/user/payments/card/initiate',
+          { packCode },
+          {
+            headers: { 'x-auth-token': token },
+          },
+        );
+
+        setTransaction(response.data.transaction);
       } catch (err) {}
     };
 
-    createOrderNumber();
-  }, [isModalOpen]);
+    createTransaction();
+  }, [packCode]);
+
   useEffect(() => {
     openModel();
   }, [url]);
 
   const sendPayment = async () => {
+    if (!transaction) {
+      return;
+    }
+
     try {
+      const transactionId = transaction._id;
+      const orderNumber = transaction.provider && transaction.provider.orderNumber ? transaction.provider.orderNumber : '';
+      const successUrl = `${process.env.REACT_APP_CLIENT_URL}/payment-success?transactionId=${transactionId}`;
+      const failUrl = `${process.env.REACT_APP_CLIENT_URL}/payment-error?transactionId=${transactionId}`;
+
       const {
-        data: { orderId, formUrl },
+        data: { formUrl },
       } = await axios.post(
         process.env.REACT_APP_CLICK_TO_PAY_API_URL +
           '?amount=' +
-          parseFloat(query.get('amount')) +
+          parseFloat(transaction.expectedAmount) +
           '&currency=' +
           currency +
           '&language=' +
@@ -59,14 +78,12 @@ const OrderConfirmation = () => {
           password +
           '&userName=' +
           userName +
-          `&returnUrl=${process.env.REACT_APP_CLIENT_URL}/payment-success?amount=${query.get('amount')}&failUrl=${
-            process.env.REACT_APP_CLIENT_URL
-          }/payment-error?amount=${query.get('amount')}`
+          `&returnUrl=${successUrl}&failUrl=${failUrl}`,
       );
       setUrl(formUrl);
-      setPressed(true);
     } catch (err) {}
   };
+
   const openModel = () => {
     if (url.length > 1) {
       setIsModalOpen(true);
@@ -74,13 +91,14 @@ const OrderConfirmation = () => {
       setIsModalOpen(false);
     }
   };
+
   return (
     <div className="PayementError">
       <span>
         يرجى الضغط على زر <b>الدفع</b> لإتمام المعاملة
       </span>
       <div className="Payement">
-        <button className="ant-btn" onClick={() => sendPayment()}>
+        <button className="ant-btn" onClick={() => sendPayment()} disabled={!transaction}>
           الدفع
         </button>
 

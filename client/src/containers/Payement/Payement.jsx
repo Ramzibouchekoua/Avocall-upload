@@ -1,5 +1,4 @@
 import React from 'react';
-import { message } from 'antd';
 import { CheckOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
@@ -13,6 +12,7 @@ const packs = [
   {
     id: 1,
     title: 'إستشارة',
+    packCode: 'OLD_PACK_1',
     price: '100TND',
     nbr: 1,
     amount: 100000,
@@ -21,6 +21,7 @@ const packs = [
   {
     id: 2,
     title: 'استشارة فورية',
+    packCode: 'OLD_PACK_2',
     price: '199TND',
     nbr: 1,
     amount: 199000,
@@ -30,14 +31,16 @@ const packs = [
   {
     id: 3,
     title: 'باقة شهر',
+    packCode: 'NEW_PACK_1M',
     price: '199TND',
     nbr: 3,
-    amount: 199001,
+    amount: 1001,
     duration: 1,
   },
   {
     id: 4,
     title: 'باقة 6 شهور',
+    packCode: 'NEW_PACK_6M',
     price: '999TND',
     nbr: 15,
     amount: 999000,
@@ -46,6 +49,7 @@ const packs = [
   {
     id: 5,
     title: 'باقة سنة',
+    packCode: 'NEW_PACK_12M',
     price: '1799TND',
     nbr: 30,
     amount: 1799000,
@@ -96,23 +100,21 @@ const Payement = () => {
         filename = upFile.data.data.fileName;
         displayNotification('success', 'تم', 'تم تحميل الصورة');
 
-        const newConsultation = await axios.post(
-          process.env.REACT_APP_API_URL + '/api/user/buyPack',
+        const response = await axios.post(
+          process.env.REACT_APP_API_URL + '/api/user/payments/bank-transfer',
           {
             packCode: isChecked.packCode,
-            amount: isChecked.amount,
             filename,
           },
           {
             headers: { 'x-auth-token': token },
-          }
+          },
         );
         displayNotification('success', 'تم', 'سيضاف لكم الرصيد في اجل اقصاه 48 ساعة شكرا');
 
-        //history.push('/OrderConfirmation');
         setActive(true);
         setTimeout(() => {
-          history.push('/written-advice');
+          history.push('/payment-pending?transactionId=' + response.data.transaction._id);
         }, 5000);
       } catch (err) {
         displayNotification('error', 'خطأ', 'حاول مرة أخرى. شكرًا لك');
@@ -149,8 +151,8 @@ const Payement = () => {
         <span className="under-title">يمكنك الدفع عبر حوالة مصرفية او عبر استعمال بطاقتك البنكية</span>
         <div className="credit-card">
           <span>للدفع عبر البطاقة المصرفية اختر العرض المرغوب فيه</span>
-          {isChecked.amount && (
-            <Link to={`/OrderConfirmation?amount=${isChecked.amount}`}>
+          {isChecked.packCode && (
+            <Link to={`/OrderConfirmation?packCode=${isChecked.packCode}`}>
               <button className="ant-btn">البطاقة المصرفية</button>
             </Link>
           )}

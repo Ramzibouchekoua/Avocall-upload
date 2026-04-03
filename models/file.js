@@ -22,8 +22,12 @@ const uploadedFileSchema = new mongoose.Schema(
       type: ObjectId,
       ref: 'user',
     },
+    paymentTransaction: {
+      type: ObjectId,
+      ref: 'paymentTransaction',
+    },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 uploadedFileSchema.methods.toJSON = function () {
@@ -31,5 +35,5 @@ uploadedFileSchema.methods.toJSON = function () {
   return obj;
 };
 
-const File = mongoose.model("file", uploadedFileSchema);
+const File = mongoose.model('file', uploadedFileSchema);
 export default File;

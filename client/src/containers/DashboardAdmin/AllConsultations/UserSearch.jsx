@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Input } from 'antd';
+import { SortAscendingOutlined, SortDescendingOutlined } from '@ant-design/icons';
 import Datatable from './index';
 
 function UserSearch() {
@@ -28,16 +29,14 @@ function UserSearch() {
       })
       .catch((err) => {});
   }, []);
-  function search(item) {
-    if (item[0]) {
-      const colmuns = item[0] && Object.keys(item[0]);
-      return data.filter((item) =>
-        colmuns.some((colmun) => item.userId.email.toString().toLowerCase().indexOf(q.toLowerCase()) > -1)
-      );
-    } else {
-      return;
+  function search(items) {
+    if (!items || items.length === 0) {
+      return [];
     }
+
+    return items.filter((item) => item?.userId?.email?.toString().toLowerCase().indexOf(q.toLowerCase()) > -1);
   }
+
   const toggleSortOrder = () => {
     setAscending(!ascending);
   };
@@ -45,10 +44,21 @@ function UserSearch() {
   return (
     <div className="alluser">
       <span className="title">All Consultations</span>
-      <Search placeholder="User search" type="text" value={q} onChange={(e) => setQ(e.target.value)} enterButton />
-      <button onClick={toggleSortOrder} className="sort-button">
-        {ascending ? 'A' : 'D'}
-      </button>{' '}
+
+      <div className="filters-bar">
+        <Search
+          placeholder="Filter by user email"
+          type="text"
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          enterButton
+          className="filter-search"
+        />
+        <button onClick={toggleSortOrder} className="sort-button" type="button">
+          {ascending ? <SortAscendingOutlined /> : <SortDescendingOutlined />}
+        </button>
+      </div>
+
       <div className="table">
         <span className="bold email">User Email</span>
         <span className="bold">Title</span>

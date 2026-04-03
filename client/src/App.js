@@ -26,6 +26,7 @@ import PhoneCall from './containers/PhoneCall';
 import PhoneExpired from './containers/Phoneexpired';
 import PayementFailed from './containers/PayementError';
 import PayementSuccess from './containers/PayementSuccess';
+import PayementPending from './containers/PayementPending';
 import PayementGateway from './containers/PayementGateway';
 import Verification from './containers/AccountVerification';
 import Validaton from './containers/AccountVerification/AccountValidation';
@@ -194,6 +195,7 @@ export default function App() {
                   <Route exact path="/server-error" component={ServerError} />
                   <Route exact path="/payment-gateway" component={PayementGateway} />
                   <Route exact path="/payment-error" component={PayementFailed} />
+                  <PrivateUser exact path="/payment-pending" component={PayementPending} />
                   <Route exact path="/payment-success" component={PayementSuccess} />
                   <Route exact strict component={NotFound} />
                 </Switch>

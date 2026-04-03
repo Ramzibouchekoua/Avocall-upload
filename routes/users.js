@@ -16,6 +16,10 @@ router.post('/newConsultation', auth, UserController.newConsultation);
 router.get('/allConsultation', auth, UserController.getConsultations);
 router.get('/consultation/:id', auth, UserController.getConsultation);
 router.put('/updateConsultation/:id', auth, UserController.updateConsultation);
+router.post('/payments/card/initiate', auth, UserController.createCardPaymentTransaction);
+router.post('/payments/card/return', auth, UserController.recordCardPaymentReturn);
+router.post('/payments/bank-transfer', auth, UserController.createBankTransferPayment);
+router.get('/payments/:transactionId', auth, UserController.getPaymentTransaction);
 router.post('/buyPack', auth, UserController.buyPack);
 router.get('/createOrderNumber', auth, UserController.createOrderNumber);
 
