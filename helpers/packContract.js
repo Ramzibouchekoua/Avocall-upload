@@ -7,7 +7,7 @@ export const PACK_CONTRACTS = {
   149000: { walletAdd: 1, months: 12, packCode: 'OLD_PACK_2' }, // 149 TND (old instant)
 
   // New packs
-  1001: { walletAdd: 3, months: 1, packCode: 'NEW_PACK_1M' }, // 199 TND – 1 month
+  199000: { walletAdd: 3, months: 1, packCode: 'NEW_PACK_1M' }, // 199 TND – 1 month
   999000: { walletAdd: 18, months: 6, packCode: 'NEW_PACK_6M' }, // 999 TND – 6 months
   1799000: { walletAdd: 36, months: 12, packCode: 'NEW_PACK_12M' }, // 1799 TND – 1 year
 };

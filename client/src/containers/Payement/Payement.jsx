@@ -34,7 +34,7 @@ const packs = [
     packCode: 'NEW_PACK_1M',
     price: '199TND',
     nbr: 3,
-    amount: 1001,
+    amount: 199000,
     duration: 1,
   },
   {
