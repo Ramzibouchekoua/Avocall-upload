@@ -6,6 +6,6 @@ import emailService from '../services/email';
 //@access private
 export const sendMail = asyncHandler(async (req, res) => {
   const { to, subject, text, html } = req.body;
-  emailService.sendEmail(to, subject, text, html);
+  await emailService.sendEmail(to, subject, text, html);
   res.json({ success: true });
 });
