@@ -22,9 +22,9 @@ const packs = [
     id: 2,
     title: 'استشارة فورية',
     packCode: 'OLD_PACK_2',
-    price: '199TND',
+    price: '149TND',
     nbr: 1,
-    amount: 199000,
+    amount: 149000,
     duration: 12,
   },
   // New packs
@@ -136,11 +136,15 @@ const Payement = () => {
               className={`${isChecked.id === e.id ? 'card-type checked' : 'card-type'}${e.id === 2 ? ' emergency' : ''}`}
               key={e.id}
             >
-              <CheckOutlined />
-              <span className="title">{e.title}</span>
-              <span className="old-price">{e.oldprice}</span>
-              <span className="price">{e.price}</span>
-              <span className="duration">{getDurationLabel(e.duration)}</span>
+              <CheckOutlined className="check-icon" />
+              <div className="card-content">
+                <span className="title">{e.title}</span>
+                <span className="price">{e.price}</span>
+                <div className="meta-row">
+                  <span className="consultations-count">{e.nbr} استشارات</span>
+                  <span className="duration">{getDurationLabel(e.duration)}</span>
+                </div>
+              </div>
             </div>
           ))}
         </div>
