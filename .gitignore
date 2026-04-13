@@ -36,9 +36,15 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+
+# Environment files
+.env
+.env.*
+*.env
 client/.env
-./env
-./uploads/*
+
+# Uploads and generated user files
+uploads/
 # TypeScript v1 declaration files
 typings/
 
@@ -46,8 +52,6 @@ typings/
 .npm
 # Optional eslint cache
 .eslintcache
-client/.env
-*.env
 # Optional REPL history
 .node_repl_history
 
@@ -56,9 +60,6 @@ client/.env
 
 # Yarn Integrity uploadedFile
 .yarn-integrity
-
-# dotenv environment variables uploadedFile
-.env
 
 # next.js build output
 .next
