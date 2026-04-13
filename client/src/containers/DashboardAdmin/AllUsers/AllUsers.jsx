@@ -31,19 +31,25 @@ function AllUsers() {
   }
   function search(item) {
     if (item[0]) {
-      const colmuns = item[0] && Object.keys(item[0]);
-      return data.filter((item) =>
-        colmuns.some((colmun) => item.email.toString().toLowerCase().indexOf(q.toLowerCase()) > -1)
-      );
+      return data.filter((entry) => entry.email.toString().toLowerCase().indexOf(q.toLowerCase()) > -1);
     } else {
-      return '';
+      return [];
     }
   }
 
   return (
     <div className="alluser">
       <span className="title">All Users</span>
-      <Search placeholder="Email" type="text" value={q} onChange={(e) => setQ(e.target.value)} enterButton />
+      <div className="filters-bar">
+        <Search
+          placeholder="Filter by email"
+          type="text"
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          enterButton
+          className="filter-search"
+        />
+      </div>
       <div className="table">
         <span className="bold">Name</span>
         <span className="bold">Created</span>

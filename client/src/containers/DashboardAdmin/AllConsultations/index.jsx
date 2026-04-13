@@ -5,18 +5,23 @@ import moment from 'moment';
 
 function Datatable({ data, ascending, setData, setAscending }) {
   const [first, setfirst] = useState(data);
+
   useEffect(() => {
     dataSort();
-  }, [ascending]);
+  }, [ascending, data]);
+
   const dataSort = () => {
-    let x = [];
+    const source = Array.isArray(data) ? [...data] : [];
+
     if (ascending) {
-      x = data?.sort((a, b) => new moment(a.date).format('YYYYMMDD') - new moment(b.date).format('YYYYMMDD'));
+      source.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
     } else {
-      x = data?.sort((a, b) => new moment(b.date).format('YYYYMMDD') - new moment(a.date).format('YYYYMMDD'));
+      source.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     }
-    setfirst(x);
+
+    setfirst(source);
   };
+
   return (
     <div className="users">
       <table>

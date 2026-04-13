@@ -1,5 +1,4 @@
 import React from 'react';
-import { message } from 'antd';
 import { CheckOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
@@ -9,23 +8,60 @@ import { Link } from 'react-router-dom';
 import displayNotification from '../../components/displayNotification';
 
 const packs = [
+  // Old packs – kept for backward compatibility, 1-year expiration
   {
     id: 1,
     title: 'إستشارة',
+    packCode: 'OLD_PACK_1',
     price: '100TND',
-    nbr: 0,
+    nbr: 1,
     amount: 100000,
-    // oldprice: '50TND',
+    duration: 12,
   },
   {
     id: 2,
-    title: ' استشارة فورية',
-    price: '199TND',
+    title: 'استشارة فورية',
+    packCode: 'OLD_PACK_2',
+    price: '149TND',
     nbr: 1,
-    amount: 199000,
-    // oldprice: '90TND',
+    amount: 149000,
+    duration: 12,
+  },
+  // New packs
+  {
+    id: 3,
+    title: 'باقة شهر',
+    packCode: 'NEW_PACK_1M',
+    price: '199TND',
+    nbr: 3,
+    amount: 1001,
+    duration: 1,
+  },
+  {
+    id: 4,
+    title: 'باقة 6 شهور',
+    packCode: 'NEW_PACK_6M',
+    price: '999TND',
+    nbr: 15,
+    amount: 999000,
+    duration: 6,
+  },
+  {
+    id: 5,
+    title: 'باقة سنة',
+    packCode: 'NEW_PACK_12M',
+    price: '1799TND',
+    nbr: 30,
+    amount: 1799000,
+    duration: 12,
   },
 ];
+
+const getDurationLabel = (months) => {
+  if (months === 1) return 'صالحة لمدة شهر';
+  if (months === 12) return 'صالحة لمدة سنة';
+  return `صالحة لمدة ${months} شهور`;
+};
 
 const Payement = () => {
   const [isChecked, setIsChecked] = useState({});
@@ -64,22 +100,21 @@ const Payement = () => {
         filename = upFile.data.data.fileName;
         displayNotification('success', 'تم', 'تم تحميل الصورة');
 
-        const newConsultation = await axios.post(
-          process.env.REACT_APP_API_URL + '/api/user/buyPack',
+        const response = await axios.post(
+          process.env.REACT_APP_API_URL + '/api/user/payments/bank-transfer',
           {
-            consultationNumber: isChecked.nbr,
+            packCode: isChecked.packCode,
             filename,
           },
           {
             headers: { 'x-auth-token': token },
-          }
+          },
         );
         displayNotification('success', 'تم', 'سيضاف لكم الرصيد في اجل اقصاه 48 ساعة شكرا');
 
-        //history.push('/OrderConfirmation');
         setActive(true);
         setTimeout(() => {
-          history.push('/written-advice');
+          history.push('/payment-pending?transactionId=' + response.data.transaction._id);
         }, 5000);
       } catch (err) {
         displayNotification('error', 'خطأ', 'حاول مرة أخرى. شكرًا لك');
@@ -101,10 +136,15 @@ const Payement = () => {
               className={`${isChecked.id === e.id ? 'card-type checked' : 'card-type'}${e.id === 2 ? ' emergency' : ''}`}
               key={e.id}
             >
-              <CheckOutlined />
-              <span className="title">{e.title}</span>
-              <span className="old-price">{e.oldprice}</span>
-              <span className="price">{e.price}</span>
+              <CheckOutlined className="check-icon" />
+              <div className="card-content">
+                <span className="title">{e.title}</span>
+                <span className="price">{e.price}</span>
+                <div className="meta-row">
+                  <span className="consultations-count">{e.nbr} استشارات</span>
+                  <span className="duration">{getDurationLabel(e.duration)}</span>
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -115,8 +155,8 @@ const Payement = () => {
         <span className="under-title">يمكنك الدفع عبر حوالة مصرفية او عبر استعمال بطاقتك البنكية</span>
         <div className="credit-card">
           <span>للدفع عبر البطاقة المصرفية اختر العرض المرغوب فيه</span>
-          {isChecked.amount && (
-            <Link to={`/OrderConfirmation?amount=${isChecked.amount}`}>
+          {isChecked.packCode && (
+            <Link to={`/OrderConfirmation?packCode=${isChecked.packCode}`}>
               <button className="ant-btn">البطاقة المصرفية</button>
             </Link>
           )}

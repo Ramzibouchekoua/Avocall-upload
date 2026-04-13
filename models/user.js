@@ -23,6 +23,7 @@ const userSchema = new mongoose.Schema(
     address: { type: String },
     class: { type: String },
     wallet: { type: Number, default: 0 },
+    walletExpirationDate: { type: Date },
     specialization: { type: String },
     type: { type: String },
     files: [
