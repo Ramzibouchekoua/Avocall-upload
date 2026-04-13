@@ -38,9 +38,7 @@ node_modules/
 jspm_packages/
 
 # Environment files
-.env
-.env.*
-*.env
+
 client/.env
 
 # Uploads and generated user files
