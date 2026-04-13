@@ -46,7 +46,7 @@ const Textchat = ({ socket }) => {
                 headers: {
                   'x-auth-token': authToken,
                 },
-              }
+              },
             );
 
             if (consultationResponse.data[0]) {
@@ -80,14 +80,30 @@ const Textchat = ({ socket }) => {
     }
   };
   const sendMessage = () => {
-    if (socket) {
-      socket.emit('chatroomMessage', {
-        chatroomId,
-        message: messageRef.current.value,
-      });
-
-      messageRef.current.value = '';
+    const message = messageRef.current?.value?.trim();
+    if (!message) {
+      console.log('Cannot send message: message is empty');
+      return;
     }
+
+    if (!socket) {
+      displayNotification('error', 'خطأ', 'لا يوجد اتصال بالخادم');
+      return;
+    }
+
+    if (!socket.connected) {
+      displayNotification('error', 'خطأ', 'الاتصال منقطع، جاري إعادة المحاولة...');
+      console.log('Socket not connected, current state:', socket.connected);
+      return;
+    }
+
+    console.log('Sending message to room:', chatroomId);
+    socket.emit('chatroomMessage', {
+      chatroomId,
+      message: message,
+    });
+
+    messageRef.current.value = '';
   };
   const handleKeyDown = (event) => {
     // Check if the pressed key is "Enter" (key code 13)
@@ -115,46 +131,79 @@ const Textchat = ({ socket }) => {
       const payload = JSON.parse(atob(token.split('.')[1]));
       setUserId(payload.id);
     }
-    if (socket) {
-      socket.on('newMessage', (message) => {
-        const newMessages = [...messages, message];
-        setMessages(newMessages);
-        showNotification(message);
-      });
+  }, []); // Only run once on mount
 
-      // Cleanup function to remove event listener when component unmounts
-      return () => {
-        socket.off('newMessage');
-      };
-    }
-  }, [messages, socket]);
+  // Separate useEffect for socket event listeners to prevent memory leaks
+  useEffect(() => {
+    if (!socket) return;
+
+    const handleNewMessage = (message) => {
+      setMessages((prevMessages) => {
+        // Prevent duplicate messages
+        const messageExists = prevMessages.some(
+          (msg) =>
+            msg._id === message._id ||
+            (msg.message === message.message &&
+              msg.user === message.user &&
+              Math.abs(new Date(msg.createdAt) - new Date()) < 5000),
+        );
+        if (messageExists) return prevMessages;
+
+        const newMessages = [...prevMessages, message];
+        showNotification(message);
+        return newMessages;
+      });
+    };
+
+    // Set up event listener
+    socket.on('newMessage', handleNewMessage);
+
+    // Cleanup function to remove event listener when component unmounts or socket changes
+    return () => {
+      socket.off('newMessage', handleNewMessage);
+    };
+  }, [socket]); // Only depend on socket, not messages
 
   const showNotification = (message) => {
-    if (userOwner && message && message !== lastNotifiedMessage) {
-      if (message.name !== userOwner.name) {
-        displayNotification('info', 'New message: ' + message.name, message.message);
-        setLastNotifiedMessage(message);
-      }
+    if (!userOwner || !message || message === lastNotifiedMessage) return;
+
+    if (message.name && message.name !== userOwner.name) {
+      displayNotification('info', 'رسالة جديدة: ' + message.name, message.message);
+      setLastNotifiedMessage(message);
     }
   };
 
+  // Separate useEffect for room management
   useEffect(() => {
-    if (socket) {
+    if (!socket || !chatroomId) return;
+
+    // Join room when socket connects or component mounts
+    const joinRoom = () => {
       socket.emit('joinRoom', {
         chatroomId,
       });
+      console.log('Joined chat room:', chatroomId);
+    };
+
+    // Join immediately if already connected
+    if (socket.connected) {
+      joinRoom();
     }
 
+    // Join room when socket connects/reconnects
+    socket.on('connect', joinRoom);
+
     return () => {
-      //Component Unmount
-      if (socket) {
+      // Leave room when component unmounts or socket changes
+      if (socket.connected) {
         socket.emit('leaveRoom', {
           chatroomId,
         });
+        console.log('Left chat room:', chatroomId);
       }
+      socket.off('connect', joinRoom);
     };
-    //eslint-disable-next-line
-  }, []);
+  }, [socket, chatroomId]);
   const viewPic = async () => {
     const file = await axios.get(process.env.REACT_APP_API_URL + '/api/file/download/60da61e47585d73764d32133', {
       headers: { 'x-auth-token': localStorage.getItem('auth-token') },
@@ -226,10 +275,10 @@ const Textchat = ({ socket }) => {
                     {theConsultation.type === 'text'
                       ? 'إستشارة كتابيّة'
                       : theConsultation.type === 'whatsapp'
-                      ? 'إستشارة عبر الواتساب'
-                      : theConsultation.type === 'sms'
-                      ? 'إستشارة عبر الرسائل النصية'
-                      : 'نوع الاستشارة غير معروف'}
+                        ? 'إستشارة عبر الواتساب'
+                        : theConsultation.type === 'sms'
+                          ? 'إستشارة عبر الرسائل النصية'
+                          : 'نوع الاستشارة غير معروف'}
                   </th>
                 </tr>
                 <tr>

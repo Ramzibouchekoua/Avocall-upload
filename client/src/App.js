@@ -52,35 +52,107 @@ export default function App() {
   const [socket, setSocket] = useState(null);
   const [isPro] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [socketConnected, setSocketConnected] = useState(false);
+  const [reconnectAttempts, setReconnectAttempts] = useState(0);
   const [userData, setUserData] = useState({
     token: undefined,
     user: undefined,
   });
-  // const location = useLocation()
-  //SOCKET Begin
-  const setupSocket = () => {
-    const token = localStorage.getItem('auth-token');
-    if (token && !socket) {
-      const newSocket = io(process.env.REACT_APP_API_URL, {
-        query: {
-          token: localStorage.getItem('auth-token'),
-        },
-      });
 
-      newSocket.on('disconnect', () => {
-        setSocket(null);
-        setTimeout(setupSocket, 20000);
-      });
-
-      newSocket.on('connect', () => {});
-
-      setSocket(newSocket);
+  // Socket cleanup function
+  const cleanupSocket = (currentSocket) => {
+    if (currentSocket) {
+      currentSocket.removeAllListeners();
+      currentSocket.disconnect();
     }
   };
+
+  //SOCKET Begin - Optimized connection management
+  const setupSocket = () => {
+    const token = localStorage.getItem('auth-token');
+
+    // Don't reconnect if no token or socket already exists
+    if (!token || socket) return;
+
+    const newSocket = io(process.env.REACT_APP_API_URL, {
+      query: {
+        token: token,
+      },
+      // Start with polling, then upgrade to websocket if available
+      transports: ['polling', 'websocket'],
+      upgrade: true,
+      // Connection timeout and ping settings
+      timeout: 15000,
+      forceNew: false,
+      // Additional reliability options
+      reconnection: true,
+      reconnectionDelay: 2000,
+      reconnectionAttempts: 5,
+      maxReconnectionAttempts: 5,
+    });
+
+    newSocket.on('connect', () => {
+      console.log('Socket connected via:', newSocket.io.engine.transport.name);
+      setSocketConnected(true);
+      setReconnectAttempts(0); // Reset counter on successful connection
+    });
+
+    // Log transport upgrades
+    newSocket.on('upgrade', () => {
+      console.log('Socket upgraded to:', newSocket.io.engine.transport.name);
+    });
+
+    newSocket.on('disconnect', (reason) => {
+      console.log('Socket disconnected:', reason);
+      setSocketConnected(false);
+      setSocket(null);
+
+      // Only auto-reconnect for certain disconnect reasons and if user is still authenticated
+      const shouldReconnect = ['io server disconnect', 'ping timeout', 'transport close', 'transport error'].includes(
+        reason,
+      );
+
+      if (shouldReconnect && localStorage.getItem('auth-token') && reconnectAttempts < 5) {
+        // Exponential backoff: 2s, 4s, 8s, 16s, 32s
+        const delay = Math.min(2000 * Math.pow(2, reconnectAttempts), 32000);
+        setReconnectAttempts((prev) => prev + 1);
+
+        setTimeout(() => {
+          setupSocket();
+        }, delay);
+      }
+    });
+
+    newSocket.on('connect_error', (error) => {
+      console.log('Socket connection error:', error);
+      setSocketConnected(false);
+    });
+
+    setSocket(newSocket);
+  };
+  // Initialize socket when component mounts
   useEffect(() => {
     setupSocket();
+
+    // Cleanup socket on component unmount
+    return () => {
+      cleanupSocket(socket);
+    };
     // eslint-disable-next-line
   }, []);
+
+  // Reconnect socket when user data changes (login/logout)
+  useEffect(() => {
+    if (userData.token && !socket) {
+      setupSocket();
+    } else if (!userData.token && socket) {
+      cleanupSocket(socket);
+      setSocket(null);
+      setSocketConnected(false);
+      setReconnectAttempts(0);
+    }
+    // eslint-disable-next-line
+  }, [userData.token]);
   //SOCKET End
 
   const checkLoggedIn = async () => {

@@ -66,16 +66,29 @@ const io = require('socket.io')(server, {
     origin: '*',
     methods: ['GET', 'POST'],
   },
+  // Optimize Socket.IO server settings
+  transports: ['websocket', 'polling'],
+  allowUpgrades: true,
+  pingTimeout: 60000,
+  pingInterval: 25000,
+  // Disable polling by default, prefer websockets
+  allowEIO3: true,
 });
 const jwt = require('jwt-then');
 
 io.use(async (socket, next) => {
   try {
     const token = socket.handshake.query.token;
+    if (!token) {
+      return next(new Error('Authentication error - no token'));
+    }
     const payload = await jwt.verify(token, config.jwt.secret);
     socket.userId = payload.id;
     next();
-  } catch (err) {}
+  } catch (err) {
+    console.log('Socket auth failed:', err.message);
+    next(new Error('Authentication error - invalid token'));
+  }
 });
 
 io.on('connection', (socket) => {
