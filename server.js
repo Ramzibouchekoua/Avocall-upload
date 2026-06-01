@@ -1,3 +1,7 @@
+process.on('unhandledRejection', (reason) => {
+  console.error('Unhandled rejection:', reason);
+});
+
 import express from 'express';
 import helmet from 'helmet';
 import xss from 'xss-clean';
